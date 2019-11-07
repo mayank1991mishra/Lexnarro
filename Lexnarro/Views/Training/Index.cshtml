@@ -1,0 +1,327 @@
+﻿@using Lexnarro.HelperClasses
+
+@{
+    ViewBag.Title = "Training";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var id = UserHelper.GetUserId();
+    var Role = UserHelper.GetUserRole();
+
+    var fyyy = ViewBag.fy;
+}
+
+<h2>CPD Records</h2>
+
+@if (Role != "Admin")
+{
+    <p>
+        @if (ViewBag.userPlan == "Demo")
+        {
+            if ((int)ViewBag.RowCount < 5)
+            {
+                @Html.ActionLink("Create New", "Create", "Training", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+            }
+            else
+            {
+                @Html.ActionLink("Create New", "Create", "Training", new { }, htmlAttributes: new { @class = "btn btn-primary", @Disabled = "Disabled" })
+
+                <div class="alert alert-danger">
+                    <strong>Alert!</strong> Demo user can create five records only. Upgrade your plan for full apllication usage.
+                </div>
+            }
+        }
+        else
+        {
+            @Html.ActionLink("Create New", "Create", "Training", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+        }
+    </p>
+}
+
+<p><h5><b>State Enrolled : <span id="state">@UserHelper.GetUserStateEnrolledName()</span></b></h5></p>
+
+<div class="row">
+    <div class="col-md-4">
+        <p><h5><b>Total Units : <span id="units"></span></b></h5></p>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <span class="control-label"><b>CPD Year</b></span>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("financialYear", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Search" class="btn btn-info" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    @*<th class="hidden">
+                            User Name
+                        </th>*@
+
+                    <th>
+                        Date
+                    </th>
+
+                    @*<th class="hidden">
+                            State Enrolled
+                        </th>*@
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        Activity
+                    </th>
+
+                    <th>
+                        Subactivity
+                    </th>
+
+                    <th>
+                        Hours
+                    </th>
+
+                    <th>Units</th>
+
+                    <th>
+                        Provider
+                    </th>
+
+                    <th>
+                        CPD Year
+                    </th>
+
+                    @*<th>
+                            Your Role
+                        </th>*@
+
+                    @*<th>
+                            Forwardable
+                        </th>
+
+                        <th>
+                           Has Been Forwarded
+                        </th>*@
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="row">
+        @if (ViewBag.RowCount != null)
+        {
+            if ((int)ViewBag.RowCount != 0)
+            {
+                <div class="hidden" id="mailDiv">
+                    <br />
+                    <div class="col-md-3">
+                        @Html.ActionLink("Export Report", "ExportExcel", "Training",
+                            new { }, new { @class = "btn btn-danger" })
+                        @*<button class="btn btn-danger" id="exportExcel">Export Report</button>*@
+                    </div>
+
+                    <div class="col-md-3">
+                        @*@if (ViewBag.userPlan != "Demo")
+                        {*@
+                            <button class="btn btn-danger" id="sendMail">Mail Report</button>
+                        @*}*@
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+    }
+
+    @section scripts
+    {
+        <script>
+            $(function () {
+                var year = $('#financialYear').val();
+                var fy = '@fyyy';
+                console.log(fy);
+                console.log(year);
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    }],
+                    "order": [[1, 'asc']],
+
+                    "ajax": {
+                        "url": '/Training/GetTraining',
+                        "type": 'get',
+                        "data":{ id : @id, finYear : year },
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": null },
+                        { "data": "Date" },
+                        { "data": "Category" },
+                        { "data": "Activity" },
+                        { "data": "SubActivity" },
+                        { "data": "Hours" },
+                        { "data": "Units_Done" },
+                        { "data": "Provider" },
+                        { "data": "Financial_Year" },
+                        {
+                            "data": "Training_Transaction_ID", render: (function (data, type, row) {
+                                $('#units').text(row.TotalUnits);
+
+                                if (parseInt(row.rowCount) > 0) {
+                                    $('#mailDiv').removeClass('hidden');
+                                }
+                                if (row.Received_By_Forwarding != null) {
+                                    var forwarded = row.Received_By_Forwarding.toString();
+                                }
+
+                                if (forwarded == "Yes") {                                   
+                                    if (fy == year) {
+                                        return ' <a href="/Training/Details/' + data + '" class="btn btn-info">Details</a>' +
+                                            ' <a href="/Training/Delete/' + data + '" class="btn btn-danger">Delete</a>';
+                                    }
+                                    else {
+                                        return ' <a href="/Training/Details/' + data + '" class="btn btn-info">Details</a>' +
+                                            ' <a href="/Training/Delete/' + data + '" class="btn btn-danger">Delete</a>';
+                                    }
+                                }
+                                else {
+                                    if (fy == year) {
+                                        return ' <a href="/Training/Edit/' + data + '" class="btn btn-success">Edit</a>'+
+                                        ' <a href="/Training/Details/' + data + '" class="btn btn-info">Details</a>' +
+                                            ' <a href="/Training/Delete/' + data + '" class="btn btn-danger">Delete</a>';
+                                    }
+                                    else {
+                                        return ' <a href="/Training/Details/' + data + '" class="btn btn-info">Details</a>' +
+                                            ' <a href="/Training/Delete/' + data + '" class="btn btn-danger">Delete</a>';
+                                    }
+                                }
+                            })
+                        }
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+
+                //var rowCount = $('#dataTable tr').length;
+            });
+        </script>
+
+        <script>
+        $(function () {
+            $('#sendMail').click(function () {
+                $("#sendMail").empty();
+                $("#sendMail").attr("disabled", true);
+                $("#sendMail").append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+                $.ajax
+                ({
+                    url: '@Url.Action("SendTrainingReport", "Training")',
+                    type: 'GET',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                        data: { 'finYear': $('#financialYear').val()},
+
+                        success: function (result) {
+                            $("#sendMail").empty();
+                            $("#sendMail").append('Mail Report');
+                            $("#sendMail").attr("disabled", false);
+
+                            //console.log(result);
+
+                        Command: toastr['success']('Mail sent');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                            }
+                        },
+                        error: function (result) {
+                            $("#sendMail").empty();
+                            $("#sendMail").append('Mail Report');
+                            $("#sendMail").attr("disabled", false);
+
+                            Command: toastr['error']('Mail not sent. Please try again after some time.');
+                            toastr.options = {
+                                'closeButton': false,
+                                'debug': false,
+                                'newestOnTop': false,
+                                'progressBar': false,
+                                'positionClass': 'toast-top-right',
+                                'preventDuplicates': false,
+                                'onclick': null,
+                                'showDuration': '5000',
+                                'hideDuration': '1000',
+                                'timeOut': '3000',
+                                'extendedTimeOut': '1000',
+                                'showEasing': 'swing',
+                                'hideEasing': 'linear',
+                                'showMethod': 'fadeIn',
+                                'hideMethod': 'fadeOut'
+                            }
+                        }
+                });
+            })})
+        </script>
+
+        @*<script>
+                $(function () {
+                    $('#exportExcel').click(function () {
+                        $("#exportExcel").empty();
+                        $("#exportExcel").attr("disabled", true);
+                    $("#exportExcel").append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+
+                    var finYear = $('#financialYear').val();
+
+
+                        //setTimeout(
+                        //    function () {
+                                window.location = "@Url.Action("ExportExcel", "Training")";
+                            //}, 5000);
+
+                        $("#exportExcel").empty();
+                        $("#exportExcel").append('Export Report');
+                        $("#exportExcel").attr("disabled", false);
+                    })
+                });
+            </script>*@
+    }
+</section>

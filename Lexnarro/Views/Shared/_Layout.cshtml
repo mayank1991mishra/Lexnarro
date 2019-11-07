@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @*<link rel="shortcut icon" href="img/favicon.png">*@
+
+    <title>LEX NARRO</title>
+
+    @using System.Web.Optimization
+    @using Lexnarro.HelperClasses
+
+    @Styles.Render("~/bundles/css")
+
+    @*<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Content/IndexCSS/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+        .asdasd label {
+            font-weight: bold;
+        }
+    </style>
+
+   @*<link href="~/Content/css/elegant-icons-style.css" rel="stylesheet" />*@
+    @*<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />*@
+</head>
+<body>
+    <header class="header dark-bg">
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+
+        <!--logo start-->
+
+        @*<a href="" class="logo">LEX <span class="lite">NARRO</span></a>*@
+        <a href="@Url.Action("Index", "Account")" class="nohover">
+            <img alt="" src="@Url.Content("~/Content/img/ln2(2).png")" height="36" width="186" style="margin-top:14px;">
+        </a>
+        <!--logo end-->
+
+        <div class="top-nav notification-row">
+
+            <!-- notificatoin dropdown start-->
+            <div class="asdasd">
+                <label>Hi, @UserHelper.GetUserName() | </label>
+                <label>State Enrolled : @UserHelper.GetUserStateEnrolledName()</label>
+            </div>
+            <ul class="nav pull-right top-menu">
+                <li class="dropdown">
+                    @Html.ActionLink("Logout", "LogOff", "Account", new { }, new { @class = "username" })
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+            <!-- notificatoin dropdown end-->
+        </div>
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+
+        <div id="sidebar" class="nav-collapse">
+
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+                <li class="active">
+                        @Html.ActionLink("Home", "Index", "Home", new { }, null)
+                </li>
+
+                @if (UserHelper.GetUserRole() == "Admin")
+                {
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Admin Profile</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("My Profile", "Profile", "Admin", new { }, null)</li>
+                            <li>@Html.ActionLink("Active Users", "Index", "ActiveUsers", new { }, null)</li>
+                            <li>@Html.ActionLink("Other Users", "Index", "OtherUsers", new { }, null)</li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Masters</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Country Master", "Index", "Country", new { }, null)</li>
+                            <li>@Html.ActionLink("State Master", "Index", "State", new { }, null)</li>
+                            <li>@Html.ActionLink("Plan Master", "Index", "Plan", new { }, null)</li>
+                            <li>@Html.ActionLink("Rate Card", "Index", "Rate", new { }, null)</li>
+                            <li>@Html.ActionLink("Category Master", "Index", "Category", new { }, null)</li>
+                            <li>@Html.ActionLink("Rule One Master", "Index", "RuleOne", new { }, null)</li>
+                            <li>@Html.ActionLink("Rule Two Master", "Index", "RuleTwo", new { }, null)</li>
+                            <li>@Html.ActionLink("Rule Three Master", "Index", "RuleThree", new { }, null)</li>
+                            <li>@Html.ActionLink("Rule Four Master", "Index", "RuleFour", new { }, null)</li>
+                            <li>@Html.ActionLink("Activity Master", "Index", "Activity", new { }, null)</li>
+                            <li>@Html.ActionLink("Subactivity Master", "Index", "Subactivity", new { }, null)</li>
+                            <li>@Html.ActionLink("Unit Master", "Index", "Unit", new { }, null)</li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Configuration</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+
+                            <li>@Html.ActionLink("State-Activity Mapping", "Index", "StateActivity", new { }, null)</li>
+                            <li>@Html.ActionLink("Subactivity-Rule One Mapping", "Index", "StateSubactivityRuleOne", new { }, null)</li>
+                            <li>@Html.ActionLink("State-Activity-Rule Two Mapping", "Index", "StateActivityRuleTwo", new { }, null)</li>
+                            <li>@Html.ActionLink("State-Rule Three Mapping", "Index", "StateRuleThree", new { }, null)</li>
+                            <li>@Html.ActionLink("State-Category-Rule Four Mapping", "Index", "StateCategoryRuleFour", new { }, null)</li>
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Subscription</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Subscription History", "Index", "TransactionHistory", new { }, null)</li>
+                            <li>@Html.ActionLink("CPD Activity", "Index", "TrainingHistory", new { }, null)</li>
+                        </ul>
+                    </li>
+                }
+                @if (UserHelper.GetUserRole() == "User")
+                {
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>My Details</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("My Profile", "Index", "User", null, null)</li>
+                            <li>@Html.ActionLink("My Records", "Index", "Training", new { }, null)</li>
+                            <li>@Html.ActionLink("Carry Over", "Index", "CarryOver", new { }, null)</li>
+                            <li>@Html.ActionLink("My Transactions", "Payment", "User", new { }, null)</li>
+                            <li>@Html.ActionLink("My Subscription", "Index", "Subscription", new { }, null)</li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <section id="main-content">
+        <section class="wrapper">
+            <!--overview start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa-laptop"></i> Welcome</h3>
+                </div>
+            </div>
+
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+            </div>
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Lexnarro</p>
+            </footer>
+        </section>        
+    </section>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/owl")
+
+    @RenderSection("scripts", required: false)
+
+    @RenderSection("JavaScript", required: false)
+
+    <script>
+        $(function () {
+
+            $("#owl-demo").owlCarousel({
+
+                navigation: true, // Show next and prev buttons
+                slideSpeed: 900,
+                paginationSpeed: 400,
+                singleItem: true
+
+                // "singleItem:true" is a shortcut for:
+                // items : 1,
+                // itemsDesktop : false,
+                // itemsDesktopSmall : false,
+                // itemsTablet: false,
+                // itemsMobile : false
+
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            var url = window.location;
+            // for sidebar menu entirely but not cover treeview
+            $('ul.nav-pills>li a').filter(function () {
+                return this.href == url;
+            }).parents('li:eq(1)').addClass('menu-open active');
+            // for treeview
+            $('ul.nav-pills a').filter(function () {
+                return this.href == url;
+            }).addClass('bg-info');
+        });
+    </script>
+</body>
+</html>

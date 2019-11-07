@@ -1,0 +1,527 @@
+﻿@using Lexnarro.HelperClasses
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fyyy = ViewBag.fy;
+    var id = UserHelper.GetUserId();
+    var units = (ViewBag.CarryOverUnits > 10) ? 10000 : ViewBag.CarryOverUnits;
+}
+
+<style>
+    .textbox-border {
+        border-color: red;
+    }
+</style>
+
+<h2>Carry Over</h2>
+
+
+<section class="panel">
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <span class="control-label"><b>CPD Year</b></span>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("financialYear", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Search" class="btn btn-info" />
+                    </div>
+
+                    <div class="col-md-4">
+                        @if (units == 10000)
+                        {
+                            <label class="text-danger">Allowed units to transfer = Unlimited</label>
+                        }
+                        else
+                        {
+                            <label class="text-danger">Allowed units to transfer = @units</label>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        Activity
+                    </th>
+
+                    <th>
+                        Subactivity
+                    </th>
+
+                    <th>Units</th>
+
+                    <th>
+                        Provider
+                    </th>
+
+                    <th>
+                        CPD Year
+                    </th>
+
+                    <th>Enter Units</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="row">
+            <br />
+            <div class="col-md-3">
+                <button class="btn btn-danger" id="btn_carryOver" onclick="carryOver()">Carry Over</button>
+            </div>
+
+            <div class="col-md-9">
+                <label id="note" class="text-danger pull-right"></label>
+            </div>
+        </div>
+    </div>
+
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+    }
+
+    @section scripts
+    {
+        <script>
+
+            function MyToaster(msg) {
+                Command: toastr['error'](msg);
+                toastr.options = {
+                    'closeButton': false,
+                    'debug': false,
+                    'newestOnTop': false,
+                    'progressBar': false,
+                    'positionClass': 'toast-top-right',
+                    'preventDuplicates': false,
+                    'onclick': null,
+                    'showDuration': '5000',
+                    'hideDuration': '1000',
+                    'timeOut': '3000',
+                    'extendedTimeOut': '-5000',
+                    'showEasing': 'swing',
+                    'hideEasing': 'linear',
+                    'showMethod': 'fadeIn',
+                    'hideMethod': 'fadeOut'
+                }
+            };
+        </script>
+
+        <script>
+            $(function () {
+                var year = $('#financialYear').val();
+                var fy = '@fyyy';
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+                    paging: false,
+
+                    "language": {
+                        "emptyTable": "Please wait."
+                    },
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    },
+                    {
+                        'targets': 6,
+                        'createdCell':  function (td, cellData, rowData, row, col) {
+                            $(td).attr('id', 'cell_' + row);
+                        }}
+                    ],
+
+                    "order": [[1, 'asc']],
+
+                    "ajax": {
+                        "url": '/CarryOver/GetTraining',
+                        "type": 'get',
+                        "data":{ id : @id, finYear : year },
+                        "datatype": "json",
+                        "dataSrc": function (data) {
+                            var return_data = new Array();
+                            //console.log(data);
+                            for (p in data) {
+                                var elem = data[p];
+                            }
+                            if (elem == "All categories are not completed.") {
+                                console.log("asasas");
+                                t.context[0].oLanguage.sEmptyTable = elem;
+                                t.clear().draw();
+                            }
+                            else if (elem == "No records for carry over found.") {
+                                t.context[0].oLanguage.sEmptyTable = elem;
+                                t.clear().draw();
+                            }
+                            else if (elem == "All allowed records has been carried over") {
+                                t.context[0].oLanguage.sEmptyTable = elem;
+                                t.clear().draw();
+                            }
+                            else if (elem == "This state does not allow carry over.") {
+                                t.context[0].oLanguage.sEmptyTable = elem;
+                                t.clear().draw();
+                            }
+                            else {
+                                for (var i = 0; i < elem.length; i++) {
+                                    console.log(elem[i].Date);
+                                    return_data.push({
+                                        'Date': elem[i].Date,
+                                        'Category': elem[i].Category,
+                                        'Activity': elem[i].Activity,
+                                        'SubActivity': elem[i].SubActivity,
+                                        'Units_Done': elem[i].Units_Done,
+                                        'Provider': elem[i].Provider,
+                                        'Financial_Year': elem[i].Financial_Year,
+                                        'Training_Transaction_ID': elem[i].Training_Transaction_ID
+                                    })
+                                }
+                                return return_data;
+                            }
+                        }
+                    },
+                    "columns": [
+                        { "data": "Training_Transaction_ID", render: function (data, type, full, meta){
+                            return '<input type="checkbox" onclick = "checkboxChange()" class="checkbox" id="chk_'+data+'" value="'
+                               + $('<div/>').text(data).html() + '">';
+                        } },
+                        { "data": null },
+                        { "data": "Date" },
+                        { "data": "Category" },
+                        { "data": "Activity" },
+                        { "data": "SubActivity" },
+                        { "data": "Units_Done" },
+                        { "data": "Provider" },
+                        { "data": "Financial_Year" },
+                        { "data": "Training_Transaction_ID", render: function (data, type, row){
+                            return '<input type="text" disabled id="txt_' + data + '" class="form-control input-sm" '+
+                                'onkeyup="validateInput('+row.Training_Transaction_ID+')"> ';
+                        }}
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+
+                //var rowCount = $('#dataTable tr').length;
+
+            });
+        </script>
+
+        <script>
+            function validateInput(e) {
+                $('#txt_' + e).keypress(function (event) {
+                    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            function checkboxChange() {
+                $('#dataTable').find('tr').each(function () {
+                    var row = $(this);
+                    if (row.find('input[type="checkbox"]').is(':checked')) {
+                        row.find('[id^=txt_]').removeAttr("disabled");
+                    }
+                    else {
+                        row.find('[id^=txt_]').attr("disabled", "true");
+                    }
+                });
+            };
+        </script>
+
+        <script>
+            function carryOver(){
+                var year = $('#financialYear').val();
+
+                if (true) {
+
+                }
+                var allowedUnits = @units;
+
+                var id;
+
+                var totalUnitsSelected = 0;
+
+                var selectedRows = new Array();
+                var selectedUnitsToTransfer = new Array();
+
+                //console.log(sss);
+                var checked = 'false';
+
+                $('#dataTable').find('tr').each(function () {
+                    var row = $(this);
+                    if (row.find('input[type="checkbox"]').is(':checked')) {
+                        checked = 'true';
+                    }
+                });
+
+                if (checked == 'false') {
+                    $('#note').text('Select a cehckbox for the record to carry over.');
+                }
+
+                $('#dataTable').find('tr').each(function () {
+                    var row = $(this);
+                    //console.log(row);
+
+                    if (row.find('input[type="checkbox"]').is(':checked')) {
+
+                        id = row.find('[id^=txt_]').attr('id').split('_')[1];
+
+                        selectedRows.push(id);
+
+                        var textboxvalue = row.find('[id^=txt_]').val();
+
+                        var units = row.find('[id^=cell]').html();
+
+                        var unitsSelected = parseFloat(textboxvalue);
+                        var unitsDone = parseFloat(units);
+
+                        if (unitsSelected > unitsDone) {
+                            row.find('[id^=txt_]').addClass('textbox-border');
+                            selectedRows = [];
+                            selectedUnitsToTransfer = [];
+                            console.log(allowedUnits);
+                            if (allowedUnits == 10000) {
+                                $('#note').text('0 of unlimited selected');
+                            }
+                            else {
+                                $('#note').text('0 of ' + allowedUnits + ' selected');
+                            }
+                            return false;
+                        }
+                        else if (unitsSelected <= 0) {
+                            row.find('[id^=txt_]').addClass('textbox-border');
+                            selectedRows = [];
+                            selectedUnitsToTransfer = [];
+                            $('#note').text('Selected units should be greater then 0.');
+                            return false;
+                        }
+                        else {
+                            row.find('[id^=txt_]').removeClass('textbox-border');
+
+                            if (units.indexOf(".") >= 0) {
+                                //console.log('reached here');
+
+                                var values = textboxvalue.split('.')[1];
+
+                                //console.log(values);
+
+                                if (values != undefined) {
+                                    console.log('reached here part 2');
+                                    if (values != "5") {
+                                        //console.log('reached here part 3');
+                                        row.find('[id^=txt_]').addClass('textbox-border');
+                                        $('#note').text('Error - Invalid digit after decimal point');
+                                        return false;
+                                    }
+                                }
+                            }
+
+
+                            selectedUnitsToTransfer.push(unitsSelected);
+                            totalUnitsSelected = totalUnitsSelected + unitsSelected;
+
+                            if (allowedUnits == 10000) {
+                                $('#note').text(totalUnitsSelected + ' of unlimited selected');
+                            }
+                            $('#note').text(totalUnitsSelected + ' of ' + allowedUnits + ' selected');
+
+                            if (totalUnitsSelected > allowedUnits) {
+                                //selectedRows = [];
+                                //selectedUnitsToTransfer = [];
+                                $('#note').text('Error - More then @units units selected. Please re-enter units');
+                                return false;
+                            }
+                        }
+                    }
+                });
+
+                if (selectedRows.length > 0 && selectedUnitsToTransfer.length > 0 && (totalUnitsSelected <= allowedUnits)) {
+                    $("#btn_carryOver").empty();
+                    $("#btn_carryOver").attr("disabled", true);
+                    $("#btn_carryOver").append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+                    $.ajax
+                          ({
+                              url: '@Url.Action("DoTask", "CarryOver")',
+                              type: 'GET',
+                              datatype: 'application/json',
+                              contentType: 'application/json',
+                              data: {'financialYear':year,'ids':JSON.stringify(selectedRows), 'units':JSON.stringify(selectedUnitsToTransfer)},
+
+                              success: function (result) {
+                                  $("#btn_carryOver").empty();
+                                  $("#btn_carryOver").append('Carry Over');
+                                  $("#btn_carryOver").attr("disabled", false);
+
+                                  //console.log(JSON.stringify(result));
+
+                                  for(p in result) {
+                                      var elem = result[p];
+                                  }
+
+                                  //console.log(elem);
+                                  if (elem == "Error - units") {
+                                      $('#note').text('Error - Units selected are more then the allowed units in this state. Please correct it.');
+                                      Command: toastr['info']('Units selected are more then the allowed units in this state. Please correct it.');
+                                      toastr.options = {
+                                          'closeButton': false,
+                                          'debug': false,
+                                          'newestOnTop': false,
+                                          'progressBar': false,
+                                          'positionClass': 'toast-top-right',
+                                          'preventDuplicates': false,
+                                          'onclick': null,
+                                          'showDuration': '5000',
+                                          'hideDuration': '1000',
+                                          'timeOut': '3000',
+                                          'extendedTimeOut': '1000',
+                                          'showEasing': 'swing',
+                                          'hideEasing': 'linear',
+                                          'showMethod': 'fadeIn',
+                                          'hideMethod': 'fadeOut'
+                                      }
+                                  }
+
+                                  if (elem == "Error - minimum") {
+                                      $('#note').text('Error - Less then minimum allowed units(i.e 1) left after this carry over which is not allowed');
+                                      Command: toastr['error']('Less then minimum allowed units(i.e 1) left after this carry over which is not allowed');
+                                      toastr.options = {
+                                          'closeButton': false,
+                                          'debug': false,
+                                          'newestOnTop': false,
+                                          'progressBar': false,
+                                          'positionClass': 'toast-top-right',
+                                          'preventDuplicates': false,
+                                          'onclick': null,
+                                          'showDuration': '5000',
+                                          'hideDuration': '1000',
+                                          'timeOut': '3000',
+                                          'extendedTimeOut': '1000',
+                                          'showEasing': 'swing',
+                                          'hideEasing': 'linear',
+                                          'showMethod': 'fadeIn',
+                                          'hideMethod': 'fadeOut'
+                                      }
+                                  }
+
+                                  if (elem == "Error - .5 in this category, not allowed") {
+                                      $('#note').text('Error - *.5 in this category is not allowed');
+                                      Command: toastr['info']('Error - *.5 in this category is not allowed');
+                                      toastr.options = {
+                                          'closeButton': false,
+                                          'debug': false,
+                                          'newestOnTop': false,
+                                          'progressBar': false,
+                                          'positionClass': 'toast-top-right',
+                                          'preventDuplicates': false,
+                                          'onclick': null,
+                                          'showDuration': '5000',
+                                          'hideDuration': '1000',
+                                          'timeOut': '3000',
+                                          'extendedTimeOut': '1000',
+                                          'showEasing': 'swing',
+                                          'hideEasing': 'linear',
+                                          'showMethod': 'fadeIn',
+                                          'hideMethod': 'fadeOut'
+                                      }
+                                  }
+
+                                  if (elem == "Error - Please select units more then 0 (zero)") {
+                                      $('#note').text('Error - Please select units more then 0 (zero)');
+                                      Command: toastr['info']('Error - Please select units more then 0 (zero)');
+                                      toastr.options = {
+                                          'closeButton': false,
+                                          'debug': false,
+                                          'newestOnTop': false,
+                                          'progressBar': false,
+                                          'positionClass': 'toast-top-right',
+                                          'preventDuplicates': false,
+                                          'onclick': null,
+                                          'showDuration': '5000',
+                                          'hideDuration': '1000',
+                                          'timeOut': '3000',
+                                          'extendedTimeOut': '1000',
+                                          'showEasing': 'swing',
+                                          'hideEasing': 'linear',
+                                          'showMethod': 'fadeIn',
+                                          'hideMethod': 'fadeOut'
+                                      }
+                                  }
+
+                                  if (elem == "Success") {
+                                      location.reload();
+                                      Command: toastr['success']('Records carried over successfully.');
+                                      toastr.options = {
+                                          'closeButton': false,
+                                          'debug': false,
+                                          'newestOnTop': false,
+                                          'progressBar': false,
+                                          'positionClass': 'toast-top-right',
+                                          'preventDuplicates': false,
+                                          'onclick': null,
+                                          'showDuration': '5000',
+                                          'hideDuration': '1000',
+                                          'timeOut': '3000',
+                                          'extendedTimeOut': '1000',
+                                          'showEasing': 'swing',
+                                          'hideEasing': 'linear',
+                                          'showMethod': 'fadeIn',
+                                          'hideMethod': 'fadeOut'
+                                      }
+                                  }
+                              },
+                              error: function (result) {
+                                  $("#btn_carryOver").empty();
+                                  $("#btn_carryOver").append('Carry Over');
+                                  $("#btn_carryOver").attr("disabled", false);
+                                  $('#note').text('Error - Something went wrong. Please contact administrator.');
+                                  Command: toastr['error']('Something went wrong. Please contact administrator.');
+                                  toastr.options = {
+                                      'closeButton': false,
+                                      'debug': false,
+                                      'newestOnTop': false,
+                                      'progressBar': false,
+                                      'positionClass': 'toast-top-right',
+                                      'preventDuplicates': false,
+                                      'onclick': null,
+                                      'showDuration': '5000',
+                                      'hideDuration': '1000',
+                                      'timeOut': '3000',
+                                      'extendedTimeOut': '1000',
+                                      'showEasing': 'swing',
+                                      'hideEasing': 'linear',
+                                      'showMethod': 'fadeIn',
+                                      'hideMethod': 'fadeOut'
+                                  }
+                              }
+                          })
+                }
+            };
+        </script>
+    }
+</section>

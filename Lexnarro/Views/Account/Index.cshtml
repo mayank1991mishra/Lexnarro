@@ -1,0 +1,1091 @@
+﻿@using System.Web.Optimization
+@using Lexnarro.HelperClasses
+
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+
+    <meta name="keywords" content="CPD, Continued Professional development, Lawyer, Legal, Barrister, Law Society, effortlessly, effortless, simple, simply, automation, AI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>LEX NARRO</title>
+
+    <!-- Favicon -->
+    <!--<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">-->
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon">-->
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Lato:300,400,700,900" rel="stylesheet">
+
+    @Styles.Render("~/bundles/index")
+
+    <link href="~/Content/IndexCSS/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div id="loader">
+            <div id="box"></div>
+            <div id="hill"></div>
+        </div>
+    </div>
+    <!-- Header -->
+    <header id="home">
+        <nav class="navbar navbar-default" id="main-nav" style="padding-bottom: 2px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-morki">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!--<a class="navbar-brand" href="#">Lexnarro</a>-->
+                            @*<a href="" class="navbar-brand"><img src="./ln2.jpg" height="40" width="200" style="margin-top:-5px"></a>*@
+                            <a href="" class="navbar-brand"><img src="~/Content/img/ln2(2).png" height="40" width="190" style="margin-top:-17px; padding-bottom: 2px;"></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-morki">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active"><a href="#home" data-scroll>Home</a></li>
+
+                                <li><a href="#features" data-scroll>Features</a></li>
+                                <li><a href="#screenshots" data-scroll>Screenshots</a></li>
+                                <li><a href="#price-table" data-scroll>Price</a></li>
+                                <li><a href="#testimonial" data-scroll>About</a></li>
+
+                                <li><a href="#contact" data-scroll>Contact</a></li>
+                                @{
+                                    var userName = UserHelper.GetUserName();
+                                    var userRole = UserHelper.GetUserRole();
+                                }
+
+                                @if (userRole == "Admin")
+                                {
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            @*<span class="profile-ava">
+                                                    <img alt="" src="img/avatar1_small.jpg">
+                                                </span>*@
+                                            <span class="username">@userName</span>
+                                            @*<b class="caret"></b>*@
+                                        </a>
+
+                                        <ul class="dropdown-menu extended logout">
+                                            <div class="log-arrow-up"></div>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Profile", "Admin", new { }, null)"><i class="icon_profile"></i> My Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "ActiveUsers", new { }, null)"><i class="icon_mail_alt"></i> Active Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "OtherUsers", new { }, null)"><i class="icon_clock_alt"></i> Other Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("LogOff", "Account", new { }, null)"><i class="icon_key_alt"></i> Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                @if (userRole == "User")
+                                {
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            @*<span class="profile-ava">
+                                                    <img alt="" src="img/avatar1_small.jpg">
+                                                </span>*@
+                                            <span class="username">@userName</span>
+                                            @*<b class="caret"></b>*@
+                                        </a>
+
+                                        <ul class="dropdown-menu extended logout">
+                                            <div class="log-arrow-up"></div>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Index", "Home", new { }, null)"><i class="icon_profile"></i> Dashboard</a>
+                                            </li>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Index", "User", new { }, null)"><i class="icon_profile"></i> My Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Training", new { }, null)"><i class="icon_mail_alt"></i> My Records</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "CarryOver", new { }, null)"><i class="icon_mail_alt"></i> Carryover</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Payment", "User", new { }, null)"><i class="icon_clock_alt"></i> My Transactions</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Subscription", new { }, null)"><i class="icon_chat_alt"></i> My Subscriptions</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("LogOff", "Account", new { }, null)"><i class="icon_key_alt"></i> Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                @if (string.IsNullOrEmpty(userRole))
+                                {
+                                    <li class="nav-download-btn">@Html.ActionLink("Login", "Login", new { }, null)</li>
+                                    <li class="nav-download-btn">@Html.ActionLink("Signup", "Signup", "User", new { }, null)</li>
+                                }
+
+                            </ul>
+                        </div><!-- .navbar-collapse -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header><!-- Ends: header -->
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-1 col-sm-8 intro-info wow fadeIn">
+                    <div class="intro-info-content">
+                        <h1>
+                            Manage your CPD records  effortlessly.
+
+                        </h1>
+                        @*<p>
+                            Lex Narro is a simple way to
+                            manage your CPD records. Made
+                            by a busy lawyer with the same
+                            pain points as you. This app is an
+                            easy to use tool for tracking and
+                            managing your records.
+                        </p>*@
+
+                        <p>
+                            Lex Narro is a simple way to manage and report your CPD records. 
+                            Made for busy Australian qualified lawyers.
+                            Available on IOS, Android and web application. 
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("Signup", "User", new { }, null)"><i class="icon_key_alt"></i>Subscribe Now</a></li>
+                            <li><a href="@Url.Action("Signup", "User", new { }, null)"><i class="icon_key_alt"></i>Start Trial</a></li>
+                        </ul>
+                    </div>
+                </div><!-- Ends: .intro-info -->
+
+                <div class="col-md-3 col-md-offset-1 col-sm-4 intro-image wow fadeIn">
+                    <div class="intro-image-content">
+                        @*<img src="~/images/intro-image.png" alt="" class="img-responsive">*@
+                        <img src="~/Content/img/top picture.jpg" alt="" class="img-responsive">
+                    </div>
+                </div><!-- Ends: .intro-image -->
+            </div>
+        </div>
+    </section><!-- Ends: .intro -->
+    <!-- About App -->
+    <section class="about-app">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="app-info wow fadeIn">
+                        <h2>
+                            Respond to any audit requests within
+                            minutes.
+                        </h2>
+                        <ul class="list-unstyled">
+                            <li>Record multiple years’ CPD data.</li>
+                            <li>
+                                Review and manage current or previous
+                                years’ records with a user-friendly dashboard.
+                            </li>
+                            <li>
+                                View remaining requirements for any current
+                                year with your dashboard.
+                            </li>
+                            <li>
+                                Upload and maintain any accompanying
+                                documents to support your CPD activities.
+                            </li>
+                            <li>
+                                Send your CPD records at the touch of a
+                                button formatted with any accompanying files
+                                attached.
+                            </li>
+                            <li>
+                                Surplus points can be carried over to the
+                                following year in accordance with the rules of
+                                the State or Territory that you are enrolled in
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- Ends: .col-sm-6 -->
+                <div class="col-sm-5">
+                    <div class="app-image wow fadeInUp" data-wow-delay="0.2s">
+                        @*<img src="~/images/app-screen-bw2.png" alt="" class="img-responsive">*@
+                        <img src="~/Content/img/middle.jpg" alt="" class="img-responsive">
+                    </div>
+                </div><!-- Ends: .col-sm-6 -->
+            </div>
+        </div>
+    </section><!-- Ends: .about-app -->
+    <!-- App Features -->
+    <section class="app-features" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>Our Features</h2>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="features-left wow fadeInLeft">
+                        <div class="feature-single">
+                            <div class="feature-info">
+                                <h3>Cloud back up</h3>
+                                <p>Your data is held on Australian-based servers.</p>
+                            </div>
+                            <div class="feature-icon">
+                                <span><i class="fa fa-slack"></i></span>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-info">
+                                <h3>State Specific</h3>
+                                <p>
+                                    With all Australian States and Territories’ Law Societies
+                                    having their own specific CPD requirements, we’ve
+                                    customised our app so that when you tell us the State or
+                                    Territory that you are enrolled in, the app will automatically
+                                    configure itself to your Law Society’s requirements.
+                                </p>
+                            </div>
+                            <div class="feature-icon">
+                                <span><i class="fa fa-battery"></i></span>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-info">
+                                <h3>Multiple Year Records</h3>
+                                <p>
+                                    Input data for all your previous years’ CPD activities and
+                                    don’t rely on manual processes, emails, spreadsheets or
+                                    online calendars.
+                                </p>
+                            </div>
+                            <div class="feature-icon">
+                                <span><i class="fa fa-bug"></i></span>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-info">
+                                <h3>Mandatory Point Management </h3>
+                                <p>
+                                    Our app makes it clear and simple which points in which
+                                    categories are still to be completed.
+                                </p>
+                            </div>
+                            <div class="feature-icon">
+                                <span><i class="fa fa-bar-chart"></i></span>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+                <div class="col-md-4 col-sm-12" style="margin-top:100px">
+                    <div class="feature-image wow fadeInUp">
+                        @*<img src="~/images/intro-image.png" alt="" class="img-responsive">*@
+                        <img src="~/Content/img/bottom.jpg" alt="" class="img-responsive">
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+                <div class="col-md-4 col-sm-12">
+                    <div class="features-right wow fadeInRight">
+                        <div class="feature-single">
+                            <div class="feature-icon">
+                                <span><i class="fa fa-object-group"></i></span>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Count Down to Due date</h3>
+                                <p>
+                                    See how many days left are until your current year’s point
+                                    are due..
+                                </p>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-icon">
+                                <span><i class="fa fa-magic"></i></span>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Auto-formatted PDFs</h3>
+                                <p>
+                                    At the touch of a button you can create and send a PDF of your
+                                    CPD records. We’ve even auto formatted the PDF to contain
+                                    the information fields required by your Law Society.
+                                </p>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-icon">
+                                <span><i class="fa fa-share-alt"></i></span>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Upload Accompanying data</h3>
+                                <p>
+                                    Upload any receipts or accompanying data evidencing your
+                                    attendance to accompany your PDF. Lex Narro will attach these
+                                    to your email when you choose to send that year’s data..
+                                </p>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                        <div class="feature-single">
+                            <div class="feature-icon">
+                                <span><i class="fa fa-cogs"></i></span>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Peace of Mind</h3>
+                                <p>
+                                    Your privacy is paramount to us and we will only store or use
+                                    your personal information in accordance with our privacy policy.
+                                </p>
+                            </div>
+                        </div><!-- Ends: .feature-single -->
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+            </div>
+        </div>
+    </section><!-- Ends: .app-features -->
+    <!-- Video -->
+    <!-- Ends: .video -->
+
+
+    <section class="video-featured">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 wow bounceIn" data-wow-delay="0.2s">
+                    <a href="https://www.youtube.com/watch?v=StS2rNnK2TQ" class="video-btn">
+                        <span><i class="fa fa-play"></i></span>
+                        <span>Watch video</span>
+                    </a>
+                </div> Ends: .col-sm-12
+            </div>
+        </div>
+    </section>
+    <!-- Screenshots -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>App Screens</h2>
+                </div>
+                <div class="col-md-4 col-sm-5">
+                    <div class="gallery-info wow fadeInLeft">
+                        <h3>Explore More</h3>
+                        <p>
+                            Do you or your team struggle to effectively
+                            manage your CPD records. Managing your
+                            records across Word files, Excel
+                            spreadsheets, CPD fliers or online calendar
+                            entries or a combination of these? There is a
+                            better way. Lex Narro provides a way for you
+                            to record and store your CPD records in one
+                            place accessible at the touch of a button.
+                        </p>
+                        <p>
+                            Sophistication on the back end and simplicity
+                            on the front end. Your dashboard gives you an
+                            ‘at a glance view’ of the precise CPD activities
+                            you still need to complete this year and how
+                            long you have to complete these.
+                        </p>
+                        <p>
+                            Your app allows you to add details of your
+                            CPD activities (including uploading supporting
+                            documents such as receipts), view previous
+                            years’ activities, create and send PDFs with
+                            any accompanying supporting documents to
+                            yourself or your Law Society. It really is that
+                            simple!
+                        </p>
+                        <a href="">Take A Tour</a>
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+                <div class="col-md-8 col-sm-7" style="margin-top:50px">
+                    <div class="screenshot-gallery owl-carousel wow fadeInRight">
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/1.jpg" alt="" class="img-resoponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 1.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/1.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 1.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/2.jpg" alt="" class="img-resoponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 2.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/2.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 2.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/3.jpg" alt="" class="img-respoonsive">*@
+                                <img src="~/Content/img/lexi/Lex App 3.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/3.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 3.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/4.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 4.png" alt="" class="img-resoponsive">
+
+                                <figcaption>
+                                    @*<a href="~/images/4.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 4.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/5.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 5.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/5.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 5.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/6.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 6.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/6.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 6.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/7.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 7.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/7.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 7.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/8.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 8.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/8.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 8.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="screenshot-single">
+                            <figure>
+                                @*<img src="~/images/9.jpg" alt="" class="img-roesponsive">*@
+                                <img src="~/Content/img/lexi/Lex App 9.png" alt="" class="img-resoponsive">
+                                <figcaption>
+                                    @*<a href="~/images/9.jpg"></a>*@
+                                    <a href="~/Content/img/lexi/Lex App 9.png"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div><!-- Ends: .col-sm-8 -->
+            </div>
+        </div>
+    </section><!-- Ends: .screenshots -->
+    <!-- Price Table -->
+    <section class="price-table" id="price-table">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>Our Pricing</h2>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-table-wrapper wow fadeIn" data-wow-delay="0.1s">
+                        <div class="price-header">
+                            <h3>Demo</h3>
+                            <span class="price">Free 5-day </span><span>Trial</span>
+
+                            <span style="color:#fff;">Year</span>
+                            <p style="color:#fff;">*</p>
+                        </div>
+                        <div class="price-content">
+                            <ul class="list-unstyled">
+                                <li>• Limited to 5 records</li>
+                                <li class="ablock">• Unlimited PDF downloads </li>
+                                <li class="ablock">• Unlimited ancillary files upload </li>
+                                <li class="ablock">• Free Future Updates & Fixes </li>
+                                <li class="ablock">• Free Support</li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="price-btn">
+                            <a href="@Url.Action("Signup", "User", new { }, null)">Demo Now</a>
+                        </div>
+                    </div>
+                </div><!-- Ends: .col-sm-3 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-table-wrapper wow fadeIn" data-wow-delay="0.3s">
+                        <div class="price-header">
+                            <h3>1 Year</h3>
+                            @*<span class="price">$13.99</span>*@
+                            <span class="price">$24.99</span>
+                            <span>Year</span>
+                            <p style="font-size: 10px;">*Includes GST</p>
+                        </div>
+                        <div class="price-content">
+                            <ul class="list-unstyled">
+                                @*<li>• Less than  $1.17  per month for 1 Year Subscription </li>*@
+                                @*<li>• Less than  $2.08  per month for 1 Year Subscription </li>*@
+                                <li>• Less than  $2.09  per month for 1 Year Subscription </li>
+                                <li>• Unlimited Records</li>
+                                <li>• Unlimited PDF downloads</li>
+                                <li>• Unlimited ancillary files upload</li>
+                                <li>• Free Future Updates & Fixes</li>
+                                <li>• Free Support</li>
+                            </ul>
+                        </div>
+                        <div class="price-btn">
+                            <a href="@Url.Action("Signup", "User", new { }, null)">Subscribe Now</a>
+                        </div>
+                    </div>
+                </div><!-- Ends: .col-sm-3 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-table-wrapper price-table-featured wow fadeIn" data-wow-delay="0.5s">
+                        <div class="price-header">
+                            <h3>2 Years</h3>
+                            @*<span class="price">$24.99</span>*@
+                            <span class="price">$44.98</span>
+                            <span>2 Year</span>
+                            <p style="font-size: 10px;">*Includes GST</p>
+                        </div>
+                        <div class="price-content">
+                            <ul class="list-unstyled">
+                                @*<li>• Less than  $1.05  per month for 2 Year Subscription </li>*@
+                                @*<li>• Less than  $3.74  per month for 2 Year Subscription </li>*@
+                                <li>• Less than  $1.88  per month for 2 Year Subscription </li>
+                                <li>• Unlimited Records</li>
+                                <li>• Unlimited PDF downloads</li>
+                                <li>• Unlimited ancillary files upload</li>
+                                <li>• Free Future Updates & Fixes</li>
+                                <li>• Free Support</li>
+                            </ul>
+                        </div>
+                        <div class="price-btn">
+                            <a href="@Url.Action("Signup", "User", new { }, null)">Subscribe Now</a>
+                        </div>
+                    </div>
+                </div><!-- Ends: .col-sm-3 -->
+            </div>
+        </div>
+    </section><!-- Ends: .price-table -->
+    <!-- Testimonial -->
+    <section class="testimonial" id="testimonial">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>About</h2>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="testimonial-slider owl-carousel wow fadeInUp">
+                        <div class="slide-single">
+                            <div class="client-info">
+                                <ul class="list-unstyled">
+                                    <li class="105">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="client-text">
+                                <p>
+                                    Lex Narro is a simple way to manage your continuing education and professional development
+                                    (CPD) obligations. Created by a busy lawyer with the same pain points as you. We made it simple
+                                    and fast, so you don’t need to worry any more than you need to about your records.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Ends: .testimonial -->
+    <!-- Download App -->
+    <section class="download-app" id="download-app">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <h2>Now Available</h2>
+                    <p>Visit the iOS App store or Google Play to download your App as well as being able to access everything by logging into our website.</p>
+                    <ul class="list-unstyled">
+                        <li><a href="https://play.google.com/store/apps/details?id=com.lexnarro"><img src="~/Content/img/icons/2.png" alt=""></a></li>
+                        <li><a href="https://apps.apple.com/us/app/lex-narro-cpd-australia-lawyer/id1469242352?ls=1"><img src="~/Content/img/icons/3.png" alt=""></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!-- Ends: .download-app -->
+    <!-- Change Log -->
+    <!--<section class="change-log">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>Change Log</h2>
+                </div>
+                <div class="col-sm-12">
+                    <div class="changelog-timeline wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="timeline-single">
+                            <div class="content-left">
+                                <h3>Free Version Fetured On Store</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vitae, recusandae libero nulla veniam aut.</p>
+                            </div>
+                            <div class="content-right timeline-date">
+                                <span>Feb 24, 2017</span>
+                            </div>
+                            <div class="icon"><i class="fa fa-heart"></i></div>
+                        </div><!-- Ends: .timeline-single -->
+    <!--<div class="timeline-single">
+        <div class="content-left timeline-date">
+            <span>Jan 14, 2017</span>
+        </div>
+        <div class="content-right">
+            <h3>Minor Bug Fixing</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vitae, recusandae libero nulla veniam aut.</p>
+        </div>
+        <div class="icon"><i class="fa fa-heart"></i></div>
+    </div>-->
+    <!-- Ends: .timeline-single -->
+    <!--<div class="timeline-single">
+        <div class="content-left">
+            <h3>New Feature Added</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vitae, recusandae libero nulla veniam aut.</p>
+        </div>
+        <div class="content-right timeline-date">
+            <span>Dec 08, 2016</span>
+        </div>
+        <div class="icon"><i class="fa fa-heart"></i></div>
+    </div>-->
+    <!-- Ends: .timeline-single -->
+    <!--<div class="timeline-single">
+        <div class="content-left timeline-date">
+            <span>Nov 20, 2016</span>
+        </div>
+        <div class="content-right">
+            <h3>Initial Release</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vitae, recusandae libero nulla veniam aut.</p>
+        </div>
+        <div class="icon"><i class="fa fa-heart"></i></div>
+    </div>-->
+    <!-- Ends: .timeline-single -->
+    @*</div><!-- Ends: .changelog-timeline -->
+        </div><!-- Ends: .col-sm-12 -->
+        </div>
+        </div>
+        </section>--><!-- Ends: .change-log -->*@
+    <!-- FAQ -->
+    <section class="faqs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>FAQ's</h2>
+                </div>
+                <div class="col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>
+                                What personal information is held by Lex Narro?
+
+                            </h3>
+                            <p>
+                                The personal information you enter when you subscribe,
+                                the CPD records you enter and the files you upload are held
+                                by Lex Narro. We manage your information in accordance
+                                with our privacy policy. As payment is made through
+                                PayPal, Lex Narro does not have visibility or store any of
+                                your credit/debit card details.
+                            </p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Where is the personal data input into the App held? </h3>
+                            <p>Secure Australian based servers.</p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Are my credit/debit card details safe? </h3>
+                            <p>
+                                As payment is made through PayPal, Lex Narro does not
+                                have visibility of or access to your credit/debit card details.
+                                Please contact PayPal directly to review or understand
+                                better their online security.
+                            </p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                </div><!-- Ends: .col-sm-6 -->
+                <div class="col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>What happens if I need to edit prior year’s records? </h3>
+                            <p>While your subscription is current, you can edit previous year’s records.</p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>What happens when my subscription expires? </h3>
+                            <p>
+                                You can unsubscribe at any time by email to admin@lexnarro.com.au and your subscription will
+                                continue until the end of that year. We are not able to offer a refund for the balance of that year.
+                            </p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>What If I wish to unsubscribe? </h3>
+                            <p>You can email us at admin@lexnarro.com.au to unsubscribe. Since you have paid 12 months up front we will keep your account active until that time has ceased plus another 12 months incase you wish to resubscribe in that time. If you contact us we can have your account/data deleted in full at anytime. </p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                </div><!-- Ends: .col-sm-6 -->
+            </div>
+        </div>
+    </section><!-- Ends: .faqs -->
+    <!-- Newsletter -->
+    <!--<section class="newsletter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 wow fadeInUp" data-wow-delay="0.1s">
+                    <h3>Subscribe To Our Newsletter To Get Latest Updates &amp; News</h3>
+                    <form action="#">
+                        <input type="text" placeholder="Your Email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div> Ends: .col-sm-12
+            </div>
+        </div>
+    </section>-->
+    <!-- Ends: .newsletter -->
+    <!-- Blog -->
+    <!--<section class="blog" id="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>Our Blog</h2>
+                </div>
+                <div class="col-sm-4">
+                    <div class="blog-single wow fadeIn" data-wow-delay="0.1s">
+                        <figure>
+                            <img src="images/blog04.jpg" alt="" class="img-responsive">
+                            <figcaption>
+                                <ul class="list-unstyled post-meta clearfix">
+                                    <li>23 Feb, 2017 by <a href="">Admin</a></li>
+                                    <li><a href="">Category Sketch</a></li>
+                                </ul>
+                                <h3><a href="">Dignissimos nihil explicabo neque</a></h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos modi at dignissimos nihil explicabo neque magni ea natus, mollitia ut.</p>
+                                <ul class="list-unstyled post-bottom">
+                                    <li><a href="">Read More</a></li>
+                                    <li>#lorem #wordpress</li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+    <!--<div class="col-sm-4">
+        <div class="blog-single wow fadeIn" data-wow-delay="0.3s">
+            <figure>
+                <img src="images/blog05.jpg" alt="" class="img-responsive">
+                <figcaption>
+                    <ul class="list-unstyled post-meta clearfix">
+                        <li>23 Feb, 2017 by <a href="">Admin</a></li>
+                        <li><a href="">Category Sketch</a></li>
+                    </ul>
+                    <h3><a href="">Dignissimos nihil explicabo neque</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos modi at dignissimos nihil explicabo neque magni ea natus, mollitia ut.</p>
+                    <ul class="list-unstyled post-bottom">
+                        <li><a href="">Read More</a></li>
+                        <li>#lorem #wordpress</li>
+                    </ul>
+                </figcaption>
+            </figure>
+        </div>
+    </div>-->
+    <!-- Ends: .col-sm-4 -->
+    <!--<div class="col-sm-4">
+        <div class="blog-single wow fadeIn" data-wow-delay="0.5s">
+            <figure>
+                <img src="images/blog06.jpg" alt="" class="img-responsive">
+                <figcaption>
+                    <ul class="list-unstyled post-meta clearfix">
+                        <li>23 Feb, 2017 by <a href="">Admin</a></li>
+                        <li><a href="">Category Sketch</a></li>
+                    </ul>
+                    <h3><a href="">Dignissimos nihil explicabo neque</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos modi at dignissimos nihil explicabo neque magni ea natus, mollitia ut.</p>
+                    <ul class="list-unstyled post-bottom">
+                        <li><a href="">Read More</a></li>
+                        <li>#lorem #wordpress</li>
+                    </ul>
+                </figcaption>
+            </figure>
+        </div>
+    </div>-->
+    <!-- Ends: .col-sm-4 -->
+    <!--<div class="col-sm-12">
+        <div class="blog-btn wow bounceIn" data-wow-delay="0.3s">
+            <a href="">Go to Blog</a>
+        </div>
+    </div>-->
+    @*</div>
+        </div>
+        </section>*@<!-- Ends: .blog -->
+    <!-- Cliets Logo -->
+    <!--<section class="clients-logo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.1s"><img src="images/client01.jpg" alt="" class="img-responsive"></div>
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.2s"><img src="images/client02.jpg" alt="" class="img-responsive"></div>
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.3s"><img src="images/client03.jpg" alt="" class="img-responsive"></div>
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.4s"><img src="images/client04.jpg" alt="" class="img-responsive"></div>
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.5s"><img src="images/client01.jpg" alt="" class="img-responsive"></div>
+                <div class="col-sm-2 col-xs-6 wow fadeInLeft" data-wow-delay="0.6s"><img src="images/client02.jpg" alt="" class="img-responsive"></div>
+            </div>
+        </div>
+    </section>-->
+    <!-- Ends: .clients-logo -->
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header">
+                    <h2>Contact</h2>
+                </div>
+                <div class="col-md-8 col-sm-7">
+                    <div class="contact-wrapper wow fadeInLeft" data-wow-delay="0.1s">
+                        <form method="post" action="">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Name" name="name" required id="txtName">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Email" name="email" required id="txtEmail">
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea placeholder="Message" name="message" required id="txtMessage"></textarea>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button id="sendMail">Send Message</button>
+                                </div>
+                            </div>
+                            <div id="form-messages"></div>
+                        </form>
+                    </div>
+                </div><!-- Ends: .col-sm-8 -->
+                <div class="col-md-4 col-sm-5">
+                    <div class="contact-details wow fadeInRight" data-wow-delay="0.3s">
+                        <h3>Contact Info</h3>
+                        <p>
+                            Get in touch with us we’ll get back
+                            to you as fast as we can. Leave
+                            feedback, request support or just
+                            say hello.
+                        </p>
+                        <ul class="list-unstyled contact-info-list">
+                            <li><i class="fa fa-phone"></i> Phone: +61459 471 528</li>
+                            <li><i class="fa fa-envelope"></i> Email: admin@lexnarro.com.au</li>
+                            <li><i class="fa fa-globe"></i> Web: https://lexnarro.com.au</li>
+                        </ul>
+                        <ul class="list-unstyled contact-social">
+                            <li><a href="https://www.facebook.com/Lex-Narro-291592028015780/"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/LexNarro"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/lex-narro-99b436171"><i class="fa fa-linkedin"></i></a></li>
+                            <!--<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href=""><i class="fa fa-whatsapp"></i></a></li>-->
+                            <li><a href="https://www.instagram.com/lexnarro/"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div><!-- Ends: .col-sm-4 -->
+            </div>
+        </div>
+    </section><!-- Ends: .contact -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 footer-bottom-left">
+                    <p>Lex Narro © 2019</p>
+                </div>
+                <div class="col-md-7 col-sm-12 footer-bottom-menu">
+                    <ul class="list-unstyled">
+
+                        <li><a href="/Account/privacyPolicy">Privacy Policy</a></li>
+
+
+                        @*<li><a href="@Url.Action("privacyPolicy", "Account")">privacy policy</a></li>*@
+
+
+                        @*@Html.ActionLink("Privacy Policy", "privacyPolicy", "Account", null, new { @class = "page-scroll" });*@
+                        <li><a href="/Account/TermAndCondition">Terms and Condition</a></li>
+                        @*<li><a href="">Support</a></li>
+                            <li><a href="">New Features</a></li>*@
+                    </ul>
+                    <p id="back-top"><a href="#top"><i class="fa fa-angle-up"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ===================================================
+        Javascript Files
+    ===================================================== -->
+    <!-- ===================================================
+        Javascript Files
+    ===================================================== -->
+
+    @Scripts.Render("~/bundles/indexjs")
+
+
+    @section message{
+        @Html.Raw(ViewBag.message)
+    }
+
+    <script>
+        $(function () {
+            $('#sendMail').click(function () {
+                $("#sendMail").empty();
+                $("#sendMail").attr("disabled", true);
+                $("#sendMail").append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+                $.ajax
+                ({
+                    url: '@Url.Action("SendMail", "Account")',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 'name': $('#txtName').val(), 'email': $('#txtEmail').val(), 'message': $('#txtMessage').val() }),
+
+                    success: function (result) {
+                        $("#sendMail").empty();
+                        $("#sendMail").append('Send Message');
+                        $("#sendMail").attr("disabled", false);
+
+
+                        Command: toastr['success']('Message sent');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                        }
+                    },
+                    error: function (result) {
+                        $("#sendMail").empty();
+                        $("#sendMail").append('Send Message');
+                        $("#sendMail").attr("disabled", false);
+                        Command: toastr['error']('Message not sent. Please try again after some time.');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() == 0) {
+                //$('#header').removeClass('tiny');
+                //$('#menu-spacing').addClass('nav-margin-top');
+                $('.navbar-brand img').attr('src', '../Content/img/ln2(2).png');
+            } else {
+                //$('#header').addClass('tiny');
+                //$('#menu-spacing').removeClass('nav-margin-top');
+                $('.navbar-brand img').attr('src', '../Content/img/ln1.png');
+            }
+        });
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136966071-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136966071-1');
+    </script>
+
+</body>
+</html>

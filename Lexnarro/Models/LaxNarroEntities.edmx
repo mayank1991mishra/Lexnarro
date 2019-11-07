@@ -1,0 +1,2822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LaxNarroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Country_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ExpiredPlanUserMailLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReminderType" Type="varchar" MaxLength="50" />
+          <Property Name="ReminderDate" Type="datetime" />
+          <Property Name="ReminderStatus" Type="varchar" MaxLength="50" />
+          <Property Name="NextReminderDueDate" Type="datetime" />
+          <Property Name="RecordOperationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MailLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReminderOne" Type="datetime" />
+          <Property Name="ReminderTwo" Type="datetime" />
+          <Property Name="ReminderThree" Type="datetime" />
+          <Property Name="ReminderFour" Type="datetime" />
+          <Property Name="ReminderFive" Type="datetime" />
+          <Property Name="ReminderSix" Type="datetime" />
+          <Property Name="LastReminderStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="page_master">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="page_id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="page_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="page_group" Type="varchar" MaxLength="50" />
+          <Property Name="menu_name" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PaypalResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Paypal_ReferenceId" Type="varchar(max)" />
+          <Property Name="intent" Type="varchar" MaxLength="50" />
+          <Property Name="payer" Type="varchar" MaxLength="50" />
+          <Property Name="application_context" Type="varchar(max)" />
+          <Property Name="response_state" Type="varchar" MaxLength="50" />
+          <Property Name="experience_profile_id" Type="varchar" MaxLength="500" />
+          <Property Name="note_to_payer" Type="varchar" MaxLength="200" />
+          <Property Name="failure_reason" Type="varchar(max)" />
+          <Property Name="create_time" Type="varchar" MaxLength="100" />
+          <Property Name="update_time" Type="varchar" MaxLength="100" />
+          <Property Name="links" Type="varchar(max)" />
+          <Property Name="payee" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Plan_Master">
+          <Key>
+            <PropertyRef Name="Plan_ID" />
+          </Key>
+          <Property Name="Plan_ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plan" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rate_Card">
+          <Key>
+            <PropertyRef Name="Rate_Id" />
+          </Key>
+          <Property Name="Rate_Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plan_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="role_page_map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="page_id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rule1_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Min" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Max" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Rule2_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Unit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Hours" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Rule3_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarryOverUnits" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Rule4_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MinUnits" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State_Activity_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State_Category_With_Rule4_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CategoryID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule4_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="State_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
+          <Property Name="Country_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State_Rule3_Marriage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule3_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StateActivity _with_Rule2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule2_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StateActivitySubActivityWithRule1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SubActivityID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Rule1ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Sub_Activity_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Activity_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="50" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscription_Master">
+          <Key>
+            <PropertyRef Name="Subscription_ID" />
+          </Key>
+          <Property Name="Subscription_ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plan" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Total_Unit_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Total_Units" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Start_Date" Type="datetime" Nullable="false" />
+          <Property Name="End_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Profile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="OtherName" Type="varchar" MaxLength="100" />
+          <Property Name="StreetNumber" Type="varchar" MaxLength="100" />
+          <Property Name="StreetName" Type="varchar" MaxLength="100" />
+          <Property Name="PostCode" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Suburb" Type="varchar" MaxLength="100" />
+          <Property Name="StateID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CountryID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StateEnrolled" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="LawSocietyNumber" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Role_id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Device_Imei" Type="varchar(max)" />
+          <Property Name="Device_Token" Type="varchar(max)" />
+          <Property Name="Device_Type" Type="varchar(max)" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="50" />
+          <Property Name="AccountConfirmed" Type="varchar" MaxLength="10" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" />
+          <Property Name="MailUnsubscribed" Type="varchar" MaxLength="10" />
+          <Property Name="Firm" Type="varchar" MaxLength="500" />
+          <Property Name="Current_Financial_year" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User_Role_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="user_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="role_id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="login_id" Type="varchar" MaxLength="500" />
+          <Property Name="password" Type="varchar" MaxLength="500" />
+          <Property Name="confirm_password" Type="varchar" MaxLength="500" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="status" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User_Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PlanID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RateID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
+          <Property Name="TransectionID" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User_Training_Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Financial_Year" Type="varchar" MaxLength="50" />
+          <Property Name="Category_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Min_Required_Category_Units" Type="int" />
+          <Property Name="Activity_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SubActivity_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Units_Done" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Received_By_Forwarding" Type="varchar" MaxLength="10" />
+          <Property Name="Training_Transaction_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Training_Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="State_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Category_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Activity_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SubActivity_Id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Hours" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Provider" Type="varchar" MaxLength="50" />
+          <Property Name="Financial_Year" Type="varchar" MaxLength="50" />
+          <Property Name="Your_Role" Type="varchar" MaxLength="50" />
+          <Property Name="Forwardable" Type="varchar" MaxLength="10" />
+          <Property Name="Has_been_Forwarded" Type="varchar" MaxLength="10" />
+          <Property Name="Descrption" Type="varchar(max)" />
+          <Property Name="UploadedFile" Type="image" />
+          <Property Name="UploadedFileName" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User_Transaction_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rate_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="User_ID" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PlanID" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Start_Date" Type="datetime" Nullable="false" />
+          <Property Name="End_Date" Type="datetime" />
+          <Property Name="Payment_Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Transection_ID" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Payment_Date" Type="datetime" />
+          <Property Name="Invoice_No" Type="int" />
+          <Property Name="Payment_Method" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Paypal_PayerId" Type="varchar(max)" />
+          <Property Name="Transaction_Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__ExpiredPl__UserI__68487DD7">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="ExpiredPlanUserMailLog" Type="Self.ExpiredPlanUserMailLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExpiredPlanUserMailLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MailLog__UserID__693CA210">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="MailLog" Type="Self.MailLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MailLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Act__Activ__09746778">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="State_Activity_Mapping" Type="Self.State_Activity_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Activity_Mapping">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Act__State__6EF57B66">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Activity_Mapping" Type="Self.State_Activity_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Activity_Mapping">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__Categ__6FE99F9F">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__Rule4__70DDC3D8">
+          <End Role="Rule4_Master" Type="Self.Rule4_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule4_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="Rule4_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__State__71D1E811">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Rul__Rule3__73BA3083">
+          <End Role="Rule3_Master" Type="Self.Rule3_Master" Multiplicity="1" />
+          <End Role="State_Rule3_Marriage" Type="Self.State_Rule3_Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule3_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Rule3_Marriage">
+              <PropertyRef Name="Rule3_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Rul__State__74AE54BC">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Rule3_Marriage" Type="Self.State_Rule3_Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Rule3_Marriage">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Activ__3F115E1A">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="Activity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Activ__43D61337">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Activity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Categ__08B54D69">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Categ__0D7A0286">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__State__0E6E26BF">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__SubAc__09A971A2">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="SubActivity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__SubAc__0F624AF8">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="SubActivity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Train__0A9D95DB">
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Training_Transaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Training_Transaction_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__User___0B91BA14">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__User___10566F31">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaypalResponse_UserProfile">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="PaypalResponse" Type="Self.PaypalResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaypalResponse">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_Card_ToPlan_Master">
+          <End Role="Plan_Master" Type="Self.Plan_Master" Multiplicity="0..1" />
+          <End Role="Rate_Card" Type="Self.Rate_Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="Rate_Card">
+              <PropertyRef Name="Plan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_page_map_page_master">
+          <End Role="page_master" Type="Self.page_master" Multiplicity="1" />
+          <End Role="role_page_map" Type="Self.role_page_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="page_master">
+              <PropertyRef Name="page_id" />
+            </Principal>
+            <Dependent Role="role_page_map">
+              <PropertyRef Name="page_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_page_map_ToRole_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="role_page_map" Type="Self.role_page_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_page_map">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Master_ToCountryMaster">
+          <End Role="Country_Master" Type="Self.Country_Master" Multiplicity="1" />
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Master">
+              <PropertyRef Name="Country_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity _with_Rule2_ToActivityMaster">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="StateActivity _with_Rule2" Type="Self.StateActivity _with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivity _with_Rule2">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity _with_Rule2_ToRule2_Master">
+          <End Role="Rule2_Master" Type="Self.Rule2_Master" Multiplicity="1" />
+          <End Role="StateActivity _with_Rule2" Type="Self.StateActivity _with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule2_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateActivity _with_Rule2">
+              <PropertyRef Name="Rule2_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity _with_Rule2_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="StateActivity _with_Rule2" Type="Self.StateActivity _with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivity _with_Rule2">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_Activity_Master">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_Rule1_Master">
+          <End Role="Rule1_Master" Type="Self.Rule1_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule1_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="Rule1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_State_Master">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_SubActivity_Master">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="SubActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Activity_Master_To_Activity_Master">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Activity_Master">
+              <PropertyRef Name="Activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Activity_Master_To_state_Master">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Activity_Master">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Total_Unit_Master_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="Total_Unit_Master" Type="Self.Total_Unit_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Total_Unit_Master">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_Role_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="Role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_ToCountryMaster">
+          <End Role="Country_Master" Type="Self.Country_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_ProfileStateEnrolled_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="StateEnrolled" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Mapping_ToRole_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="User_Role_Mapping" Type="Self.User_Role_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role_Mapping">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Mapping_User_Profile">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Role_Mapping" Type="Self.User_Role_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Mapping">
+              <PropertyRef Name="user_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToPlanMaster">
+          <End Role="Plan_Master" Type="Self.Plan_Master" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToRateCard">
+          <End Role="Rate_Card" Type="Self.Rate_Card" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate_Card">
+              <PropertyRef Name="Rate_Id" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToUserProfile">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Transaction_Master_ToPlan_Master">
+          <End Role="Plan_Master" Type="Self.Plan_Master" Multiplicity="0..1" />
+          <End Role="User_Transaction_Master" Type="Self.User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Transaction_Master_ToRate_Card">
+          <End Role="Rate_Card" Type="Self.Rate_Card" Multiplicity="1" />
+          <End Role="User_Transaction_Master" Type="Self.User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate_Card">
+              <PropertyRef Name="Rate_Id" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="Rate_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Transaction_Master_ToUser_Subscription">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Transaction_Master" Type="Self.User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="OtherName" Type="varchar" Mode="In" />
+          <Parameter Name="StreetNumber" Type="varchar" Mode="In" />
+          <Parameter Name="StreetName" Type="varchar" Mode="In" />
+          <Parameter Name="PostCode" Type="decimal" Mode="In" />
+          <Parameter Name="Suburb" Type="varchar" Mode="In" />
+          <Parameter Name="StateID" Type="decimal" Mode="In" />
+          <Parameter Name="CountryID" Type="decimal" Mode="In" />
+          <Parameter Name="StateEnrolled" Type="decimal" Mode="In" />
+          <Parameter Name="LawSocietyNumber" Type="decimal" Mode="In" />
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="Role_id" Type="decimal" Mode="In" />
+          <Parameter Name="Address" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Device_Imei" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Device_Type" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Device_Token" Type="varchar(max)" Mode="In" />
+          <Parameter Name="IsDeleted" Type="varchar" Mode="In" />
+          <Parameter Name="AccountConfirmed" Type="varchar" Mode="In" />
+          <Parameter Name="ActivationCode" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="LaxNarroModelStoreContainer">
+          <EntitySet Name="Activity_Master" EntityType="Self.Activity_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Master" EntityType="Self.Category_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country_Master" EntityType="Self.Country_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpiredPlanUserMailLog" EntityType="Self.ExpiredPlanUserMailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailLog" EntityType="Self.MailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="page_master" EntityType="Self.page_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaypalResponse" EntityType="Self.PaypalResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan_Master" EntityType="Self.Plan_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rate_Card" EntityType="Self.Rate_Card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_Master" EntityType="Self.Role_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role_page_map" EntityType="Self.role_page_map" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rule1_Master" EntityType="Self.Rule1_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rule2_Master" EntityType="Self.Rule2_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rule3_Master" EntityType="Self.Rule3_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rule4_Master" EntityType="Self.Rule4_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State_Activity_Mapping" EntityType="Self.State_Activity_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State_Category_With_Rule4_Mapping" EntityType="Self.State_Category_With_Rule4_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State_Master" EntityType="Self.State_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State_Rule3_Marriage" EntityType="Self.State_Rule3_Marriage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateActivity _with_Rule2" EntityType="Self.StateActivity _with_Rule2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateActivitySubActivityWithRule1" EntityType="Self.StateActivitySubActivityWithRule1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Activity_Master" EntityType="Self.Sub_Activity_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscription_Master" EntityType="Self.Subscription_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Total_Unit_Master" EntityType="Self.Total_Unit_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Profile" EntityType="Self.User_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Role_Mapping" EntityType="Self.User_Role_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Subscription" EntityType="Self.User_Subscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Training_Status" EntityType="Self.User_Training_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Training_Transaction" EntityType="Self.User_Training_Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Transaction_Master" EntityType="Self.User_Transaction_Master" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ExpiredPl__UserI__68487DD7" Association="Self.FK__ExpiredPl__UserI__68487DD7">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="ExpiredPlanUserMailLog" EntitySet="ExpiredPlanUserMailLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MailLog__UserID__693CA210" Association="Self.FK__MailLog__UserID__693CA210">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="MailLog" EntitySet="MailLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Act__Activ__09746778" Association="Self.FK__State_Act__Activ__09746778">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="State_Activity_Mapping" EntitySet="State_Activity_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Act__State__6EF57B66" Association="Self.FK__State_Act__State__6EF57B66">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Activity_Mapping" EntitySet="State_Activity_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__Categ__6FE99F9F" Association="Self.FK__State_Cat__Categ__6FE99F9F">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__Rule4__70DDC3D8" Association="Self.FK__State_Cat__Rule4__70DDC3D8">
+            <End Role="Rule4_Master" EntitySet="Rule4_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__State__71D1E811" Association="Self.FK__State_Cat__State__71D1E811">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Rul__Rule3__73BA3083" Association="Self.FK__State_Rul__Rule3__73BA3083">
+            <End Role="Rule3_Master" EntitySet="Rule3_Master" />
+            <End Role="State_Rule3_Marriage" EntitySet="State_Rule3_Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Rul__State__74AE54BC" Association="Self.FK__State_Rul__State__74AE54BC">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Rule3_Marriage" EntitySet="State_Rule3_Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Activ__3F115E1A" Association="Self.FK__User_Trai__Activ__3F115E1A">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Activ__43D61337" Association="Self.FK__User_Trai__Activ__43D61337">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Categ__08B54D69" Association="Self.FK__User_Trai__Categ__08B54D69">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Categ__0D7A0286" Association="Self.FK__User_Trai__Categ__0D7A0286">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__State__0E6E26BF" Association="Self.FK__User_Trai__State__0E6E26BF">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__SubAc__09A971A2" Association="Self.FK__User_Trai__SubAc__09A971A2">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__SubAc__0F624AF8" Association="Self.FK__User_Trai__SubAc__0F624AF8">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Train__0A9D95DB" Association="Self.FK__User_Trai__Train__0A9D95DB">
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__User___0B91BA14" Association="Self.FK__User_Trai__User___0B91BA14">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__User___10566F31" Association="Self.FK__User_Trai__User___10566F31">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaypalResponse_UserProfile" Association="Self.FK_PaypalResponse_UserProfile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="PaypalResponse" EntitySet="PaypalResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_Card_ToPlan_Master" Association="Self.FK_Rate_Card_ToPlan_Master">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_page_map_page_master" Association="Self.FK_role_page_map_page_master">
+            <End Role="page_master" EntitySet="page_master" />
+            <End Role="role_page_map" EntitySet="role_page_map" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_page_map_ToRole_Master" Association="Self.FK_role_page_map_ToRole_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="role_page_map" EntitySet="role_page_map" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Master_ToCountryMaster" Association="Self.FK_State_Master_ToCountryMaster">
+            <End Role="Country_Master" EntitySet="Country_Master" />
+            <End Role="State_Master" EntitySet="State_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity _with_Rule2_ToActivityMaster" Association="Self.FK_StateActivity _with_Rule2_ToActivityMaster">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="StateActivity _with_Rule2" EntitySet="StateActivity _with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity _with_Rule2_ToRule2_Master" Association="Self.FK_StateActivity _with_Rule2_ToRule2_Master">
+            <End Role="Rule2_Master" EntitySet="Rule2_Master" />
+            <End Role="StateActivity _with_Rule2" EntitySet="StateActivity _with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity _with_Rule2_ToStateMaster" Association="Self.FK_StateActivity _with_Rule2_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="StateActivity _with_Rule2" EntitySet="StateActivity _with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_Activity_Master" Association="Self.FK_StateActivitySubActivityWithRule_Activity_Master">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_Rule1_Master" Association="Self.FK_StateActivitySubActivityWithRule_Rule1_Master">
+            <End Role="Rule1_Master" EntitySet="Rule1_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_State_Master" Association="Self.FK_StateActivitySubActivityWithRule_State_Master">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_SubActivity_Master" Association="Self.FK_StateActivitySubActivityWithRule_SubActivity_Master">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Activity_Master_To_Activity_Master" Association="Self.FK_Sub_Activity_Master_To_Activity_Master">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Activity_Master_To_state_Master" Association="Self.FK_Sub_Activity_Master_To_state_Master">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Total_Unit_Master_ToStateMaster" Association="Self.FK_Total_Unit_Master_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="Total_Unit_Master" EntitySet="Total_Unit_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_Role_Master" Association="Self.FK_User_Profile_Role_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_ToCountryMaster" Association="Self.FK_User_Profile_ToCountryMaster">
+            <End Role="Country_Master" EntitySet="Country_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_ToStateMaster" Association="Self.FK_User_Profile_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_ProfileStateEnrolled_ToStateMaster" Association="Self.FK_User_ProfileStateEnrolled_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Mapping_ToRole_Master" Association="Self.FK_User_Role_Mapping_ToRole_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="User_Role_Mapping" EntitySet="User_Role_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Mapping_User_Profile" Association="Self.FK_User_Role_Mapping_User_Profile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Role_Mapping" EntitySet="User_Role_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToPlanMaster" Association="Self.FK_User_Subscription_ToPlanMaster">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToRateCard" Association="Self.FK_User_Subscription_ToRateCard">
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToUserProfile" Association="Self.FK_User_Subscription_ToUserProfile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Transaction_Master_ToPlan_Master" Association="Self.FK_User_Transaction_Master_ToPlan_Master">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Transaction_Master_ToRate_Card" Association="Self.FK_User_Transaction_Master_ToRate_Card">
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Transaction_Master_ToUser_Subscription" Association="Self.FK_User_Transaction_Master_ToUser_Subscription">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LaxNarroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Rule3_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarryOverUnits" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="State_Rule3_Marriage" Relationship="Self.FK__State_Rul__Rule3__245D67DE" FromRole="Rule3_Master" ToRole="State_Rule3_Marriage" />
+        </EntityType>
+        <EntityType Name="State_Rule3_Marriage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule3_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rule3_Master" Relationship="Self.FK__State_Rul__Rule3__245D67DE" FromRole="State_Rule3_Marriage" ToRole="Rule3_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK__State_Rul__State__236943A5" FromRole="State_Rule3_Marriage" ToRole="State_Master" />
+        </EntityType>
+        <EntityType Name="Activity_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="State_Activity_Mapping" Relationship="Self.FK__State_Act__Activ__09746778" FromRole="Activity_Master" ToRole="State_Activity_Mapping" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__Activ__3F115E1A" FromRole="Activity_Master" ToRole="User_Training_Transaction" />
+          <NavigationProperty Name="User_Training_Status" Relationship="Self.FK__User_Trai__Activ__43D61337" FromRole="Activity_Master" ToRole="User_Training_Status" />
+          <NavigationProperty Name="StateActivity__with_Rule2" Relationship="Self.FK_StateActivity__with_Rule2_ToActivityMaster" FromRole="Activity_Master" ToRole="StateActivity__with_Rule2" />
+          <NavigationProperty Name="StateActivitySubActivityWithRule1" Relationship="Self.FK_StateActivitySubActivityWithRule_Activity_Master" FromRole="Activity_Master" ToRole="StateActivitySubActivityWithRule1" />
+          <NavigationProperty Name="Sub_Activity_Master" Relationship="Self.FK_Sub_Activity_Master_To_Activity_Master" FromRole="Activity_Master" ToRole="Sub_Activity_Master" />
+        </EntityType>
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="State_Category_With_Rule4_Mapping" Relationship="Self.FK__State_Cat__Categ__531856C7" FromRole="Category_Master" ToRole="State_Category_With_Rule4_Mapping" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__Categ__29E1370A" FromRole="Category_Master" ToRole="User_Training_Transaction" />
+          <NavigationProperty Name="User_Training_Status" Relationship="Self.FK__User_Trai__Categ__2F9A1060" FromRole="Category_Master" ToRole="User_Training_Status" />
+        </EntityType>
+        <EntityType Name="Country_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_State_Master_ToCountryMaster" FromRole="Country_Master" ToRole="State_Master" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK_User_Profile_ToCountryMaster" FromRole="Country_Master" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="ExpiredPlanUserMailLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReminderType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReminderDate" Type="DateTime" Precision="3" />
+          <Property Name="ReminderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NextReminderDueDate" Type="DateTime" Precision="3" />
+          <Property Name="RecordOperationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK__ExpiredPl__UserI__54CB950F" FromRole="ExpiredPlanUserMailLog" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="MailLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ReminderOne" Type="DateTime" Precision="3" />
+          <Property Name="ReminderTwo" Type="DateTime" Precision="3" />
+          <Property Name="ReminderThree" Type="DateTime" Precision="3" />
+          <Property Name="ReminderFour" Type="DateTime" Precision="3" />
+          <Property Name="ReminderFive" Type="DateTime" Precision="3" />
+          <Property Name="ReminderSix" Type="DateTime" Precision="3" />
+          <Property Name="LastReminderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK__MailLog__UserID__1B9317B3" FromRole="MailLog" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="page_master">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="page_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="page_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="page_group" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="role_page_map" Relationship="Self.FK_role_page_map_page_master" FromRole="page_master" ToRole="role_page_map" />
+        </EntityType>
+        <EntityType Name="Plan_Master">
+          <Key>
+            <PropertyRef Name="Plan_ID" />
+          </Key>
+          <Property Name="Plan_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rate_Card" Relationship="Self.FK_Rate_Card_ToPlan_Master" FromRole="Plan_Master" ToRole="Rate_Card" />
+          <NavigationProperty Name="User_Subscription" Relationship="Self.FK_User_Subscription_ToPlanMaster" FromRole="Plan_Master" ToRole="User_Subscription" />
+          <NavigationProperty Name="User_Transaction_Master" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToPlan_Master" FromRole="Plan_Master" ToRole="User_Transaction_Master" />
+        </EntityType>
+        <EntityType Name="Rate_Card">
+          <Key>
+            <PropertyRef Name="Rate_Id" />
+          </Key>
+          <Property Name="Rate_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plan_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan_Master" Relationship="Self.FK_Rate_Card_ToPlan_Master" FromRole="Rate_Card" ToRole="Plan_Master" />
+          <NavigationProperty Name="User_Subscription" Relationship="Self.FK_User_Subscription_ToRateCard" FromRole="Rate_Card" ToRole="User_Subscription" />
+          <NavigationProperty Name="User_Transaction_Master" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToRate_Card" FromRole="Rate_Card" ToRole="User_Transaction_Master" />
+        </EntityType>
+        <EntityType Name="Role_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="role_page_map" Relationship="Self.FK_role_page_map_ToRole_Master" FromRole="Role_Master" ToRole="role_page_map" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK_User_Profile_Role_Master" FromRole="Role_Master" ToRole="User_Profile" />
+          <NavigationProperty Name="User_Role_Mapping" Relationship="Self.FK_User_Role_Mapping_ToRole_Master" FromRole="Role_Master" ToRole="User_Role_Mapping" />
+        </EntityType>
+        <EntityType Name="role_page_map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="page_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="page_master" Relationship="Self.FK_role_page_map_page_master" FromRole="role_page_map" ToRole="page_master" />
+          <NavigationProperty Name="Role_Master" Relationship="Self.FK_role_page_map_ToRole_Master" FromRole="role_page_map" ToRole="Role_Master" />
+        </EntityType>
+        <EntityType Name="Rule1_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Min" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Max" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="StateActivitySubActivityWithRule1" Relationship="Self.FK_StateActivitySubActivityWithRule_Rule1_Master" FromRole="Rule1_Master" ToRole="StateActivitySubActivityWithRule1" />
+        </EntityType>
+        <EntityType Name="Rule2_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Hours" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="StateActivity__with_Rule2" Relationship="Self.FK_StateActivity__with_Rule2_ToRule2_Master" FromRole="Rule2_Master" ToRole="StateActivity__with_Rule2" />
+        </EntityType>
+        <EntityType Name="Rule4_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MinUnits" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="State_Category_With_Rule4_Mapping" Relationship="Self.FK__State_Cat__Rule4__540C7B00" FromRole="Rule4_Master" ToRole="State_Category_With_Rule4_Mapping" />
+        </EntityType>
+        <EntityType Name="State_Activity_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK__State_Act__Activ__09746778" FromRole="State_Activity_Mapping" ToRole="Activity_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK__State_Act__State__0880433F" FromRole="State_Activity_Mapping" ToRole="State_Master" />
+        </EntityType>
+        <EntityType Name="State_Category_With_Rule4_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CategoryID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule4_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category_Master" Relationship="Self.FK__State_Cat__Categ__531856C7" FromRole="State_Category_With_Rule4_Mapping" ToRole="Category_Master" />
+          <NavigationProperty Name="Rule4_Master" Relationship="Self.FK__State_Cat__Rule4__540C7B00" FromRole="State_Category_With_Rule4_Mapping" ToRole="Rule4_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK__State_Cat__State__5224328E" FromRole="State_Category_With_Rule4_Mapping" ToRole="State_Master" />
+        </EntityType>
+        <EntityType Name="State_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="State_Rule3_Marriage" Relationship="Self.FK__State_Rul__State__236943A5" FromRole="State_Master" ToRole="State_Rule3_Marriage" />
+          <NavigationProperty Name="Country_Master" Relationship="Self.FK_State_Master_ToCountryMaster" FromRole="State_Master" ToRole="Country_Master" />
+          <NavigationProperty Name="State_Activity_Mapping" Relationship="Self.FK__State_Act__State__0880433F" FromRole="State_Master" ToRole="State_Activity_Mapping" />
+          <NavigationProperty Name="State_Category_With_Rule4_Mapping" Relationship="Self.FK__State_Cat__State__5224328E" FromRole="State_Master" ToRole="State_Category_With_Rule4_Mapping" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__State__28ED12D1" FromRole="State_Master" ToRole="User_Training_Transaction" />
+          <NavigationProperty Name="StateActivity__with_Rule2" Relationship="Self.FK_StateActivity__with_Rule2_ToStateMaster" FromRole="State_Master" ToRole="StateActivity__with_Rule2" />
+          <NavigationProperty Name="StateActivitySubActivityWithRule1" Relationship="Self.FK_StateActivitySubActivityWithRule_State_Master" FromRole="State_Master" ToRole="StateActivitySubActivityWithRule1" />
+          <NavigationProperty Name="Sub_Activity_Master" Relationship="Self.FK_Sub_Activity_Master_To_state_Master" FromRole="State_Master" ToRole="Sub_Activity_Master" />
+          <NavigationProperty Name="Total_Unit_Master" Relationship="Self.FK_Total_Unit_Master_ToStateMaster" FromRole="State_Master" ToRole="Total_Unit_Master" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK_User_Profile_ToStateMaster" FromRole="State_Master" ToRole="User_Profile" />
+          <NavigationProperty Name="User_Profile1" Relationship="Self.FK_User_ProfileStateEnrolled_ToStateMaster" FromRole="State_Master" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="StateActivity__with_Rule2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rule2_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK_StateActivity__with_Rule2_ToActivityMaster" FromRole="StateActivity__with_Rule2" ToRole="Activity_Master" />
+          <NavigationProperty Name="Rule2_Master" Relationship="Self.FK_StateActivity__with_Rule2_ToRule2_Master" FromRole="StateActivity__with_Rule2" ToRole="Rule2_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_StateActivity__with_Rule2_ToStateMaster" FromRole="StateActivity__with_Rule2" ToRole="State_Master" />
+        </EntityType>
+        <EntityType Name="StateActivitySubActivityWithRule1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ActivityID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SubActivityID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Rule1ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK_StateActivitySubActivityWithRule_Activity_Master" FromRole="StateActivitySubActivityWithRule1" ToRole="Activity_Master" />
+          <NavigationProperty Name="Rule1_Master" Relationship="Self.FK_StateActivitySubActivityWithRule_Rule1_Master" FromRole="StateActivitySubActivityWithRule1" ToRole="Rule1_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_StateActivitySubActivityWithRule_State_Master" FromRole="StateActivitySubActivityWithRule1" ToRole="State_Master" />
+          <NavigationProperty Name="Sub_Activity_Master" Relationship="Self.FK_StateActivitySubActivityWithRule_SubActivity_Master" FromRole="StateActivitySubActivityWithRule1" ToRole="Sub_Activity_Master" />
+        </EntityType>
+        <EntityType Name="Sub_Activity_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activity_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK_Sub_Activity_Master_To_Activity_Master" FromRole="Sub_Activity_Master" ToRole="Activity_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_Sub_Activity_Master_To_state_Master" FromRole="Sub_Activity_Master" ToRole="State_Master" />
+          <NavigationProperty Name="StateActivitySubActivityWithRule1" Relationship="Self.FK_StateActivitySubActivityWithRule_SubActivity_Master" FromRole="Sub_Activity_Master" ToRole="StateActivitySubActivityWithRule1" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__SubAc__2AD55B43" FromRole="Sub_Activity_Master" ToRole="User_Training_Transaction" />
+          <NavigationProperty Name="User_Training_Status" Relationship="Self.FK__User_Trai__SubAc__308E3499" FromRole="Sub_Activity_Master" ToRole="User_Training_Status" />
+        </EntityType>
+        <EntityType Name="Subscription_Master">
+          <Key>
+            <PropertyRef Name="Subscription_ID" />
+          </Key>
+          <Property Name="Subscription_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Total_Unit_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Total_Units" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_Total_Unit_Master_ToStateMaster" FromRole="Total_Unit_Master" ToRole="State_Master" />
+        </EntityType>
+        <EntityType Name="User_Profile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OtherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StreetNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StreetName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Suburb" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CountryID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StateEnrolled" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LawSocietyNumber" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Role_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Device_Imei" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Device_Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Device_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountConfirmed" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ActivationCode" Type="Guid" />
+          <Property Name="MailUnsubscribed" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Firm" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Country_Master" Relationship="Self.FK_User_Profile_ToCountryMaster" FromRole="User_Profile" ToRole="Country_Master" />
+          <NavigationProperty Name="ExpiredPlanUserMailLogs" Relationship="Self.FK__ExpiredPl__UserI__54CB950F" FromRole="User_Profile" ToRole="ExpiredPlanUserMailLog" />
+          <NavigationProperty Name="MailLogs" Relationship="Self.FK__MailLog__UserID__1B9317B3" FromRole="User_Profile" ToRole="MailLog" />
+          <NavigationProperty Name="Role_Master" Relationship="Self.FK_User_Profile_Role_Master" FromRole="User_Profile" ToRole="Role_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK_User_Profile_ToStateMaster" FromRole="User_Profile" ToRole="State_Master" />
+          <NavigationProperty Name="State_Master1" Relationship="Self.FK_User_ProfileStateEnrolled_ToStateMaster" FromRole="User_Profile" ToRole="State_Master" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__User___27F8EE98" FromRole="User_Profile" ToRole="User_Training_Transaction" />
+          <NavigationProperty Name="User_Training_Status" Relationship="Self.FK__User_Trai__User___2EA5EC27" FromRole="User_Profile" ToRole="User_Training_Status" />
+          <NavigationProperty Name="User_Role_Mapping" Relationship="Self.FK_User_Role_Mapping_User_Profile" FromRole="User_Profile" ToRole="User_Role_Mapping" />
+          <NavigationProperty Name="User_Subscription" Relationship="Self.FK_User_Subscription_ToUserProfile" FromRole="User_Profile" ToRole="User_Subscription" />
+          <NavigationProperty Name="PaypalResponses" Relationship="LaxNarroModel.FK_PaypalResponse_UserProfile" FromRole="User_Profile" ToRole="PaypalResponse" />
+          <NavigationProperty Name="User_Transaction_Master" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToUser_Subscription" FromRole="User_Profile" ToRole="User_Transaction_Master" />
+          <Property Name="Current_Financial_year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User_Role_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="user_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="role_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="login_id" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="confirm_password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Role_Master" Relationship="Self.FK_User_Role_Mapping_ToRole_Master" FromRole="User_Role_Mapping" ToRole="Role_Master" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK_User_Role_Mapping_User_Profile" FromRole="User_Role_Mapping" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="User_Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PlanID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RateID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransectionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan_Master" Relationship="Self.FK_User_Subscription_ToPlanMaster" FromRole="User_Subscription" ToRole="Plan_Master" />
+          <NavigationProperty Name="Rate_Card" Relationship="Self.FK_User_Subscription_ToRateCard" FromRole="User_Subscription" ToRole="Rate_Card" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK_User_Subscription_ToUserProfile" FromRole="User_Subscription" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="User_Training_Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Financial_Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Category_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Min_Required_Category_Units" Type="Int32" />
+          <Property Name="Activity_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubActivity_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Units_Done" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Received_By_Forwarding" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Training_Transaction_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK__User_Trai__Activ__43D61337" FromRole="User_Training_Status" ToRole="Activity_Master" />
+          <NavigationProperty Name="Category_Master" Relationship="Self.FK__User_Trai__Categ__2F9A1060" FromRole="User_Training_Status" ToRole="Category_Master" />
+          <NavigationProperty Name="Sub_Activity_Master" Relationship="Self.FK__User_Trai__SubAc__308E3499" FromRole="User_Training_Status" ToRole="Sub_Activity_Master" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK__User_Trai__User___2EA5EC27" FromRole="User_Training_Status" ToRole="User_Profile" />
+          <NavigationProperty Name="User_Training_Transaction" Relationship="Self.FK__User_Trai__Train__318258D2" FromRole="User_Training_Status" ToRole="User_Training_Transaction" />
+        </EntityType>
+        <EntityType Name="User_Training_Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="State_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Category_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Activity_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubActivity_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Hours" Type="Decimal" Nullable="true" />
+          <Property Name="Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Financial_Year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Your_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Forwardable" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Has_been_Forwarded" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descrption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UploadedFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activity_Master" Relationship="Self.FK__User_Trai__Activ__3F115E1A" FromRole="User_Training_Transaction" ToRole="Activity_Master" />
+          <NavigationProperty Name="Category_Master" Relationship="Self.FK__User_Trai__Categ__29E1370A" FromRole="User_Training_Transaction" ToRole="Category_Master" />
+          <NavigationProperty Name="State_Master" Relationship="Self.FK__User_Trai__State__28ED12D1" FromRole="User_Training_Transaction" ToRole="State_Master" />
+          <NavigationProperty Name="Sub_Activity_Master" Relationship="Self.FK__User_Trai__SubAc__2AD55B43" FromRole="User_Training_Transaction" ToRole="Sub_Activity_Master" />
+          <NavigationProperty Name="User_Profile" Relationship="Self.FK__User_Trai__User___27F8EE98" FromRole="User_Training_Transaction" ToRole="User_Profile" />
+          <NavigationProperty Name="User_Training_Status" Relationship="Self.FK__User_Trai__Train__318258D2" FromRole="User_Training_Transaction" ToRole="User_Training_Status" />
+        </EntityType>
+        <Association Name="FK__State_Rul__Rule3__245D67DE">
+          <End Role="Rule3_Master" Type="Self.Rule3_Master" Multiplicity="1" />
+          <End Role="State_Rule3_Marriage" Type="Self.State_Rule3_Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule3_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Rule3_Marriage">
+              <PropertyRef Name="Rule3_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Rul__State__236943A5">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Rule3_Marriage" Type="Self.State_Rule3_Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Rule3_Marriage">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Act__Activ__09746778">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="State_Activity_Mapping" Type="Self.State_Activity_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Activity_Mapping">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Activ__3F115E1A">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="Activity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Activ__43D61337">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Activity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity__with_Rule2_ToActivityMaster">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="StateActivity__with_Rule2" Type="Self.StateActivity__with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivity__with_Rule2">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_Activity_Master">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Activity_Master_To_Activity_Master">
+          <End Role="Activity_Master" Type="Self.Activity_Master" Multiplicity="1" />
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Activity_Master">
+              <PropertyRef Name="Activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__Categ__531856C7">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Categ__29E1370A">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Categ__2F9A1060">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Master_ToCountryMaster">
+          <End Role="Country_Master" Type="Self.Country_Master" Multiplicity="1" />
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Master">
+              <PropertyRef Name="Country_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_ToCountryMaster">
+          <End Role="Country_Master" Type="Self.Country_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExpiredPl__UserI__54CB950F">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="ExpiredPlanUserMailLog" Type="Self.ExpiredPlanUserMailLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExpiredPlanUserMailLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MailLog__UserID__1B9317B3">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="MailLog" Type="Self.MailLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MailLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_page_map_page_master">
+          <End Role="page_master" Type="Self.page_master" Multiplicity="1" />
+          <End Role="role_page_map" Type="Self.role_page_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="page_master">
+              <PropertyRef Name="page_id" />
+            </Principal>
+            <Dependent Role="role_page_map">
+              <PropertyRef Name="page_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_Card_ToPlan_Master">
+          <End Role="Plan_Master" Type="Self.Plan_Master" Multiplicity="0..1" />
+          <End Role="Rate_Card" Type="Self.Rate_Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="Rate_Card">
+              <PropertyRef Name="Plan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToPlanMaster">
+          <End Role="Plan_Master" Type="Self.Plan_Master" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToRateCard">
+          <End Role="Rate_Card" Type="Self.Rate_Card" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate_Card">
+              <PropertyRef Name="Rate_Id" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="RateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_page_map_ToRole_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="role_page_map" Type="Self.role_page_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="role_page_map">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_Role_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="Role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Mapping_ToRole_Master">
+          <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="1" />
+          <End Role="User_Role_Mapping" Type="Self.User_Role_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role_Mapping">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_Rule1_Master">
+          <End Role="Rule1_Master" Type="Self.Rule1_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule1_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="Rule1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity__with_Rule2_ToRule2_Master">
+          <End Role="Rule2_Master" Type="Self.Rule2_Master" Multiplicity="1" />
+          <End Role="StateActivity__with_Rule2" Type="Self.StateActivity__with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule2_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateActivity__with_Rule2">
+              <PropertyRef Name="Rule2_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__Rule4__540C7B00">
+          <End Role="Rule4_Master" Type="Self.Rule4_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rule4_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="Rule4_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Act__State__0880433F">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Activity_Mapping" Type="Self.State_Activity_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Activity_Mapping">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State_Cat__State__5224328E">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="State_Category_With_Rule4_Mapping" Type="Self.State_Category_With_Rule4_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State_Category_With_Rule4_Mapping">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__State__28ED12D1">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivity__with_Rule2_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="StateActivity__with_Rule2" Type="Self.StateActivity__with_Rule2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivity__with_Rule2">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_State_Master">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Activity_Master_To_state_Master">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sub_Activity_Master">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Total_Unit_Master_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="1" />
+          <End Role="Total_Unit_Master" Type="Self.Total_Unit_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Total_Unit_Master">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Profile_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_ProfileStateEnrolled_ToStateMaster">
+          <End Role="State_Master" Type="Self.State_Master" Multiplicity="0..1" />
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Profile">
+              <PropertyRef Name="StateEnrolled" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateActivitySubActivityWithRule_SubActivity_Master">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="StateActivitySubActivityWithRule1" Type="Self.StateActivitySubActivityWithRule1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateActivitySubActivityWithRule1">
+              <PropertyRef Name="SubActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__SubAc__2AD55B43">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="SubActivity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__SubAc__308E3499">
+          <End Role="Sub_Activity_Master" Type="Self.Sub_Activity_Master" Multiplicity="0..1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Activity_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="SubActivity_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__User___27F8EE98">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Transaction">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__User___2EA5EC27">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Mapping_User_Profile">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="1" />
+          <End Role="User_Role_Mapping" Type="Self.User_Role_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Mapping">
+              <PropertyRef Name="user_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Subscription_ToUserProfile">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="0..1" />
+          <End Role="User_Subscription" Type="Self.User_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Subscription">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Trai__Train__318258D2">
+          <End Role="User_Training_Transaction" Type="Self.User_Training_Transaction" Multiplicity="1" />
+          <End Role="User_Training_Status" Type="Self.User_Training_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Training_Transaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Training_Status">
+              <PropertyRef Name="Training_Transaction_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaxNarroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rule3_Master" EntityType="Self.Rule3_Master" />
+          <EntitySet Name="State_Rule3_Marriage" EntityType="Self.State_Rule3_Marriage" />
+          <EntitySet Name="Activity_Master" EntityType="Self.Activity_Master" />
+          <EntitySet Name="Category_Master" EntityType="Self.Category_Master" />
+          <EntitySet Name="Country_Master" EntityType="Self.Country_Master" />
+          <EntitySet Name="ExpiredPlanUserMailLogs" EntityType="Self.ExpiredPlanUserMailLog" />
+          <EntitySet Name="MailLogs" EntityType="Self.MailLog" />
+          <EntitySet Name="page_master" EntityType="Self.page_master" />
+          <EntitySet Name="Plan_Master" EntityType="Self.Plan_Master" />
+          <EntitySet Name="Rate_Card" EntityType="Self.Rate_Card" />
+          <EntitySet Name="Role_Master" EntityType="Self.Role_Master" />
+          <EntitySet Name="role_page_map" EntityType="Self.role_page_map" />
+          <EntitySet Name="Rule1_Master" EntityType="Self.Rule1_Master" />
+          <EntitySet Name="Rule2_Master" EntityType="Self.Rule2_Master" />
+          <EntitySet Name="Rule4_Master" EntityType="Self.Rule4_Master" />
+          <EntitySet Name="State_Activity_Mapping" EntityType="Self.State_Activity_Mapping" />
+          <EntitySet Name="State_Category_With_Rule4_Mapping" EntityType="Self.State_Category_With_Rule4_Mapping" />
+          <EntitySet Name="State_Master" EntityType="Self.State_Master" />
+          <EntitySet Name="StateActivity__with_Rule2" EntityType="Self.StateActivity__with_Rule2" />
+          <EntitySet Name="StateActivitySubActivityWithRule1" EntityType="Self.StateActivitySubActivityWithRule1" />
+          <EntitySet Name="Sub_Activity_Master" EntityType="Self.Sub_Activity_Master" />
+          <EntitySet Name="Subscription_Master" EntityType="Self.Subscription_Master" />
+          <EntitySet Name="Total_Unit_Master" EntityType="Self.Total_Unit_Master" />
+          <EntitySet Name="User_Profile" EntityType="Self.User_Profile" />
+          <EntitySet Name="User_Role_Mapping" EntityType="Self.User_Role_Mapping" />
+          <EntitySet Name="User_Subscription" EntityType="Self.User_Subscription" />
+          <EntitySet Name="User_Training_Status" EntityType="Self.User_Training_Status" />
+          <EntitySet Name="User_Training_Transaction" EntityType="Self.User_Training_Transaction" />
+          <AssociationSet Name="FK__State_Rul__Rule3__245D67DE" Association="Self.FK__State_Rul__Rule3__245D67DE">
+            <End Role="Rule3_Master" EntitySet="Rule3_Master" />
+            <End Role="State_Rule3_Marriage" EntitySet="State_Rule3_Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Rul__State__236943A5" Association="Self.FK__State_Rul__State__236943A5">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Rule3_Marriage" EntitySet="State_Rule3_Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Act__Activ__09746778" Association="Self.FK__State_Act__Activ__09746778">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="State_Activity_Mapping" EntitySet="State_Activity_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Activ__3F115E1A" Association="Self.FK__User_Trai__Activ__3F115E1A">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Activ__43D61337" Association="Self.FK__User_Trai__Activ__43D61337">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity__with_Rule2_ToActivityMaster" Association="Self.FK_StateActivity__with_Rule2_ToActivityMaster">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="StateActivity__with_Rule2" EntitySet="StateActivity__with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_Activity_Master" Association="Self.FK_StateActivitySubActivityWithRule_Activity_Master">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Activity_Master_To_Activity_Master" Association="Self.FK_Sub_Activity_Master_To_Activity_Master">
+            <End Role="Activity_Master" EntitySet="Activity_Master" />
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__Categ__531856C7" Association="Self.FK__State_Cat__Categ__531856C7">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Categ__29E1370A" Association="Self.FK__User_Trai__Categ__29E1370A">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Categ__2F9A1060" Association="Self.FK__User_Trai__Categ__2F9A1060">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Master_ToCountryMaster" Association="Self.FK_State_Master_ToCountryMaster">
+            <End Role="Country_Master" EntitySet="Country_Master" />
+            <End Role="State_Master" EntitySet="State_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_ToCountryMaster" Association="Self.FK_User_Profile_ToCountryMaster">
+            <End Role="Country_Master" EntitySet="Country_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExpiredPl__UserI__54CB950F" Association="Self.FK__ExpiredPl__UserI__54CB950F">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="ExpiredPlanUserMailLog" EntitySet="ExpiredPlanUserMailLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MailLog__UserID__1B9317B3" Association="Self.FK__MailLog__UserID__1B9317B3">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="MailLog" EntitySet="MailLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_page_map_page_master" Association="Self.FK_role_page_map_page_master">
+            <End Role="page_master" EntitySet="page_master" />
+            <End Role="role_page_map" EntitySet="role_page_map" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_Card_ToPlan_Master" Association="Self.FK_Rate_Card_ToPlan_Master">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToPlanMaster" Association="Self.FK_User_Subscription_ToPlanMaster">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToRateCard" Association="Self.FK_User_Subscription_ToRateCard">
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_page_map_ToRole_Master" Association="Self.FK_role_page_map_ToRole_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="role_page_map" EntitySet="role_page_map" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_Role_Master" Association="Self.FK_User_Profile_Role_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Mapping_ToRole_Master" Association="Self.FK_User_Role_Mapping_ToRole_Master">
+            <End Role="Role_Master" EntitySet="Role_Master" />
+            <End Role="User_Role_Mapping" EntitySet="User_Role_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_Rule1_Master" Association="Self.FK_StateActivitySubActivityWithRule_Rule1_Master">
+            <End Role="Rule1_Master" EntitySet="Rule1_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity__with_Rule2_ToRule2_Master" Association="Self.FK_StateActivity__with_Rule2_ToRule2_Master">
+            <End Role="Rule2_Master" EntitySet="Rule2_Master" />
+            <End Role="StateActivity__with_Rule2" EntitySet="StateActivity__with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__Rule4__540C7B00" Association="Self.FK__State_Cat__Rule4__540C7B00">
+            <End Role="Rule4_Master" EntitySet="Rule4_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Act__State__0880433F" Association="Self.FK__State_Act__State__0880433F">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Activity_Mapping" EntitySet="State_Activity_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State_Cat__State__5224328E" Association="Self.FK__State_Cat__State__5224328E">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="State_Category_With_Rule4_Mapping" EntitySet="State_Category_With_Rule4_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__State__28ED12D1" Association="Self.FK__User_Trai__State__28ED12D1">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivity__with_Rule2_ToStateMaster" Association="Self.FK_StateActivity__with_Rule2_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="StateActivity__with_Rule2" EntitySet="StateActivity__with_Rule2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_State_Master" Association="Self.FK_StateActivitySubActivityWithRule_State_Master">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Activity_Master_To_state_Master" Association="Self.FK_Sub_Activity_Master_To_state_Master">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Total_Unit_Master_ToStateMaster" Association="Self.FK_Total_Unit_Master_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="Total_Unit_Master" EntitySet="Total_Unit_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Profile_ToStateMaster" Association="Self.FK_User_Profile_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_ProfileStateEnrolled_ToStateMaster" Association="Self.FK_User_ProfileStateEnrolled_ToStateMaster">
+            <End Role="State_Master" EntitySet="State_Master" />
+            <End Role="User_Profile" EntitySet="User_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateActivitySubActivityWithRule_SubActivity_Master" Association="Self.FK_StateActivitySubActivityWithRule_SubActivity_Master">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="StateActivitySubActivityWithRule1" EntitySet="StateActivitySubActivityWithRule1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__SubAc__2AD55B43" Association="Self.FK__User_Trai__SubAc__2AD55B43">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__SubAc__308E3499" Association="Self.FK__User_Trai__SubAc__308E3499">
+            <End Role="Sub_Activity_Master" EntitySet="Sub_Activity_Master" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__User___27F8EE98" Association="Self.FK__User_Trai__User___27F8EE98">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__User___2EA5EC27" Association="Self.FK__User_Trai__User___2EA5EC27">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Mapping_User_Profile" Association="Self.FK_User_Role_Mapping_User_Profile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Role_Mapping" EntitySet="User_Role_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Subscription_ToUserProfile" Association="Self.FK_User_Subscription_ToUserProfile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Subscription" EntitySet="User_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Trai__Train__318258D2" Association="Self.FK__User_Trai__Train__318258D2">
+            <End Role="User_Training_Transaction" EntitySet="User_Training_Transaction" />
+            <End Role="User_Training_Status" EntitySet="User_Training_Status" />
+          </AssociationSet>
+          <FunctionImport Name="usp_insert">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="OtherName" Mode="In" Type="String" />
+            <Parameter Name="StreetNumber" Mode="In" Type="String" />
+            <Parameter Name="StreetName" Mode="In" Type="String" />
+            <Parameter Name="PostCode" Mode="In" Type="Decimal" />
+            <Parameter Name="Suburb" Mode="In" Type="String" />
+            <Parameter Name="StateID" Mode="In" Type="Decimal" />
+            <Parameter Name="CountryID" Mode="In" Type="Decimal" />
+            <Parameter Name="StateEnrolled" Mode="In" Type="Decimal" />
+            <Parameter Name="LawSocietyNumber" Mode="In" Type="Decimal" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Role_id" Mode="In" Type="Decimal" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Device_Imei" Mode="In" Type="String" />
+            <Parameter Name="Device_Type" Mode="In" Type="String" />
+            <Parameter Name="Device_Token" Mode="In" Type="String" />
+            <Parameter Name="IsDeleted" Mode="In" Type="String" />
+            <Parameter Name="AccountConfirmed" Mode="In" Type="String" />
+            <Parameter Name="ActivationCode" Mode="In" Type="Guid" />
+            <Parameter Name="id" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PaypalResponses" EntityType="LaxNarroModel.PaypalResponse" />
+          <AssociationSet Name="FK_PaypalResponse_UserProfile" Association="LaxNarroModel.FK_PaypalResponse_UserProfile">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="PaypalResponse" EntitySet="PaypalResponses" />
+          </AssociationSet>
+          <EntitySet Name="User_Transaction_Master" EntityType="LaxNarroModel.User_Transaction_Master" />
+          <AssociationSet Name="FK_User_Transaction_Master_ToPlan_Master" Association="LaxNarroModel.FK_User_Transaction_Master_ToPlan_Master">
+            <End Role="Plan_Master" EntitySet="Plan_Master" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Transaction_Master_ToRate_Card" Association="LaxNarroModel.FK_User_Transaction_Master_ToRate_Card">
+            <End Role="Rate_Card" EntitySet="Rate_Card" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Transaction_Master_ToUser_Subscription" Association="LaxNarroModel.FK_User_Transaction_Master_ToUser_Subscription">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="User_Transaction_Master" EntitySet="User_Transaction_Master" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PaypalResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Paypal_ReferenceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="intent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="application_context" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="response_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="experience_profile_id" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="note_to_payer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="failure_reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="update_time" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="links" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User_Profile" Relationship="LaxNarroModel.FK_PaypalResponse_UserProfile" FromRole="PaypalResponse" ToRole="User_Profile" />
+          <Property Name="payee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_PaypalResponse_UserProfile">
+          <End Type="LaxNarroModel.User_Profile" Role="User_Profile" Multiplicity="1" />
+          <End Type="LaxNarroModel.PaypalResponse" Role="PaypalResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaypalResponse">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_Transaction_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rate_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="User_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="PlanID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Start_Date" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="End_Date" Type="DateTime" Precision="3" />
+          <Property Name="Payment_Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transection_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Payment_Date" Type="DateTime" Precision="3" />
+          <Property Name="Invoice_No" Type="Int32" />
+          <Property Name="Payment_Method" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Paypal_PayerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan_Master" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToPlan_Master" FromRole="User_Transaction_Master" ToRole="Plan_Master" />
+          <NavigationProperty Name="Rate_Card" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToRate_Card" FromRole="User_Transaction_Master" ToRole="Rate_Card" />
+          <NavigationProperty Name="User_Profile" Relationship="LaxNarroModel.FK_User_Transaction_Master_ToUser_Subscription" FromRole="User_Transaction_Master" ToRole="User_Profile" />
+          <Property Name="Transaction_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_User_Transaction_Master_ToPlan_Master">
+          <End Type="LaxNarroModel.Plan_Master" Role="Plan_Master" Multiplicity="0..1" />
+          <End Type="LaxNarroModel.User_Transaction_Master" Role="User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Master">
+              <PropertyRef Name="Plan_ID" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Transaction_Master_ToRate_Card">
+          <End Type="LaxNarroModel.Rate_Card" Role="Rate_Card" Multiplicity="1" />
+          <End Type="LaxNarroModel.User_Transaction_Master" Role="User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rate_Card">
+              <PropertyRef Name="Rate_Id" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="Rate_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Transaction_Master_ToUser_Subscription">
+          <End Type="LaxNarroModel.User_Profile" Role="User_Profile" Multiplicity="1" />
+          <End Type="LaxNarroModel.User_Transaction_Master" Role="User_Transaction_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Transaction_Master">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LaxNarroModelStoreContainer" CdmEntityContainer="LaxNarroEntities">
+          <EntitySetMapping Name="Activity_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Activity_Master">
+              <MappingFragment StoreEntitySet="Activity_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Category_Master">
+              <MappingFragment StoreEntitySet="Category_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Country_Master">
+              <MappingFragment StoreEntitySet="Country_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpiredPlanUserMailLogs">
+            <EntityTypeMapping TypeName="LaxNarroModel.ExpiredPlanUserMailLog">
+              <MappingFragment StoreEntitySet="ExpiredPlanUserMailLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReminderType" ColumnName="ReminderType" />
+                <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+                <ScalarProperty Name="ReminderStatus" ColumnName="ReminderStatus" />
+                <ScalarProperty Name="NextReminderDueDate" ColumnName="NextReminderDueDate" />
+                <ScalarProperty Name="RecordOperationDate" ColumnName="RecordOperationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailLogs">
+            <EntityTypeMapping TypeName="LaxNarroModel.MailLog">
+              <MappingFragment StoreEntitySet="MailLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReminderOne" ColumnName="ReminderOne" />
+                <ScalarProperty Name="ReminderTwo" ColumnName="ReminderTwo" />
+                <ScalarProperty Name="ReminderThree" ColumnName="ReminderThree" />
+                <ScalarProperty Name="ReminderFour" ColumnName="ReminderFour" />
+                <ScalarProperty Name="ReminderFive" ColumnName="ReminderFive" />
+                <ScalarProperty Name="ReminderSix" ColumnName="ReminderSix" />
+                <ScalarProperty Name="LastReminderStatus" ColumnName="LastReminderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="page_master">
+            <EntityTypeMapping TypeName="LaxNarroModel.page_master">
+              <MappingFragment StoreEntitySet="page_master">
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="page_name" ColumnName="page_name" />
+                <ScalarProperty Name="page_group" ColumnName="page_group" />
+                <ScalarProperty Name="menu_name" ColumnName="menu_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plan_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Plan_Master">
+              <MappingFragment StoreEntitySet="Plan_Master">
+                <ScalarProperty Name="Plan_ID" ColumnName="Plan_ID" />
+                <ScalarProperty Name="Plan" ColumnName="Plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rate_Card">
+            <EntityTypeMapping TypeName="LaxNarroModel.Rate_Card">
+              <MappingFragment StoreEntitySet="Rate_Card">
+                <ScalarProperty Name="Rate_Id" ColumnName="Rate_Id" />
+                <ScalarProperty Name="Plan_Id" ColumnName="Plan_Id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Role_Master">
+              <MappingFragment StoreEntitySet="Role_Master">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_page_map">
+            <EntityTypeMapping TypeName="LaxNarroModel.role_page_map">
+              <MappingFragment StoreEntitySet="role_page_map">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rule1_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Rule1_Master">
+              <MappingFragment StoreEntitySet="Rule1_Master">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
+                <ScalarProperty Name="Max" ColumnName="Max" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rule2_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Rule2_Master">
+              <MappingFragment StoreEntitySet="Rule2_Master">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rule4_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Rule4_Master">
+              <MappingFragment StoreEntitySet="Rule4_Master">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MinUnits" ColumnName="MinUnits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State_Activity_Mapping">
+            <EntityTypeMapping TypeName="LaxNarroModel.State_Activity_Mapping">
+              <MappingFragment StoreEntitySet="State_Activity_Mapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State_Category_With_Rule4_Mapping">
+            <EntityTypeMapping TypeName="LaxNarroModel.State_Category_With_Rule4_Mapping">
+              <MappingFragment StoreEntitySet="State_Category_With_Rule4_Mapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Rule4_ID" ColumnName="Rule4_ID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.State_Master">
+              <MappingFragment StoreEntitySet="State_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateActivity__with_Rule2">
+            <EntityTypeMapping TypeName="LaxNarroModel.StateActivity__with_Rule2">
+              <MappingFragment StoreEntitySet="StateActivity _with_Rule2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="Rule2_ID" ColumnName="Rule2_ID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateActivitySubActivityWithRule1">
+            <EntityTypeMapping TypeName="LaxNarroModel.StateActivitySubActivityWithRule1">
+              <MappingFragment StoreEntitySet="StateActivitySubActivityWithRule1">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="SubActivityID" ColumnName="SubActivityID" />
+                <ScalarProperty Name="Rule1ID" ColumnName="Rule1ID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Activity_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Sub_Activity_Master">
+              <MappingFragment StoreEntitySet="Sub_Activity_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Activity_ID" ColumnName="Activity_ID" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscription_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Subscription_Master">
+              <MappingFragment StoreEntitySet="Subscription_Master">
+                <ScalarProperty Name="Subscription_ID" ColumnName="Subscription_ID" />
+                <ScalarProperty Name="Plan" ColumnName="Plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Total_Unit_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.Total_Unit_Master">
+              <MappingFragment StoreEntitySet="Total_Unit_Master">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Total_Units" ColumnName="Total_Units" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Profile">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Profile">
+              <MappingFragment StoreEntitySet="User_Profile">
+                <ScalarProperty Name="Current_Financial_year" ColumnName="Current_Financial_year" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="OtherName" ColumnName="OtherName" />
+                <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="StateEnrolled" ColumnName="StateEnrolled" />
+                <ScalarProperty Name="LawSocietyNumber" ColumnName="LawSocietyNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Device_Imei" ColumnName="Device_Imei" />
+                <ScalarProperty Name="Device_Token" ColumnName="Device_Token" />
+                <ScalarProperty Name="Device_Type" ColumnName="Device_Type" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AccountConfirmed" ColumnName="AccountConfirmed" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="MailUnsubscribed" ColumnName="MailUnsubscribed" />
+                <ScalarProperty Name="Firm" ColumnName="Firm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role_Mapping">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Role_Mapping">
+              <MappingFragment StoreEntitySet="User_Role_Mapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Subscription">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Subscription">
+              <MappingFragment StoreEntitySet="User_Subscription">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="TransectionID" ColumnName="TransectionID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Training_Status">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Training_Status">
+              <MappingFragment StoreEntitySet="User_Training_Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Financial_Year" ColumnName="Financial_Year" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Min_Required_Category_Units" ColumnName="Min_Required_Category_Units" />
+                <ScalarProperty Name="Activity_Id" ColumnName="Activity_Id" />
+                <ScalarProperty Name="SubActivity_Id" ColumnName="SubActivity_Id" />
+                <ScalarProperty Name="Units_Done" ColumnName="Units_Done" />
+                <ScalarProperty Name="Received_By_Forwarding" ColumnName="Received_By_Forwarding" />
+                <ScalarProperty Name="Training_Transaction_ID" ColumnName="Training_Transaction_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Training_Transaction">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Training_Transaction">
+              <MappingFragment StoreEntitySet="User_Training_Transaction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Activity_Id" ColumnName="Activity_Id" />
+                <ScalarProperty Name="SubActivity_Id" ColumnName="SubActivity_Id" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="Financial_Year" ColumnName="Financial_Year" />
+                <ScalarProperty Name="Your_Role" ColumnName="Your_Role" />
+                <ScalarProperty Name="Forwardable" ColumnName="Forwardable" />
+                <ScalarProperty Name="Has_been_Forwarded" ColumnName="Has_been_Forwarded" />
+                <ScalarProperty Name="Descrption" ColumnName="Descrption" />
+                <ScalarProperty Name="UploadedFile" ColumnName="UploadedFile" />
+                <ScalarProperty Name="UploadedFileName" ColumnName="UploadedFileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_insert" FunctionName="LaxNarroModel.Store.usp_insert" />
+          <EntitySetMapping Name="Rule3_Master">
+            <EntityTypeMapping TypeName="IsTypeOf(LaxNarroModel.Rule3_Master)">
+              <MappingFragment StoreEntitySet="Rule3_Master">
+                <ScalarProperty Name="CarryOverUnits" ColumnName="CarryOverUnits" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State_Rule3_Marriage">
+            <EntityTypeMapping TypeName="IsTypeOf(LaxNarroModel.State_Rule3_Marriage)">
+              <MappingFragment StoreEntitySet="State_Rule3_Marriage">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Rule3_ID" ColumnName="Rule3_ID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaypalResponses">
+            <EntityTypeMapping TypeName="LaxNarroModel.PaypalResponse">
+              <MappingFragment StoreEntitySet="PaypalResponse">
+                <ScalarProperty Name="payee" ColumnName="payee" />
+                <ScalarProperty Name="links" ColumnName="links" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="failure_reason" ColumnName="failure_reason" />
+                <ScalarProperty Name="note_to_payer" ColumnName="note_to_payer" />
+                <ScalarProperty Name="experience_profile_id" ColumnName="experience_profile_id" />
+                <ScalarProperty Name="response_state" ColumnName="response_state" />
+                <ScalarProperty Name="application_context" ColumnName="application_context" />
+                <ScalarProperty Name="payer" ColumnName="payer" />
+                <ScalarProperty Name="intent" ColumnName="intent" />
+                <ScalarProperty Name="Paypal_ReferenceId" ColumnName="Paypal_ReferenceId" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Transaction_Master">
+            <EntityTypeMapping TypeName="LaxNarroModel.User_Transaction_Master">
+              <MappingFragment StoreEntitySet="User_Transaction_Master">
+                <ScalarProperty Name="Transaction_Status" ColumnName="Transaction_Status" />
+                <ScalarProperty Name="Paypal_PayerId" ColumnName="Paypal_PayerId" />
+                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+                <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
+                <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Transection_ID" ColumnName="Transection_ID" />
+                <ScalarProperty Name="Payment_Status" ColumnName="Payment_Status" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Rate_ID" ColumnName="Rate_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

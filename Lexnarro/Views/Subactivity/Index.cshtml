@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sub Activity</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<section class="panel">
+    <div class="panel-body">
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Sub Activity Name
+                    </th>
+                    <th>
+                        Activity Name
+                    </th>
+                    <th>
+                        State
+                    </th>
+                    @*<th>
+                            Short Name
+                        </th>*@
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+@section Javascript{
+    @Html.Raw(ViewBag.message)
+}
+
+@section scripts
+    {
+    <script>
+        $(function () {
+            var t = $('#dataTable').DataTable({
+                theme: 'bootstrap',
+                responsive: true,
+                autoWidth: false,
+
+                "columnDefs": [{
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "order": [[1, 'asc']],
+
+                "ajax": {
+                    "url": '/Subactivity/GetSubactivities',
+                    "type": 'get',
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": null },
+                    { "data": "Name" },
+                    { "data": "Activity" },
+                    { "data": "State" },
+                    //{ "data": "ShortName" },
+                    {
+                        "data": "ID", render: (function (data, type, row) {
+
+                            return '<a href="/Subactivity/Edit/' + data + '" class="btn btn-success">Edit</a>' +
+                                '|<a href="/Subactivity/Details/' + data + '" class="btn btn-info">Details</a>' +
+                                '|<a href="/Subactivity/Delete/' + data + '" class="btn btn-danger">Delete</a>';
+                        })
+                    }
+                ]
+            });
+            t.on('order.dt search.dt', function () {
+                t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
+}

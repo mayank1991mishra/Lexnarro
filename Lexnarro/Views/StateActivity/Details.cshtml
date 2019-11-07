@@ -1,0 +1,38 @@
+﻿@model Lexnarro.Models.State_Activity_Mapping
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>State Activity Mapping</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Activity")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Activity_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("State")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+            </dl>
+        </div>
+        </div></div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+        </p>

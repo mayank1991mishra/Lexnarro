@@ -1,0 +1,43 @@
+﻿@model Lexnarro.Models.Rule4_Master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>Rule Four</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Rule Four")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Minimum Units")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MinUnits)
+                </dd>
+
+            </dl>
+        </div>
+        </div>
+    </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+        </p>
+
+@section JavaScript
+    {
+    @Html.Raw(ViewBag.message)
+}

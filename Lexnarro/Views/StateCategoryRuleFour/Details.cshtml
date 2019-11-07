@@ -1,0 +1,71 @@
+﻿@model Lexnarro.Models.State_Category_With_Rule4_Mapping
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>State Category With Rule Four Mapping</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Start Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+
+                <dt>
+                    @Html.Label("End Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+
+                <dt>
+                    @Html.Label("Status")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt>
+                    @Html.Label("Category")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Rule 4")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rule4_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("State")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>

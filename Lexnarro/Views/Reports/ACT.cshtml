@@ -1,0 +1,222 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+
+@{
+    Layout = null;
+}
+
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
+</style>
+
+
+<style type="text/css">
+    .page-padding {
+        padding: 30px 20px 10px 20px;
+    }
+
+    .text-style {
+        font-size: 18px;
+    }
+
+    .text-style-medium {
+        font-size: 14px;
+    }
+
+    .text-style-small {
+        font-size: 12px;
+    }
+
+    .text-color-style {
+        color: #428bca;
+    }
+
+    .text-super-style {
+        font-size: 7pt;
+        /*font-family: 'Times New Roman', 'Times', serif;*/
+        vertical-align: super;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ACT</title>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container page-padding" style="background-color:white">
+        <div class="row">
+            <div class="col-md-6">
+                <span class="text-style text-color-style">Record of CPD activities </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <p><span><i>(Practitioners do not need to submit this record to the Society unless requested to do so)</i></span></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-bordered text-style-medium">
+                    <tr>
+                        <td>
+                            <span><b>Full Name:</b></span>
+                        </td>
+                        <td>
+                            <span>
+                                @Model.Select(u => u.FirstName).First() <span> </span>
+                                @Model.Select(u => u.LastName).First()
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span><b>Firm/Agency:</b></span>
+                        </td>
+                        <td>
+                            <span>
+                                @Model.Select(u => u.Firm).First()
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span><b>Postal Address:</b></span>
+                        </td>
+                        <td>
+                            <span>
+                                @Model.Select(u => u.StreetNumber).First() <span> ,</span>
+                                @Model.Select(u => u.StreetName).First()
+                            </span>
+                            <span>
+                                @Model.Select(u => u.Suburb).First() <span> ,</span>
+                                @Model.Select(u => u.PostCode).First()<br />
+                            </span>
+                            <span>
+                                @Model.Select(u => u.StateName).First() <span> ,</span>
+                                @Model.Select(u => u.CountryName).First()
+                            </span>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span><b>Email: </b></span>
+                        </td>
+                        <td>
+                            <span>
+                                @Model.Select(u => u.EmailAddress).First()
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span><b>CPD Year:</b></span>
+                        </td>
+                        <td>
+                            <span>
+                                1 April @Model.Select(u => u.Financial_Year.Split('-')[0]).First() to 31 March
+                                @Model.Select(u => u.Financial_Year.Split('-')[1]).First()
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <span>Practitioners must complete a minimum of 10 CPD units each CPD year, with at least one unit in each of the four core areas:</span>
+        <ol>
+            <li>
+                Legal ethics and professional responsibility
+            </li>
+            <li>
+                Practice management and business skills
+            </li>
+            <li>
+                Professional skills
+            </li>
+            <li>
+                Substantive law and procedural law
+            </li>
+        </ol>
+
+        <br />
+
+        <p><span>For more information please see the </span><span><i>CPD Guidelines </i></span><span>or contact the Society on 6247 5700.</span></p>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive table-bordered text-style-small">
+                    <thead class="text-color-style">
+                        <tr>
+                            <td>Date</td>
+                            <td>Title of activity</td>
+                            <td>Provider<span class="text-super-style">1</span></td>
+                            <td>Format<span class="text-super-style">2</span></td>
+                            <td>Your role<span class="text-super-style">3</span></td>
+                            <td>Core area</td>
+                            <td>Units claimed</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descrption)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Provider)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ActivityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubactivityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Units_Done)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container text-style-small">
+            <div class="row">
+                <p>@Html.CheckBox(" ") I have completed 10 or more units</p>
+                <p>@Html.CheckBox(" ") I have completed at least one unit in each of the four core areas</p>
+            </div>
+
+            <div class="row">
+                <p><span class="text-super-style">1</span><span> e.g. ACTLS, firm name, commercial provider name</span></p>
+
+                <p><span class="text-super-style">2</span><span> e.g. seminar, DVD, publication</span></p>
+
+                <p><span class="text-super-style">3</span><span> e.g. attendee, presenter, author</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

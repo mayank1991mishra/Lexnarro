@@ -1,0 +1,55 @@
+﻿@model Lexnarro.Models.Activity_Master
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-block alert-danger fade in">
+            <h4>Activity</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Activity")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.Label("Short Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ShortName)
+                </dd>
+
+                <dt class="hidden">
+                    @Html.Label("Description")
+                </dt>
+
+                <dd class="hidden">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div></div></div>
+
+@section JavaScript
+{
+    @Html.Raw(ViewBag.message)
+}

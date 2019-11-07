@@ -1,0 +1,207 @@
+﻿@model IEnumerable<Lexnarro.Models.Plan_Master>
+@using Lexnarro.HelperClasses;
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int unitsDone = (int)Math.Floor(ViewBag.TotalUnits);
+}
+
+@if (UserHelper.GetUserRole() == "User")
+{
+    using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-1">
+                    <span class="control-label"><b>CPD Year</b></span>
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownList("financialYear", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" value="Search" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+    <div class="right_content">
+        <div class="form">
+            <div class="container row">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="control-label"><b>@Html.Label("Days until end of CPD year = ")  @ViewBag.totalDays</b></h4>
+                    </div>
+                </div>
+                <center>
+                    <div id="owl-demo" class="owl-carousel owl-theme">
+                        <div class="item">
+
+                            @if (ViewBag.TotalUnits != 0)
+                            {
+                                <div ID="Circle_container" class="pie-wrapper progress-full fullCirc">
+                                    <div class="label">
+                                        <div class="table-cell">
+                                            <p>@unitsDone / 10</p>
+                                            <span class="unit">@Convert.ToInt32(ViewBag.TotalUnits) Units Completed</span>
+                                            <ul class="epSec">
+
+                                                @foreach (var d in ViewBag.Cat)
+                                                {
+                                                    if (@d.Units_Done != 0)
+                                                    {
+                                                        <li><span class="circle"></span>@d.Short_Name</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><span class="circle whiteBg"></span>@d.Short_Name</li>
+                                                    }
+                                                }
+                                            </ul>
+                                            <a href="#" class="minBtn">@unitsDone Units completed out of 10</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="pie">
+                                        <div class="left-side1 half-circle1"></div>
+                                        <div class="right-side1 half-circle1"></div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div ID="Circle_container" class="pie-wrapper progress-full fullCirc">
+                                    <div class="label">
+                                        <div class="table-cell">
+                                            <p>@unitsDone / 10</p>
+                                            <span class="unit">@unitsDone Units Completed</span>
+                                            <ul class="epSec">
+
+                                                @foreach (var d in ViewBag.Cat)
+                                                {
+                                                    if (@d.Units_Done != 0)
+                                                    {
+                                                        <li><span class="circle"></span>@d.Short_Name</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><span class="circle whiteBg"></span>@d.Short_Name</li>
+                                                    }
+                                                }
+                                            </ul>
+                                            <a href="#" class="minBtn">@unitsDone Units completed out of 10</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="pie">
+                                        <div class="left-side1 half-circle1"></div>
+                                        <div class="right-side1 half-circle1"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        @{
+                            foreach (var item in ViewBag.Cat)
+                            {
+                                if (@item.Units_Done > 0)
+                                {
+                                    <div class="item">
+                                        <div ID="Circle_container2" class="pie-wrapper progress-full fullCirc">
+                                            <div class="label">
+
+                                                <div class="table-cell">
+
+                                                    <p>@item.Units_Done Units</p>
+                                                    <span class="unit2">
+                                                        @item.Category_Name
+                                                    </span>
+                                                    <ul class="epSec"></ul>
+                                                    <a href="#" class="minBtn">@item.Units_Done Units in @item.Short_Name</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="pie">
+                                                <div class="left-side half-circle"></div>
+                                                <div class="right-side half-circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <div class="pie-wrapper progress-full fullCirc">
+                                            <div class="label">
+
+                                                <div class="table-cell">
+
+                                                    <p>@item.Units_Done Units</p>
+                                                    <span class="unit2">
+                                                        @item.Category_Name
+                                                    </span>
+                                                    <ul class="epSec"></ul>
+                                                    <a href="#" class="minBtn">@item.Units_Done Units in @item.Short_Name</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section JavaScript
+{
+    @Html.Raw(ViewBag.message)
+}
+
+@section scripts
+{
+    <script>
+            var bar = new ProgressBar.Circle(Circle_container, {
+                strokeWidth: 2,
+                easing: 'easeInOut',
+                duration: 1400,
+                color: '#ed4d51',
+                trailColor: '#eee',
+                trailWidth: 1,
+                svgStyle: null
+            });
+
+            if (@ViewBag.TotalUnits > 10) {
+                bar.animate(1);
+            }
+            else {
+                var value = @ViewBag.TotalUnits/10;
+                bar.animate(value);
+            }
+    </script>
+
+    <script>
+        var bar = new ProgressBar.Circle(Circle_container2, {
+            strokeWidth: 2,
+            easing: 'easeInOut',
+            duration: 1400,
+            color: '#ed4d51',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: null
+        });
+        bar.animate(1);
+    </script>
+}
+
+
+
+
+
+
+

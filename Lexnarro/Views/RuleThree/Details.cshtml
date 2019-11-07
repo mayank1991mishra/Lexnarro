@@ -1,0 +1,30 @@
+﻿@model Lexnarro.Models.Rule3_Master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>Rule Three</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Carry Over Units")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CarryOverUnits)
+                </dd>
+
+            </dl>
+        </div>
+        </div>
+    </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })           
+        </p>

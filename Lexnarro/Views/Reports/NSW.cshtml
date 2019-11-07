@@ -1,0 +1,349 @@
+﻿@using System.Web.Optimization;
+@using Lexnarro.Models;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+
+@{
+    Layout = null;
+    List<User_Training_Status> k = new List<User_Training_Status>();
+    k = (List<User_Training_Status>)ViewBag.carriedOverRecords;
+}
+
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NSW</title>
+
+    <style>
+        .line-style {
+            color: #ffa500;
+            height: 5px;
+        }
+
+        .line-color {
+            background-color: #ffa500;
+        }
+
+        .page-padding {
+            padding: 30px 20px 10px 20px;
+        }
+
+        .text-style {
+            font-size: 18px;
+        }
+
+        .text-style-medium {
+            font-size: 14px;
+        }
+
+        .text-style-small {
+            font-size: 12px;
+        }
+
+        .text-color-style {
+            color: #428bca;
+        }
+
+        .text-super-style {
+            font-size: 7pt;
+            /*font-family: 'Times New Roman', 'Times', serif;*/
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="text-style-medium">
+                <div class="row">
+                    <h3 style="color: #ffaf1a;">RECORD OF CPD ACTIVITIES</h3>
+                </div>
+
+                <div class="row">
+                    <hr class="line-style line-color">
+                </div>
+
+                <div class="row">
+                    <p class="line-style">Please retain this for your records.</p>
+                </div>
+
+                <div class="row">
+                    <hr class="line-style line-color">
+                </div>
+
+                <div class="row">
+                    <p><span>Record of CPD activities for the CPD year from 1 April @ViewBag.startYear to 31 March @ViewBag.endYear</span></p>
+                </div>
+
+                <div class="row">
+                    <hr class="line-style line-color">
+                </div>
+
+                <div class="row">
+                    <p class="line-style"><b>1.PRACTITIONER DETAILS</b></p><br />
+                </div>
+
+                @*<div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <span>First Name</span>
+                                </div>
+                                <div class="row">
+                                    <span class="form-control">@Model.Select(u => u.FirstName).First()</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <span>Last Name</span>
+                                </div>
+                                <div class="row">
+                                    <span class="form-control">@Model.Select(u => u.LastName).First()</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <span>Other Name</span>
+                                </div>
+                                <div class="row">
+                                    <span class="form-control">@Model.Select(u => u.OtherName).First()</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <span>Law Society Number</span>
+                                </div>
+                                <div class="row">
+                                    <span class="form-control">@Model.Select(u => u.LawSocietyNumber).First()</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="row">
+                    <table class="table table-responsive text-style-small">
+                        <tr>
+                            <td class="col-md-6">
+                                First Name
+                            </td>
+                            <td class="col-md-6">
+                                Last Name
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-md-6">
+                                <p class="form-control">@Model.Select(u => u.FirstName).First()</p>
+                            </td>
+                            <td class="col-md-6">
+                                <p class="form-control">@Model.Select(u => u.LastName).First()</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-md-6">
+                                Other Name
+                            </td>
+                            <td class="col-md-6">
+                                Law Society Number
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-md-6">
+                                <p class="form-control">@Model.Select(u => u.OtherName).First()</p>
+                            </td>
+                            <td class="col-md-6">
+                                <p class="form-control">@Model.Select(u => u.LawSocietyNumber).First()</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>DESCRIPTION/TITLE OF ACTIVITY</th>
+                            <th>CODE*</th>
+                            <th>PROVIDER</th>
+                            <th>UNITS CLAIMED</th>
+                            <th>FIELD**</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descrption)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ActivityShortName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Provider)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <p class="line-style"><b>2.CARRYOVER FROM PREVIOUS CPD YEAR</b></p><br />
+            </div>
+
+            <div class="row">
+                <table class="table table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>DESCRIPTION/TITLE OF ACTIVITY</th>
+                            <th>CODE*</th>
+                            <th>PROVIDER</th>
+                            <th>UNITS CLAIMED</th>
+                            <th>FIELD**</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (k != null)
+                        {
+                            foreach (var item in k)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User_Training_Transaction.Date.ToString().Split(' ')[0])
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User_Training_Transaction.Descrption)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Activity_Master.ShortName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User_Training_Transaction.Provider)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category_Master.Name)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <table style="font-size:smaller;">
+                    <tr>
+                        <td>
+                            <div>
+                                <p><b>CODES* COURSES/ACTIVITIES</b></p>
+                                <hr>
+                                <b>CS	Seminar, workshop, lecture, conference</b> (1 unit per hour)<br />
+                                <b>DG	In-house seminars/discussion group</b> (1 unit per hour)<br />
+                                <b>O	Multimedia or web-based program</b> (1 unit per hour)<br />
+                                <b>VA	Private study of audio/visual material</b> (1 unit per hour to maximum of 5 CPD units)<br />
+                                <hr>
+                                <b>
+                                    PP	Preparation and/or presentation of written or oral material to be used in a
+                                    CPD activity or in other forms of education provided to solicitors
+                                </b> (1 unit per hour to maximum of 5 CPD units)
+                                <hr>
+                                <b>PU	Publications – research, preparation or editing of an article published or published Law Reports</b>
+                                (1 unit for every 1000 words of the article and a maximum of 5 CPD units)
+                                <hr>
+                                <b>PG	Postgraduate studies relevant to a solicitor’s practice needs</b> (1 unit per hour)
+                                <hr>
+                                <b>
+                                    CM	Reasonable attendance as a committee member of professional association,
+                                    designated local authority or the Law Council of Australia or of other committees
+                                </b>
+                                (1 unit per 2 hours and a maximum of 3 CPD units)
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+
+                        <td valign="top">
+                            <div>
+                                <p><b>FIELD**</b></p>
+                                <hr />
+                                <p>
+                                    Practitioners must complete 10 CPD units every CPD year including at least one unit every
+                                    year in each of the following fields:
+                                </p>
+                                <ol>
+                                    <li>Ethics and Professional Responsibility</li>
+                                    <li>Practice Management and Business Skills</li>
+                                    <li>Professional Skills</li>
+                                    <li>Substantive Law</li>
+                                </ol>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+            </div>
+            <br /><br />
+            <div class="row form-group">
+                <p style="font-size:10px;">
+                    <b>ENQUIRIES:</b> LAW SOCIETY REGISTRY, The Law Society of New South Wales,
+                    170 Phillip Street, Sydney NSW 2000 or DX 362 Sydney<br />
+                    <b>T:</b> +61 2 9926 0156 |<b>F:</b> +61 2 9926 0257 | <b>E:</b>registry@lawsociety.com.au
+                    | <b>W:</b>lawsociety.com.au | <b>ACN:</b>000 000 699 | <b>ABN:</b> 98 696 304 966
+                </p>
+                <br />
+                <br />
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</body>
+</html>

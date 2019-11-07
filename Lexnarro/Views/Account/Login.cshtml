@@ -1,0 +1,54 @@
+﻿@using Lexnarro.ViewModels
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginPartial.cshtml";
+}
+
+<form action="" method="post" class="login-form">
+    <div class="login-wrap">
+        <p class="login-img">
+            <i class="icon_lock_alt"></i>
+        </p>
+        @{
+            @Html.AntiForgeryToken() // this is for prevent CSRF attack
+
+            @Html.ValidationSummary(true)
+            if (@ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+        }
+
+        <div class="input-group">
+            <span class="input-group-addon"><i class="icon_profile"></i></span>
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "User Name" })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { style = "float:left; color:red;" })
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessage("Password", "", new { style = "float:left; color:red;" })
+        </div>
+
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+            @*@Html.CheckBoxFor(model => model.RememberMe)*@
+            @*<span class="pull-right"><a href="#">Forgot Password?</a></span>*@
+            <span class="pull-right"> <a href="@Url.Action("ForgotPassword","Account")"> Forgot Password?</a></span>
+        </label>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+        @Html.ActionLink("Signup", "Signup", "User", new { }, htmlAttributes: new { @class = "btn btn-info btn-lg btn-block" })
+    </div>
+
+    @section JavaScript
+    {
+        @Html.Raw(ViewBag.messageInfo)
+    }
+
+    @section scripts
+    {}
+</form>

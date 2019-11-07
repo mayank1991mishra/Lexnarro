@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lexnarro - Admin Panel">
+    <meta name="author" content="JAJ & Co">
+
+    <title>Login Page</title>
+    @using System.Web.Optimization
+
+    @Styles.Render("~/bundles/css")
+
+    @*<style>
+            .toast-top-center {
+                top: 100px;
+            }
+        </style>*@
+
+    @*<link href="~/Content/css/elegant-icons-style.css" rel="stylesheet" />
+        <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />*@
+</head>
+
+<body class="login-img-body">
+
+    <div class="container">
+
+        <header class="header dark-bg">
+            @*<div class="toggle-nav">
+                    <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+                </div>*@
+
+            <a href="@Url.Action("Index", "Account")" class="nohover">
+                <img alt="" src="@Url.Content("~/Content/img/ln2(2).png")" height="36" width="186" style="margin-top:14px;">
+            </a>
+        </header>
+
+        @RenderBody()
+
+        @*<div class="text-right">
+            </div>*@
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/indexjs")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/owl")
+
+    @RenderSection("scripts", required: false)
+
+    @RenderSection("JavaScript", required: false)
+   
+</body>
+</html>
+

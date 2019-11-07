@@ -1,0 +1,124 @@
+﻿@model Lexnarro.Models.User_Training_Transaction
+
+@{
+    ViewBag.Title = "ActiveTrainingDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Training Details</h2>
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>User Training Transaction</h4>
+            <hr />
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("User Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User_Profile.UserName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("State")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Category")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Activity")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Activity_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Hours")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hours)
+                </dd>
+
+                <dt>
+                    @Html.Label("Provider")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Provider)
+                </dd>
+
+                <dt>
+                    @Html.Label("CPD Year")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Financial_Year)
+                </dd>
+
+                <dt>
+                    @Html.Label("Your Role")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Your_Role)
+                </dd>
+
+                <dt>
+                    @Html.Label("Uploaded File")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UploadedFileName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Forwardable")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Forwardable)
+                </dd>
+
+                <dt>
+                    @Html.Label("Has Been Forwarded")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Has_been_Forwarded)
+                </dd>
+                <dt>
+                    @Html.Label("Description")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descrption)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to list", "Index", "TrainingHistory", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>

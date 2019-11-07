@@ -1,0 +1,144 @@
+﻿@using Lexnarro.HelperClasses
+
+@{
+    ViewBag.Title = "Training";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var id = ViewBag.id;
+}
+
+<h2>CPD Records</h2>
+
+<p><h4><b>State Enrolled : <span id="state"></span></b></h4></p>
+
+<section class="panel">
+    <div class="panel-body">
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    @*<th class="hidden">
+                            User Name
+                        </th>*@
+
+                    <th>
+                        Date
+                    </th>
+
+                    @*<th class="hidden">
+                            State Enrolled
+                        </th>*@
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        Activity
+                    </th>
+
+                    <th>
+                        Sub Activity
+                    </th>
+
+                    <th>
+                        Hours
+                    </th>
+
+                    <th>
+                        Provider
+                    </th>
+
+                    <th>
+                        CPD Year
+                    </th>
+
+                    @*<th>
+                            Your Role
+                        </th>*@
+
+                    @*<th>
+                            Forwardable
+                        </th>
+
+                        <th>
+                           Has Been Forwarded
+                        </th>*@
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+
+        <p>
+            @Html.ActionLink("Back to List", "Details", "ActiveUsers", new { id = id }, htmlAttributes: new { @class = "btn btn-primary" })
+        </p>
+
+    </div>
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+    }
+
+    @section scripts
+    {
+        <script>
+            $(function () {
+                var userId = @UserHelper.GetUserId();
+                $("#state").html("@UserHelper.GetUserStateEnrolledName()");
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    }],
+                    "order": [[1, 'asc']],
+
+                    "ajax": {
+                        "url": '/ActiveUsers/GetTrainingList',
+                        "type": 'get',
+                        "data":{ id : @id },
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": null },
+                        //{
+                        //    "data": "EmailAddress"
+                        //},
+                        {
+                            "data": "Date", render: (function (data) {
+
+                                return (moment(data).format("DD/MM/YYYY"));
+                            }) },
+                        //{
+                        //    "data": "StateEnrolled" },
+                        { "data": "Category" },
+                        { "data": "Activity" },
+                        { "data": "SubActivity" },
+                        { "data": "Hours" },
+                        { "data": "Provider" },
+                        { "data": "Financial_Year" },
+                        {
+                            "data": "Id", render: (function (data, type, row) {
+                                if (row.Id == userId) {
+                                    return ' <a href="/ActiveUsers/Edit/' + data + '" class="btn btn-success">Edit</a>'+
+                                    ' <a href="/ActiveUsers/TrainingDetails/' + data + '" class="btn btn-info">Details</a>';
+                                }
+                                //document.getElementById("state").innerText('@UserHelper.GetUserStateEnrolledName()');
+                                return '<a href="/ActiveUsers/TrainingDetails/' + data + '" class="btn btn-info">Details</a>';
+                            })
+                        }
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+    }
+</section>

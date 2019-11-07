@@ -1,0 +1,121 @@
+﻿@model Lexnarro.Models.User_Transaction_Master
+
+@{
+    ViewBag.Title = "PaymentDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Id = ViewBag.id;
+}
+
+<h2>Transaction Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>User Transaction</h4>
+            <hr />
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("First Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User_Profile.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Plan")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Plan_Master.Plan)
+                </dd>
+
+                <dt>
+                    @Html.Label("Amount")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Amount)
+                </dd>
+
+                <dt>
+                    @Html.Label("Start Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Start_Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("End Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.End_Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("Payment Status")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Payment_Status)
+                </dd>
+
+                <dt>
+                    @Html.Label("Transection ID")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Transection_ID)
+                </dd>
+
+                <dt>
+                    @Html.Label("Status")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt>
+                    @Html.Label("Payment Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Payment_Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("Invoice No")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Invoice_No)
+                </dd>
+
+                <dt>
+                    @Html.Label("Payment Method")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Payment_Method)
+                </dd>
+
+                <dt>
+                    @Html.Label("Rate Card")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rate_Card.Status)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+
+    @Html.ActionLink("Back to list", "Index", "TransactionHistory", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+

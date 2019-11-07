@@ -1,0 +1,198 @@
+﻿@model Lexnarro.Models.User_Profile
+
+@using Lexnarro.HelperClasses;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>User</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("First Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Last Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Other Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OtherName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Address")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.Label("Street Number")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StreetNumber)
+                </dd>
+
+                <dt>
+                    @Html.Label("Street Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StreetName)
+                </dd>
+
+                <dt>
+                    @Html.Label("Postal Code")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PostCode)
+                </dd>
+
+                <dt>
+                    @Html.Label("Suburb")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Suburb)
+                </dd>
+
+                <dt>
+                    @Html.Label("State Enrolled")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master1.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Law Society Number")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LawSocietyNumber)
+                </dd>
+
+                <dt>
+                    @Html.Label("Firm")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Firm)
+                </dd>
+
+                <dt>
+                    @Html.Label("Email")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmailAddress)
+                </dd>
+
+                <dt>
+                    @Html.Label("Phone Number")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.Label("User Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+                <dt class="hidden">
+                    @Html.Label("Password")
+                </dt>
+
+                <dd class="hidden">
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+
+                <dt>
+                    @Html.Label("Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("Country Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Country_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("User Role")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Role_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("State Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+
+<p>
+    @if (UserHelper.GetUserRole() == "Admin")
+    {
+        @Html.ActionLink("Transaction History", "Transactions", "User",
+                new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary form-group" })
+        <span>|</span>
+        @Html.ActionLink("CPD Records", "Training", "User",
+            new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary form-group" })<span>|</span>
+    }
+
+    @if (UserHelper.GetUserRole() == "Admin")
+    {
+        if (Model.Role_Master.Name == "Admin")
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-info" })<span>|</span>
+        }
+    }
+    else
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-info" })<span>|</span>
+    }
+
+    @Html.ActionLink("Back to List", "Index", "User", null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>

@@ -1,0 +1,62 @@
+﻿@model Lexnarro.Models.State_Rule3_Marriage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>State Rule Three Mapping</h4>
+            <hr />
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.Label("State")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Carry Over Units")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rule3_Master.CarryOverUnits)
+                </dd>
+
+                <dt>
+                    @Html.Label("Start Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+
+                <dt>
+                    @Html.Label("End Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+            </dl>
+        </div>
+        </div></div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+        </p>

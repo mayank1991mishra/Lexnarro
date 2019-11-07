@@ -1,0 +1,194 @@
+﻿@using Lexnarro.HelperClasses
+
+@{
+    ViewBag.Title = "Training";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var id = UserHelper.GetUserId();
+    var Role = UserHelper.GetUserRole();
+}
+
+<h2>CPD Records</h2>
+
+@if (Role != "Admin")
+{
+    <p>
+        @if (ViewBag.userPlan == "Demo")
+        {
+            if ((int)ViewBag.RowCount < 5)
+            {
+                @Html.ActionLink("Create New", "Create", "UserTraining", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+            }
+            else
+            {
+                @Html.ActionLink("Create New", "Create", "UserTraining", new { }, htmlAttributes: new { @class = "btn btn-primary", @Disabled = "Disabled" })
+
+                <div class="alert alert-danger">
+                    <strong>Alert!</strong> Demo user can create five records only. Upgrade your plan for full apllication usage.
+                </div>
+            }
+        }
+        else
+        {
+            @Html.ActionLink("Create New", "Create", "UserTraining", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+        }
+    </p>
+}
+
+<p><h5><b>State Enrolled : <span id="state">@UserHelper.GetUserStateEnrolledName()</span></b></h5></p>
+
+<div class="row">
+    <div class="col-md-4">
+        <p><h5><b>Total Units : <span id="units"></span></b></h5></p>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <span class="control-label"><b>CPD Year</b></span>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("financialYear", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Search" class="btn btn-info" />
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    @*<th class="hidden">
+                            User Name
+                        </th>*@
+
+                    <th>
+                        Date
+                    </th>
+
+                    @*<th class="hidden">
+                            State Enrolled
+                        </th>*@
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        Activity
+                    </th>
+
+                    <th>
+                        Subactivity
+                    </th>
+
+                    <th>
+                        Hours
+                    </th>
+
+                    <th>Units</th>
+
+                    <th>
+                        Provider
+                    </th>
+
+                    <th>
+                        CPD Year
+                    </th>
+
+                    @*<th>
+                            Your Role
+                        </th>*@
+
+                    @*<th>
+                            Forwardable
+                        </th>
+
+                        <th>
+                           Has Been Forwarded
+                        </th>*@
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+
+        @*<p>
+                @Html.ActionLink("Back to list", "Details", "User", new { id = id }, htmlAttributes: new { @class = "btn btn-primary" })
+            </p>*@
+
+    </div>
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+    }
+
+    @section scripts
+    {
+        <script>
+            $(function () {
+                var year = $('#financialYear').val();
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    }],
+                    "order": [[1, 'asc']],
+
+                    "ajax": {
+                        "url": '/User/GetTraining',
+                        "type": 'get',
+                        "data":{ id : @id, finYear : year },
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": null },
+                        //{ "data": "EmailAddress" },
+                        {
+                            "data": "Date", render: (function (data) {
+                                return (moment(data).format("DD/MM/YYYY"));
+                            }) },
+                        //{ "data": "StateEnrolled" },
+                        { "data": "Category" },
+                        { "data": "Activity" },
+                        { "data": "SubActivity" },
+                        { "data": "Hours" },
+                        { "data": "Units_Done" },
+                        { "data": "Provider" },
+                        { "data": "Financial_Year" },
+                        {
+                            "data": "Id", render: (function (data, type, row) {
+                                //if (row.Id == userId) {
+                                $('#units').text(row.TotalUnits);
+                                    return ' <a href="/User/Edit/' + data + '" class="btn btn-success">Edit</a>'+
+                                    ' <a href="/User/TrainingDetails/' + data + '" class="btn btn-info">Details</a>'+
+                                    ' <a href="/User/TrainingDetails/' + data + '" class="btn btn-danger">Delete</a>';
+                                //}
+
+                                //return '<a href="/User/TrainingDetails/' + data + '" class="btn btn-info">Details</a>';
+                            })
+                        }
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+    }
+</section>

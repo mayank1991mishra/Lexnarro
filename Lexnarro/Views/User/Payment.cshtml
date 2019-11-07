@@ -1,0 +1,140 @@
+﻿@using Lexnarro.HelperClasses;
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var id = Convert.ToDecimal(UserHelper.GetUserId());
+}
+
+<h2>Transaction List</h2>
+<br />
+<h4><b>Name : <span id="name"></span></b></h4>
+<br />
+<section class="panel">
+    <div class="panel-body">
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+
+                    <th>
+                        Start Date
+                    </th>
+                    <th>
+                        End Date
+                    </th>
+                    <th>
+                        Plan
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Transaction Id
+                    </th>
+                    <th>
+                        Payment Date
+                    </th>
+                    <th>
+                        Invoice No
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+        </table>
+        <h4>
+            <b>
+                Total Amount : <span id="totalamount"></span>
+            </b>
+        </h4>
+        <br />
+
+        @*<p>
+            @Html.ActionLink("Back to list", "Details", "OtherUsers", new { id = id }, htmlAttributes: new { @class = "btn btn-primary" })
+        </p>*@
+
+    </div>
+
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+    }
+
+    @section scripts
+    {
+        <script>
+            $(function () {                
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+                    "footerCallback": function (row, data, start, end, display) {
+                        var api = this.api(), data;
+                        // Remove the formatting to get integer data for summation
+                        var intVal = function (i) {
+                            return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                        };
+
+                        // totalAmount over all pages
+                        total_amount = api.column(4).data().reduce(function (a, b) {
+                            return (intVal(a) + intVal(b)).toFixed(2);
+                        }, 0);
+
+                        // total_page_amount over this page
+                        total_page_amount = api.column(4, { page: 'current' }).data().reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                        total_page_amount = parseFloat(total_page_amount);
+                        total_amount = parseFloat(total_amount);
+                        // Update footer
+                        $('#totalamount').html(total_amount);
+                    },
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    }],
+                    "order": [[1, 'asc']],
+                    "ajax": {
+                        "url": '/User/GetPayments',
+                        "data":{id : @id},
+                        "type": 'get',
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": null },
+                        { "data": "StartDate" },
+                        { "data": "EndDate" },
+                        { "data": "Plan" },
+                        { "data": "Amount" },                        
+                        //{ "data": "Payment_Status" },
+                        { "data": "Transection_ID" },
+                        //{ "data": "Status" },
+                        { "data": "PaymentDate" },
+                        { "data": "Invoice_No"},
+                         {
+                             "data": "Id", render: (function (data, type, row) {
+                                 //if (row.ID == userId) {
+                                 //    return ' <a href="/User/ActiveUserDetails/' + data + '" class="btn btn-primary">Details</a>';
+                                 //}
+                                 $('#name').text(row.FirstName + ' ' + row.LastName);
+                                 return '<a href="/User/PaymentDetails/' + data + '" class="btn btn-info">Details</a>';
+                             })
+                         }
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+    }
+</section>
+

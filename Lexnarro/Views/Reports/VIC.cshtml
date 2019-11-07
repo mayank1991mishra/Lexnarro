@@ -1,0 +1,1371 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+@{
+    Layout = null;
+}
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    .text1 {
+        /*font: 36px 'Arial';*/
+        color: #0e006a;
+        /*line-height: 41px;*/
+    }
+
+    .text2 {
+        color: #1b60ab;
+        line-height: 18px;
+    }
+
+    .text3 {
+        color: #1b60ab;
+        line-height: 26px;
+        padding-left: 0;
+    }
+
+    .ft13 {
+        font: 12px 'Arial';
+        color: #ffffff;
+        /*line-height: 14px;*/
+    }
+
+    .page-padding {
+        padding: 30px 20px 10px 20px;
+    }
+
+    .text-style {
+        font-size: 18px;
+    }
+
+    .text-style-medium {
+        font-size: 12px;
+    }
+
+    .text-style-small {
+        font-size: 10px;
+    }
+
+    .text-style-xsmall {
+        font-size: 8px;
+    }
+
+    .text-style-xmedium {
+        font-size: 12px;
+    }
+
+    .text-color-style {
+        color: #428bca;
+    }
+
+    .padding2 {
+        line-height: 15px;
+    }
+
+    .td-padding {
+        padding-top: 5px;
+        padding-left: 15px;
+        line-height: 15px;
+    }
+
+    .td-padding2 {
+        padding-left: 30px;
+        padding-top: 5px;
+    }
+
+    .text-super-style {
+        font-size: 7pt;
+        /*font-family: 'Times New Roman', 'Times', serif;*/
+        vertical-align: super;
+    }
+
+    #page_1 {
+        position: relative;
+        overflow: hidden;
+        margin: 41px 0px 48px 47px;
+        padding: 0px;
+        border: none;
+        width: 1076px;
+        height: 705px;
+    }
+
+        #page_1 #id_1 {
+            border: none;
+            margin: 0px 0px 0px 0px;
+            padding: 0px;
+            border: none;
+            width: 1076px;
+            overflow: hidden;
+        }
+
+            #page_1 #id_1 #id_1_1 {
+                float: left;
+                border: none;
+                margin: 0px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                width: 824px;
+                overflow: hidden;
+            }
+
+            #page_1 #id_1 #id_1_2 {
+                float: left;
+                border: none;
+                margin: 109px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                width: 252px;
+                overflow: hidden;
+            }
+
+        #page_1 #id_2 {
+            border: none;
+            margin: 40px 0px 0px 2px;
+            padding: 0px;
+            border: none;
+            width: 1024px;
+            overflow: hidden;
+        }
+
+        #page_1 #id_3 {
+            border: none;
+            margin: 1px 0px 0px 7px;
+            padding: 0px;
+            border: none;
+            width: 995px;
+            overflow: hidden;
+        }
+
+            #page_1 #id_3 #id_3_1 {
+                float: left;
+                border: none;
+                margin: 0px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                width: 222px;
+                overflow: hidden;
+            }
+
+            #page_1 #id_3 #id_3_2 {
+                float: left;
+                border: none;
+                margin: 1px 0px 0px 280px;
+                padding: 0px;
+                border: none;
+                width: 195px;
+                overflow: hidden;
+            }
+
+            #page_1 #id_3 #id_3_3 {
+                float: left;
+                border: none;
+                margin: 1px 0px 0px 119px;
+                padding: 0px;
+                border: none;
+                width: 179px;
+                overflow: hidden;
+            }
+
+        #page_1 #p1dimg1 {
+            position: absolute;
+            top: 7px;
+            left: 1px;
+            z-index: -1;
+            width: 1026px;
+            height: 698px;
+        }
+
+            #page_1 #p1dimg1 #p1img1 {
+                width: 1026px;
+                height: 698px;
+            }
+
+    #page_2 {
+        position: relative;
+        overflow: hidden;
+        margin: 41px 0px 48px 47px;
+        padding: 0px;
+        border: none;
+        width: 1076px;
+        height: 705px;
+    }
+
+        #page_2 #id_1 {
+            border: none;
+            margin: 0px 0px 0px 0px;
+            padding: 0px;
+            border: none;
+            width: 1076px;
+            overflow: hidden;
+        }
+
+        #page_2 #id_2 {
+            border: none;
+            margin: 0px 0px 0px 7px;
+            padding: 0px;
+            border: none;
+            width: 995px;
+            overflow: hidden;
+        }
+
+            #page_2 #id_2 #id_2_1 {
+                float: left;
+                border: none;
+                margin: 0px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                width: 222px;
+                overflow: hidden;
+            }
+
+            #page_2 #id_2 #id_2_2 {
+                float: left;
+                border: none;
+                margin: 2px 0px 0px 200px;
+                padding: 0px;
+                border: none;
+                width: 175px;
+                overflow: hidden;
+            }
+
+            #page_2 #id_2 #id_2_3 {
+                float: left;
+                border: none;
+                margin: 2px 0px 0px 119px;
+                padding: 0px;
+                border: none;
+                width: 179px;
+                overflow: hidden;
+            }
+
+        #page_2 #p2dimg1 {
+            position: absolute;
+            top: 7px;
+            left: 1px;
+            z-index: -1;
+            width: 1026px;
+            height: 698px;
+        }
+
+            #page_2 #p2dimg1 #p2img1 {
+                width: 1026px;
+                height: 698px;
+            }
+
+    #page_3 {
+        position: relative;
+        overflow: hidden;
+        /*margin: 44px 0px 41px 47px;*/
+        padding: 0px;
+        border: none;
+        width: 1076px;
+    }
+
+        #page_3 #id_1 {
+            border: none;
+            margin: 0px 0px 0px 0px;
+            padding: 0px;
+            border: none;
+            width: 1075px;
+            overflow: hidden;
+        }
+
+        #page_3 #id_2 {
+            border: none;
+            /*margin: 29px 0px 0px 1px;*/
+            padding: 0px;
+            border: none;
+            width: 1075px;
+            overflow: hidden;
+        }
+
+            #page_3 #id_2 #id_2_1 {
+                float: left;
+                border: none;
+                margin: 0px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                /*width: 469px;*/
+                 width: 527px;
+                overflow: hidden;
+            }
+
+            #page_3 #id_2 #id_2_2 {
+                float: left;
+                border: none;
+                margin: 33px 0px 0px 0px;
+                padding: 0px;
+                border: none;
+                /*width: 450px;*/
+                width: 500px;
+                overflow: hidden;
+            }
+
+        #page_3 #id_3 {
+            border: none;
+            margin: 18px 0px 0px 14px;
+            padding: 0px;
+            border: none;
+            width: 1062px;
+            overflow: hidden;
+        }
+
+        #page_3 #id_4 {
+            border: none;
+            margin: 18px 0px 0px 1px;
+            padding: 0px;
+            border: none;
+            width: 1075px;
+            overflow: hidden;
+        }
+
+        #page_3 #p3dimg1 {
+            position: absolute;
+            top: 51px;
+            left: 0px;
+            z-index: -1;
+            width: 1029px;
+            height: 595px;
+        }
+
+            #page_3 #p3dimg1 #p3img1 {
+                width: 1029px;
+                height: 595px;
+            }
+
+    .ft0 {
+        font: 36px 'Arial';
+        color: #0e006a;
+        line-height: 41px;
+    }
+
+    .ft1 {
+        font: 16px 'Arial';
+        color: #1b60ab;
+        line-height: 18px;
+    }
+
+    .ft2 {
+        font: 23px 'Arial';
+        color: #1b60ab;
+        line-height: 26px;
+    }
+
+    .ft3 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        line-height: 15px;
+    }
+
+    .ft4 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        line-height: 14px;
+    }
+
+    .ft5 {
+        font: 8px 'Arial';
+        color: #0e006a;
+        line-height: 10px;
+    }
+
+    .ft6 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 2px;
+        line-height: 13px;
+    }
+
+    .ft7 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        line-height: 13px;
+    }
+
+    .ft8 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 3px;
+        line-height: 14px;
+    }
+
+    .ft9 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 2px;
+        line-height: 14px;
+    }
+
+    .ft10 {
+        font: 12px 'Arial';
+        color: #ffffff;
+        line-height: 15px;
+    }
+
+    .ft11 {
+        font: 11px 'Arial';
+        color: #ffffff;
+        line-height: 14px;
+    }
+
+    .ft12 {
+        font: 7px 'Arial';
+        color: #ffffff;
+        line-height: 7px;
+    }
+
+    .ft13 {
+        font: 12px 'Arial';
+        color: #ffffff;
+        line-height: 14px;
+    }
+
+    .ft14 {
+        font: 1px 'Arial';
+        line-height: 9px;
+    }
+
+    .ft15 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        line-height: 12px;
+    }
+
+    .ft16 {
+        font: 1px 'Arial';
+        line-height: 13px;
+    }
+
+    .ft17 {
+        font: 1px 'Arial';
+        line-height: 1px;
+    }
+
+    .ft18 {
+        font: 8px 'Arial';
+        color: #0e006a;
+        line-height: 14px;
+    }
+
+    .ft19 {
+        font: 37px 'Arial';
+        color: #0e006a;
+        line-height: 42px;
+    }
+
+    .ft20 {
+        font: 24px 'Arial';
+        color: #1b60ab;
+        line-height: 27px;
+    }
+
+    .ft21 {
+        font: 24px 'Arial';
+        color: #0e006a;
+        line-height: 27px;
+    }
+
+    .ft22 {
+        font: 13px 'Arial';
+        color: #ffffff;
+        line-height: 16px;
+    }
+
+    .ft23 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 10px;
+        line-height: 15px;
+    }
+
+    .ft24 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 12px;
+        line-height: 15px;
+    }
+
+    .ft25 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 15px;
+        line-height: 15px;
+    }
+
+    .ft26 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        margin-left: 12px;
+        line-height: 16px;
+    }
+
+    .ft27 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        line-height: 16px;
+    }
+
+    .ft28 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        margin-left: 15px;
+        line-height: 16px;
+    }
+
+    .ft29 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        margin-left: 15px;
+        line-height: 17px;
+    }
+
+    .ft30 {
+        font: 9px 'Arial';
+        color: #0e006a;
+        line-height: 17px;
+    }
+
+    .ft31 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 12px;
+        line-height: 15px;
+    }
+
+    .ft32 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        line-height: 15px;
+    }
+
+    .ft33 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 13px;
+        line-height: 15px;
+    }
+
+    .ft34 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 15px;
+        line-height: 14px;
+    }
+
+    .ft35 {
+        font: 11px 'Arial';
+        color: #0e006a;
+        margin-left: 12px;
+        line-height: 14px;
+    }
+
+    .ft36 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 6px;
+        line-height: 15px;
+    }
+
+    .ft37 {
+        font: 12px 'Arial';
+        color: #0e006a;
+        margin-left: 9px;
+        line-height: 15px;
+    }
+
+    .ft38 {
+        font: italic 8px 'Arial';
+        color: #0e006a;
+        line-height: 20px;
+    }
+
+    .ft39 {
+        font: 8px 'Arial';
+        color: #0e006a;
+        line-height: 19px;
+    }
+
+    .p0 {
+        text-align: left;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .p1 {
+        text-align: left;
+        margin-top: 8px;
+        margin-bottom: 0px;
+    }
+
+    .p2 {
+        text-align: left;
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    .p3 {
+        text-align: left;
+        padding-left: 1px;
+        margin-top: 27px;
+        margin-bottom: 0px;
+    }
+
+    .p4 {
+        text-align: left;
+        padding-left: 1px;
+        margin-top: 14px;
+        margin-bottom: 0px;
+    }
+
+    .p5 {
+        text-align: left;
+        margin-top: 4px;
+        margin-bottom: 0px;
+    }
+
+    .p6 {
+        text-align: left;
+        margin-top: 1px;
+        margin-bottom: 0px;
+    }
+
+    .p7 {
+        text-align: left;
+        padding-left: 7px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        white-space: nowrap;
+    }
+
+    .p8 {
+        text-align: left;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        white-space: nowrap;
+    }
+
+    .p9 {
+        text-align: left;
+        margin-top: 7px;
+        margin-bottom: 0px;
+    }
+
+    .p10 {
+        text-align: left;
+        padding-left: 14px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .p11 {
+        text-align: left;
+        margin-top: 17px;
+        margin-bottom: 0px;
+    }
+
+    .p12 {
+        text-align: left;
+        padding-left: 45px;
+        padding-right: 32px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -26px;
+    }
+
+    .p13 {
+        text-align: left;
+        padding-left: 45px;
+        margin-top: 6px;
+        margin-bottom: 0px;
+    }
+
+    .p14 {
+        text-align: left;
+        padding-left: 45px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .p15 {
+        text-align: left;
+        padding-left: 45px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+    }
+
+    .p16 {
+        text-align: left;
+        padding-left: 45px;
+        padding-right: 37px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -26px;
+    }
+
+    .p17 {
+        text-align: left;
+        padding-left: 19px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .p18 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 36px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p19 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 41px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p20 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 45px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p21 {
+        text-align: left;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .p22 {
+        text-align: left;
+        padding-left: 19px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+    }
+
+    .p23 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 57px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p24 {
+        text-align: left;
+        padding-left: 83px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .p25 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 29px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p26 {
+        text-align: left;
+        padding-left: 83px;
+        padding-right: 54px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-indent: -38px;
+    }
+
+    .p27 {
+        text-align: justify;
+        padding-left: 45px;
+        padding-right: 63px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -27px;
+    }
+
+    .p28 {
+        text-align: left;
+        padding-left: 18px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+    }
+
+    .p29 {
+        text-align: left;
+        padding-left: 45px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+    }
+
+    .p30 {
+        text-align: left;
+        padding-left: 45px;
+        padding-right: 84px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -27px;
+    }
+
+    .p31 {
+        text-align: left;
+        padding-left: 45px;
+        padding-right: 47px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -27px;
+    }
+
+    .p32 {
+        text-align: left;
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    .p33 {
+        text-align: left;
+        padding-left: 18px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+    }
+
+    .p34 {
+        text-align: left;
+        padding-left: 45px;
+        padding-right: 60px;
+        margin-top: 3px;
+        margin-bottom: 0px;
+        text-indent: -27px;
+    }
+
+    .p35 {
+        text-align: left;
+        padding-right: 176px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .td0 {
+        padding: 0px;
+        margin: 0px;
+        width: 81px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td1 {
+        padding: 0px;
+        margin: 0px;
+        width: 225px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td2 {
+        padding: 0px;
+        margin: 0px;
+        width: 203px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td3 {
+        padding: 0px;
+        margin: 0px;
+        width: 206px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td4 {
+        padding: 0px;
+        margin: 0px;
+        width: 108px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td5 {
+        padding: 0px;
+        margin: 0px;
+        width: 201px;
+        vertical-align: bottom;
+        background: #0e006a;
+    }
+
+    .td6 {
+        padding: 0px;
+        margin: 0px;
+        width: 74px;
+        vertical-align: bottom;
+    }
+
+    .td7 {
+        padding: 0px;
+        margin: 0px;
+        width: 148px;
+        vertical-align: bottom;
+    }
+
+    .td01 {
+        padding: 0px;
+        margin: 0px;
+        width: 85px;
+        vertical-align: bottom;
+    }
+
+    .td11 {
+        padding: 0px;
+        margin: 0px;
+        width: 225px;
+        vertical-align: bottom;
+    }
+
+    .td21 {
+        padding: 0px;
+        margin: 0px;
+        width: 203px;
+        vertical-align: central;
+    }
+
+    .td31 {
+        padding: 0px;
+        margin: 0px;
+        width: 206px;
+        vertical-align: central;
+    }
+
+    .td41 {
+        padding: 0px;
+        margin: 0px;
+        width: 108px;
+        vertical-align: central;
+    }
+
+    .td51 {
+        padding: 0px;
+        margin: 0px;
+        width: 201px;
+        vertical-align: central;
+    }
+
+    .tr0 {
+        height: 20px;
+        color: black;
+    }
+
+    .tr1 {
+        height: 14px;
+    }
+
+    .tr2 {
+        height: 9px;
+    }
+
+    .tr3 {
+        height: 13px;
+    }
+
+    .tr4 {
+        height: 16px;
+    }
+
+    .tr5 {
+        height: 21px;
+    }
+
+    .tr6 {
+        height: 15px;
+    }
+
+    .t0 {
+        width: 1024px;
+        font: 16px 'Arial';
+        color: #ffffff;
+    }
+
+    .t1 {
+        width: 222px;
+        font: 11px 'Arial';
+        color: #0e006a;
+    }
+
+    .t2 {
+        width: 1024px;
+        margin-left: 2px;
+        margin-top: 65px;
+        font: 12px 'Arial';
+        color: #ffffff;
+    }
+
+    .hhhh {
+        padding-left: -100px;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VIC</title>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container">
+        @*<div class="col-md-1"></div>*@
+        <div class="col-md-12">
+            <div class="row">
+                <h4 class="text1">RECORD OF ENGAGEMENT IN CPD ACTIVITIES</h4>
+            </div>
+
+            <div class="row">
+                <h4 class="text2">RULE 12 LEGAL PROFESSION UNIFORM CONTINUING PROFESSIONAL</h4>
+                <h4 class="text2">DEVELOPMENT (SOLICITORS) RULES 2015 (CPD RULES)</h4>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-8 text3">
+                    <h4>CPD year 1 April @ViewBag.startYear to 31 March @ViewBag.endYear </h4>
+                    <p>See endnotes overleaf for guidanace in completing this form.</p>
+                </div>
+                <div class="col-md-4 text1 text-style-small">
+                    <span>Inquiries: Compliance</span><br />
+                    <span>T:</span><span>03 9607 9423</span><br />
+                    <span>E:</span><span>compliance@liv.asn.au</span><br />
+                    <span>W:</span><span>www.liv.asn.au/CPDCompliance</span><br />
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table table-responsive table-bordered text-style-medium">
+                    <thead>
+                        <tr class="ft13" style="background-color:#0e006a">
+                            <td>
+                                <span>DATE CPD</span><br />
+                                <span class="text-style-small">UNDERTAKEN</span>
+                            </td>
+                            <td>
+                                <span>CPD FIELD</span><br />
+                                <span class="text-style-small">(Rule 6)<span class="ft12">1</span></span>
+                            </td>
+                            <td>
+                                <span>CPD CONTENT</span><br />
+                                <span class="text-style-small">(Rule 7)<span class="ft12">2</span></span>
+                            </td>
+                            <td>
+                                <span>CPD FORMAT</span><br />
+                                <span class="text-style-small">(Rule 8)<span class="ft12">3</span></span>
+                            </td>
+                            <td>
+                                <span>CPD UNITS CLAIMED</span><br />
+                                <span class="text-style-small">(Rule 9)<span class="ft12">4</span></span>
+                            </td>
+                            <td>
+                                <span>ATTACHED EVIDENCE IN SUPPORT</span><br />
+                                <span class="text-style-small">(Rule 12)<span class="ft12">5</span></span>
+                            </td>
+                        </tr>
+                        <tr class="text-style-small text1">
+                            <td>
+                                <b>
+                                    <span>
+                                        DD-MM-YY
+                                    </span>
+                                </b>
+                            </td>
+                            <td>
+                                <b>
+                                    <span>Ethics & professional responsibility</span><br />
+                                    <span>Practice management & business skills</span><br />
+                                    <span>Professional skills</span><br />
+                                    <span>Substantive law</span>
+                                </b>
+                            </td>
+                            <td></td>
+                            <td>
+                                <b>
+                                    <span>
+                                        Examples: seminar, workshop, discussion group,
+                                    </span><br />
+                                    <span>
+                                        web-based
+                                    </span><br />
+                                    <span>
+                                        program, audio/video, published article,<br />
+                                        presentation postgraduate studies.
+                                    </span>
+                                </b>
+                            </td>
+                            <td></td>
+                            <td>
+                                <b>
+                                    <span>
+                                        Examples: receipt, signed attendance record, <br />
+                                        certificate of attendance, paper or presentation
+                                    </span>
+                                </b>
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</td>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Descrption)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Units_Done)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UploadedFileName)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            @*<div class="row">
+                <span class="text1 text-style">RECORD OF ENGAGEMENT IN CPD ACTIVITIES <span class="text2 text-style">(CONTINUED)</span></span>
+            </div>*@
+            <br />
+            @*<div class="row">
+                                <table>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+                                            <span>1. Rule 6 CPD obligations</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+                                            <div class="td-padding">
+                                                <span>6.1 Unless exempted in whole or in part by the designated local regulatory</span>
+                                                <span>authority under rule 16 (Exemptions), or unless a pro rata calculation applies under</span>
+                                                <span>rule 10 (Prorata calculations), a solicitor must complete 10 CPD units in each CPD</span>
+                                                <span>year including at least one CPD unit in each of the following fields:</span>
+                                            </div>
+
+                                            <div class="td-padding2">
+                                                <span>6.1.1 ethics and professional responsibility,</span><br />
+                                                <span>6.1.2 practice management and business skills,</span><br />
+                                                <span>6.1.3 professional skills,</span><br />
+                                                <span>6.1.4 substantive law.</span>
+                                            </div>
+
+                                            <div class="td-padding text-style-small">
+                                                <span>
+                                                    6.2 Where a part exemption under rule 16 (Exemptions) or a pro rata calculation under
+                                                    rule 10 (Pro rata calculations) applies the compulsory fields must be completed as
+                                                    part of the remaining CPD units.
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+                                            <span>2. Rule 7 CPD content</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+                                            <div class="td-padding">
+                                                <span>7.1 Each CPD activity undertaken by a solicitor must be an activity:</span>
+                                            </div>
+
+                                            <div class="td-padding2">
+                                                <span>7.1.1 </span><span class="td-padding">
+                                                    of significant intellectual or practical content and must deal primarily with
+                                                    matters related to the solicitor’s practice of law, and
+                                                </span><br />
+                                                <span>7.1.2 </span><span class="td-padding">
+                                                    conducted by persons who are qualified by practical or academic
+                                                    experience in the subject covered, and
+                                                </span><br />
+                                                <span>7.1.3 </span><span class="td-padding">
+                                                    that extends the solicitor’s knowledge and skills in areas that are relevant
+                                                    to the solicitor’s practice needs or professional development.
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+
+                                            <span>3. Rule 8 CPD format</span>
+
+
+                                            <div class="td-padding">
+                                                <span>8.1</span><span> A CPD activity may consist of:</span>
+                                            </div>
+
+                                            <div class="td-padding2">
+                                                <span>8.1.1</span><span> a seminar, workshop, lecture, conference,
+                                                discussion group, multimedia or </span><nobr>web-based</nobr>
+                                                program, private study of audio/visual material or any other educational activity, or<br />
+
+                                                <span>8.1.2</span><span> the research, preparation or editing by a solicitor of:</span>
+
+                                                <div class="td-padding padding2">
+                                                    <span>8.1.2.1</span><span> an article published in a legal publication, or</span><br />
+                                                    <span>8.1.2.2</span><span> a legal article published in a </span><br />
+                                                    <nobr>non-legal</nobr>
+                                                    publication, or<br />
+                                                    <span>8.1.2.3</span><span> published Law Reports or other legal services, or</span><br />
+                                                </div>
+                                                <div class="padding2">
+                                                    <span>8.1.3</span><span>
+                                                        the preparation and/or presentation by a solicitor of
+                                                        written or oral material to be used in a CPD activity or in other forms of education provided to solicitors
+                                                        and/or to other professionals and/or to other persons including those undertaking practical or supervised
+                                                        legal training, or
+                                                    </span><br />
+
+                                                    <span>8.1.4</span><span>
+                                                        membership of a committee, taskforce or practice section of a
+                                                        professional association, designated local regulatory authority or the Law Council of Australia or of other
+                                                        committees, provided that the solicitor regularly attends its meetings, if the work performed on the committee,
+                                                        taskforce or practice section is of substantial significance to the practice of law and is reasonably likely to
+                                                        assist the solicitor’s professional development, or
+                                                    </span><br />
+                                                    <span>8.1.5</span><span> postgraduate studies relevant to a solicitor’s practice needs.</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="td-padding">
+                                                <span>8.2</span>
+                                                <span>
+                                                    Private study does not constitute CPD activity for the purpose of
+                                                    these Rules unless it involves the private study of audio/visual material specifically designed for the purpose
+                                                    of updating a solicitor’s knowledge and/or skills relevant to his/her practice needs.
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <td class="text-style-xmedium text1">
+                                            <div class="td-padding2">
+                                                <span class="ft15">8.1.4</span><span class="ft28">
+                                                    membership of a committee, taskforce or practice section of a
+                                                    professional association, designated local regulatory authority or the Law Council of Australia or of
+                                                    other committees, provided that the solicitor regularly attends its meetings, if the work performed on the
+                                                    committee, taskforce or practice section is of substantial significance to the practice of law and is
+                                                    reasonably likely to assist the solicitor’s professional development, or<br />
+                                                </span>
+                                                <span class="ft15">8.1.5</span><span class="ft25">postgraduate studies relevant to a solicitor’s practice needs.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                </div>*@
+
+            <div id="page_3">
+                <div id="id_1">
+                    <p class="p0 ft21">RECORD OF ENGAGEMENT IN CPD ACTIVITIES <span class="ft20">(CONTINUED)</span></p>
+                </div>
+                <div id="id_2">
+                    <div id="id_2_1">
+                        <p class="p10 ft22">NOTES</p>
+                        <p class="p11 ft3"><span class="ft4">1.</span><span class="ft23">Rule 6 CPD obligations</span></p>
+                        <p class="p12 ft3"><span class="ft15">6.1</span><span class="ft24">Unless exempted in whole or in part by the designated local regulatory authority under rule 16 (Exemptions), or unless a pro rata calculation applies under rule 10 (Prorata calculations), a solicitor must complete 10 CPD units in each CPD year including at least one CPD unit in each of the following fields:</span></p>
+                        <p class="p13 ft3"><span class="ft15">6.1.1</span><span class="ft25">ethics and professional responsibility,</span></p>
+                        <p class="p14 ft3"><span class="ft15">6.1.2</span><span class="ft25">practice management and business skills,</span></p>
+                        <p class="p14 ft3"><span class="ft15">6.1.3</span><span class="ft25">professional skills,</span></p>
+                        <p class="p15 ft3"><span class="ft15">6.1.4</span><span class="ft25">substantive law.</span></p>
+                        <p class="p16 ft27"><span class="ft15">6.2</span><span class="ft26">Where a part exemption under rule 16 (Exemptions) or a pro rata calculation under rule 10 (Pro rata calculations) applies the compulsory fields must be completed as part of the remaining CPD units.</span></p>
+                        <p class="p2 ft3"><span class="ft4">2.</span><span class="ft23">Rule 7 CPD content</span></p>
+                        <p class="p17 ft3"><span class="ft15">7.1</span><span class="ft24">Each CPD activity undertaken by a solicitor must be an activity:</span></p>
+                        <p class="p18 ft3"><span class="ft15">7.1.1</span><span class="ft25">of significant intellectual or practical content and must deal primarily with matters related to the solicitor’s practice of law, and</span></p>
+                        <p class="p19 ft3"><span class="ft15">7.1.2</span><span class="ft25">conducted by persons who are qualified by practical or academic experience in the subject covered, and</span></p>
+                        <p class="p20 ft3"><span class="ft15">7.1.3</span><span class="ft25">that extends the solicitor’s knowledge and skills in areas that are relevant to the solicitor’s practice needs or professional development.</span></p>
+                        <p class="p21 ft3"><span class="ft4">3.</span><span class="ft23">Rule 8 CPD format</span></p>
+                        <p class="p22 ft3"><span class="ft15">8.1</span><span class="ft24">A CPD activity may consist of:</span></p>
+                        <p class="p23 ft27">
+                            <span class="ft15">8.1.1</span><span class="ft28">a seminar, workshop, lecture, conference, discussion group, multimedia or </span>
+                            <nobr>web-based</nobr>
+                            program, private study of audio/visual material or any other educational activity, or
+                        </p>
+                        <p class="p15 ft3"><span class="ft15">8.1.2</span><span class="ft25">the research, preparation or editing by a solicitor of:</span></p>
+                        <p class="p24 ft3"><span class="ft15">8.1.2.1</span><span class="ft23">an article published in a legal publication, or</span></p>
+                        <p class="p24 ft3">
+                            <span class="ft15">8.1.2.2</span><span class="ft23">a legal article published in a </span>
+                            <nobr>non-legal</nobr>
+                            publication, or
+                        </p>
+                        <p class="p24 ft3"><span class="ft15">8.1.2.3</span><span class="ft23">published Law Reports or other legal services, or</span></p>
+                        <p class="p25 ft30"><span class="ft15">8.1.3</span><span class="ft29">the preparation and/or presentation by a solicitor of written or oral material to be used in a CPD activity or in other forms of education provided to solicitors and/or to other professionals and/or to other persons including those undertaking practical or supervised legal training, or</span></p>
+                    </div>
+                    <div id="id_2_2">
+                        <p class="p26 ft27"><span class="ft15">8.1.4</span><span class="ft28">membership of a committee, taskforce or practice section of a professional association, designated local regulatory authority or the Law Council of Australia or of other committees, provided that the solicitor regularly attends its meetings, if the work performed on the committee, taskforce or practice section is of substantial significance to the practice of law and is reasonably likely to assist the solicitor’s professional development, or</span></p>
+                        <p class="p15 ft3"><span class="ft15">8.1.5</span><span class="ft25">postgraduate studies relevant to a solicitor’s practice needs.</span></p>
+                        <p class="p27 ft32"><span class="ft4">8.2</span><span class="ft31">Private study does not constitute CPD activity for the purpose of these Rules unless it involves the private study of audio/visual material specifically designed for the purpose of updating a solicitor’s knowledge and/or skills relevant to his/her practice needs.</span></p>
+                        <p class="p5 ft3"><span class="ft15">4.</span><span class="ft33">Rule 9 CPD units</span></p>
+                        <p class="p28 ft3"><span class="ft4">9.1</span><span class="ft24">CPD unit means:</span></p>
+                        <p class="p15 ft4"><span class="ft15">9.1.1</span><span class="ft34">in relation to a CPD activity referred to in rule 8.1.1, 8.1.3 and 8.1.5, one hour of the activity,</span></p>
+                        <p class="p29 ft3"><span class="ft15">9.1.2</span><span class="ft25">in relation to a CPD activity referred to in rule 8.1.2, 1000 words of the article,</span></p>
+                        <p class="p14 ft3"><span class="ft15">9.1.3</span><span class="ft25">in relation to a CPD activity referred to in rule 8.1.4, two hours of the activity.</span></p>
+                        <p class="p30 ft3"><span class="ft4">9.2</span><span class="ft24">In calculating the relevant CPD units of CPD activity in respect of a CPD year, the total must not include:</span></p>
+                        <p class="p29 ft3"><span class="ft15">9.2.1</span><span class="ft25">more than 5 CPD units of CPD activity referred to in rule 8.1.2,</span></p>
+                        <p class="p14 ft3"><span class="ft15">9.2.2</span><span class="ft25">more than 5 CPD units of CPD activity referred to in rule 8.1.3,</span></p>
+                        <p class="p14 ft3"><span class="ft15">9.2.3</span><span class="ft25">more than 3 CPD units of CPD activity referred to in rule 8.1.4,</span></p>
+                        <p class="p14 ft3"><span class="ft15">9.2.4</span><span class="ft25">more than 5 CPD units of CPD activity referred to in rule 8.2.</span></p>
+                        <p class="p31 ft4"><span class="ft4">9.3</span><span class="ft35">Solicitors who successfully complete a specialist accreditation assessment process will be deemed to have completed 10 CPD units in the year of their completion.</span></p>
+                        <p class="p32 ft3"><span class="ft15">5.</span><span class="ft23">Rule 12 Record keeping</span></p>
+                        <p class="p33 ft3"><span class="ft4">12.1</span><span class="ft36">A solicitor must maintain for each CPD year:</span></p>
+                        <p class="p14 ft3"><span class="ft15">12.1.1</span><span class="ft37">a record of his or her engagement in CPD activities, and</span></p>
+                        <p class="p14 ft3"><span class="ft15">12.1.2</span><span class="ft37">evidence in support of the CPD activities undertaken.</span></p>
+                        <p class="p34 ft3"><span class="ft4">12.2</span><span class="ft36">A solicitor must retain the information referred to in rule 12.1.1 and the evidence in support referred to in rule 12.1.2 for at least three years after the end of the CPD year to which the CPD record and evidence in support relate.</span></p>
+                    </div>
+                </div>
+                <div id="id_3">
+                    <p class="p0 text1">RETURN FORM BY EMAIL TO: COMPLIANCE@LIV.ASN.AU</p>
+                </div>
+                <div id="id_4">
+                    <p class="p0 ft5">
+                        PRIVACY STATEMENT: The Law Institute of Victoria (“the LIV”) protects the privacy and security of
+                        information provided by you. By completing this form, you agree to the use of your personal information by the LIV:
+                        to process your registration form; <br />to contact you about our products and services; to disclose to third parties
+                    </p>
+                    <p class="p35 ft39">
+                        providing services to the LIV; and for internal purposes. For more information on our privacy
+                        policy visit www.liv.asn.au/privpolicy.html. If you do not wish to receive further information of this type please
+                        contact us at members@liv.asn.au or 9607 9470. DATE OF ISSUE: 05/07/2017 The Law Institute of Victoria Limited ACN
+                        075 475 731 is a local professional association and delegate of the Victorian Legal Services Board, designated local
+                        regulatory authority under the <span class="ft38">Legal Profession Uniform Law </span>(Vic).
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+@{
+    Layout = null;
+}
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    .page-padding {
+        padding: 30px 20px 10px 20px;
+    }
+
+    .text-style {
+        font-size: 18px;
+    }
+
+    .text-style-medium {
+        font-size: 14px;
+    }
+
+    .text-style-small {
+        font-size: 12px;
+    }
+
+    .text-color-style {
+        color: #428bca;
+    }
+
+    .text-super-style {
+        font-size: 7pt;
+        /*font-family: 'Times New Roman', 'Times', serif;*/
+        vertical-align: super;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TAS</title>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container text-style-small">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <h3>MY CPD RECORD</h3>
+                <p>CPD YEAR: @Model.Select(u => u.Financial_Year).First()</p>
+                <p>
+                    <b>Name :</b> @Model.Select(u => u.FirstName).First() @Model.Select(u => u.LastName).First() 
+
+                    <b>Film/entity: </b>@Model.Select(u => u.Firm).First() 
+
+                    <b>Telephone: </b>@Model.Select(u => u.PhoneNumber).First()
+                </p>
+            </div>
+
+            <div class="row">
+                <table class="table table-responsive table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>CPD Activity (and Event Name if applicable)</th>
+                            <th>Date</th>
+                            <th>Points  and Mandatory Category if applicable</th>
+                            <th>Provider / Entity</th>
+                            <th>
+                                Description/Comments
+
+                                Supporting evidence attached?
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Units_Done) / @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Provider)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descrption)
+                                    @if (Html.DisplayFor(modelItem => item.UploadedFileName).ToString() != string.Empty)
+	                                {
+		                                <span> / @Html.DisplayFor(modelItem => item.UploadedFileName)</span>
+	                                }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <p><b>Signature of audited practitioner:………………………………. <br /><br />Date:…………………………………</b></p>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+</body>
+</html>

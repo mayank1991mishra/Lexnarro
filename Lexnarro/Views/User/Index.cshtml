@@ -1,0 +1,108 @@
+﻿@using Lexnarro.HelperClasses;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>User</h2>
+
+<section class="panel">
+    <div class="panel-body">
+        <table class="table table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        First Name
+                    </th>
+
+                    <th>
+                        Last Name
+                    </th>
+
+                    <th>
+                        Country
+                    </th>
+
+                    @*<th>
+                        State
+                    </th>*@
+
+                    <th>
+                        State Enrolled
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+
+    @section JavaScript{
+        @Html.Raw(ViewBag.message)
+        }
+
+    @section scripts
+    {
+        <script>
+            $(function () {
+                var userId = @UserHelper.GetUserId();
+                var t = $('#dataTable').DataTable({
+                    theme: 'bootstrap',
+                    responsive: true,
+                    autoWidth: false,
+
+                    "columnDefs": [{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": [0]
+                    }],
+                    "order": [[1, 'asc']],
+
+                    "ajax": {
+                        "url": '/User/GetUsers',
+                        "type": 'get',
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        {"data": null},
+                        {
+                            "data": "FirstName", render: (function (data, type, row) {
+                                return '<a href="/User/Details/' + row.ID + '">' + data + '</a>';
+                            }),
+                        },
+                        { "data": "LastName" },
+                        { "data": "Country" },
+                        //{ "data": "State" },
+                        { "data": "StateEnrolled" },
+                        { "data": "EmailAddress" },
+                        {
+                            "data": "ID", render: (function (data, type, row) {
+                                if (row.ID == userId) {
+                                    return ' <a href="/User/Edit/' + data + '" class="btn btn-success">Edit</a>'+
+                                    ' <a href="/User/Details/' + data + '" class="btn btn-info">Details</a>';
+                                }
+
+                                return '<a href="/User/Details/' + data + '" class="btn btn-info">Details</a>';
+                            })
+                        }
+                    ]
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+            });
+        </script>
+    }
+</section>

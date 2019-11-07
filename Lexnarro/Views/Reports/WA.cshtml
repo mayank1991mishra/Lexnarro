@@ -1,0 +1,255 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+
+@{
+    Layout = null;
+    decimal? units = 0;
+    decimal? totalUnits = 0;
+
+
+    decimal? totalPm = 0;
+    decimal? totalPs = 0;
+    decimal? totalEp = 0;
+   decimal? totalSl = 0;
+}
+
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WA</title>
+
+
+    <style>
+        .line-style {
+            color: #ffa500;
+            height: 5px;
+        }
+
+        .line-color {
+            background-color: #ffa500;
+        }
+
+        .page-padding {
+            padding: 30px 0px 20px 0px;
+        }
+
+        .text-style {
+            font-size: 14px;
+        }
+
+        .text-style-medium {
+            font-size: 12px;
+        }
+
+        .text-style-small {
+            font-size: 10px;
+        }
+
+        .text-color-style {
+            color: #428bca;
+        }
+
+        .text-super-style {
+            font-size: 7pt;
+            /*font-family: 'Times New Roman', 'Times', serif;*/
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <h3 class="text-center"><b><u>CPD RECORD CARD</u></b></h3>
+            </div>
+
+            <div class="row">
+                <table class="table table-responsive table-bordered text-style-small">
+                    <thead style="background-color: #e6e6e6;font-weight:bold">
+                        <tr>
+                            <td>DATE</td>
+                            <td>PROVIDER</td>
+                            <td>ACTIVITY TOPIC</td>
+                            <td>YOUR ROLE: </td>
+                            <td>ROLE: <br /><span class="text-style-small">Participant Presenter Commentator Chair </span></td>
+                            <td>Competency Area 1 <br /><span class="text-style-small">Practice Management</span></td>
+                            <td>Competency Area 2 <br /><span class="text-style-small">Professional Skills</span></td>
+                            <td>Competency Area 3 <br /><span class="text-style-small">Ethics or Professional Responsibility</span></td>
+                            <td>Competency Area 4 <br /><span class="text-style-small">Substantive Law</span></td>
+                            <td>POINTS</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</td>
+                                <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Descrption)</td>
+                                <td>@Html.DisplayFor(modelItem => item.SubactivityName)</td>
+
+                                <td>@Html.DisplayFor(modelItem => item.Your_Role)</td>
+                                <td>
+                                    @{ units = item.Units_Done;}
+                                    @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PM")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    }
+                                </td>
+                                <td>
+                                    @{ units = item.Units_Done;}
+                                    @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PS")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    }
+                                </td>
+                                <td>
+                                    @{ units = item.Units_Done;}
+                                    @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "EP")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    }
+                                </td>
+                                <td>
+                                    @{ units = item.Units_Done;}
+                                    @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "SL")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Units_Done)
+                                    }
+                                </td>
+                                <td>
+
+                                    @*@if (item.Units_Done == )
+                                    {
+
+                                    totalPm = totalPm + item.Units_Done;
+
+                                    }*@
+
+
+                                    @{ units = item.Units_Done;}
+                                       @{totalUnits = totalUnits + units;} 
+                                   
+                                    @Html.Raw(units.ToString())
+                                </td>
+                            </tr>
+
+                          }
+
+                        <tr style="background-color: #e6e6e6;">
+                            
+                            <td colspan="3"class="text-center text-style"><b>Total Points</b></td>
+                            <td></td>
+                            <td></td>
+
+                            <td style="font-family:'Arial','Helvetica',sans-serif;font-style: italic;font-weight: bold;" class="text-style">
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.CategoryShortName == "PM")
+                                    {
+
+                                        totalPm = totalPm + item.Units_Done;
+
+                                    }
+
+                                }
+                                @Html.Raw(totalPm.ToString())
+                            </td>
+
+                          
+                            <td style="font-family:'Arial','Helvetica',sans-serif;font-style: italic;font-weight: bold;" class="text-style">
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.CategoryShortName == "PS")
+                                    {
+
+                                        totalPs = totalPs + item.Units_Done;
+                                       
+                                    }
+
+                                }
+                                @Html.Raw(totalPs.ToString())
+                            </td>
+
+
+                            <td style="font-family:'Arial','Helvetica',sans-serif;font-style: italic;font-weight: bold;" class="text-style">
+                                @foreach (var item in Model)
+                                {
+                                    if (item.CategoryShortName == "EP")
+                                    {
+
+                                        totalEp = totalEp + item.Units_Done;
+                                       
+                                    }
+
+                                }
+
+                                @Html.Raw(totalEp.ToString())
+                            </td>
+
+
+                            <td style="font-family:'Arial','Helvetica',sans-serif;font-style: italic;font-weight: bold;" class="text-style">
+                                @foreach (var item in Model)
+                                {
+                                    if (item.CategoryShortName == "SL")
+                                    {
+
+                                        totalSl = totalSl + item.Units_Done;
+                                       
+                                    }
+
+                                }
+
+                                @Html.Raw(totalSl.ToString())
+                            </td>
+
+
+
+                            <td style="font-family:'Arial','Helvetica',sans-serif;font-style: italic;font-weight: bold;" class="text-style">
+                                @Html.Raw(totalUnits.ToString())
+
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">I declare this is a true and accurate record </div>
+            <br />
+            <div class="row">
+                <span>NAME - <b><u>@Model.Select(u => u.FirstName).First() @Model.Select(u => u.LastName).First()</u></b></span><br />
+                <span>SIGNATURE -______________________DATE________________</span>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+</body>
+</html>

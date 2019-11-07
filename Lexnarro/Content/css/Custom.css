@@ -1,0 +1,129 @@
+﻿
+/*html{
+    -ms-overflow-style: scrollbar;
+}*/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+/*table.dataTable thead .sorting {
+    background-image: url("DataTables/images/sort_both.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+table.dataTable thead .sorting_asc {
+    background-image: url("DataTables/images/sort_asc.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url("DataTables/images/sort_desc.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+table.dataTable thead .sorting_asc_disabled {
+    background-image: url("DataTables/images/sort_asc_disabled.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+table.dataTable thead .sorting_desc_disabled {
+    background-image: url("DataTables/images/sort_desc_disabled.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}*/
+
+/*.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff !important;
+    border: 1px solid #979797;
+    background-color: #007aff;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    background: linear-gradient(to bottom, #007aff 0%, #007aff 100%);
+}*/
+
+/*.ui.pagination.menu .active.item {
+    background-color: #007aff !important;
+    color:#fff !important;
+}*/
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > 
+.active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #ffffff !important;
+    cursor: default;
+    background-color: #007aff !important;
+    border-color: #007aff !important;
+    border-radius:0.3em;
+}
+
+thead tr th {
+    color: #007aff;
+}
+
+.alert-info {
+    background-color: #cceaf6;
+    border-color: #aee8f1;
+    color: #34aadc;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #007aff;
+    border-color: #007aff;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    background-color:#eeeeee !important;
+    outline: none;
+    outline: 0;
+    color:#007aff !important;
+}
+
+.btn-info {
+    color: #ffffff;
+    background-color: #34aadc;
+    border-color: #34aadc;
+}
+
+ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+    background: #fff !important;
+    color: #ed4d51 !important;
+    display: block;
+    border-bottom: 1px solid #d0d8df;
+}
+
+/*ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+    background: #fff;
+    color: #ed4d51;
+    display: block;
+}*/
+
+.paginate_button active {
+    text-decoration: none;
+    background-color: #eeeeee !important;
+    outline: none;
+    outline: 0;
+    color: #007aff !important;
+}
+
+.nohover:hover, .nohover:focus{
+    background-color:transparent !important;
+
+}
+

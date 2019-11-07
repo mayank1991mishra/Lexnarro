@@ -1,0 +1,330 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+
+@{
+    Layout = null;
+    IEnumerable<Lexnarro.ViewModels.Training> pt = (IEnumerable<Lexnarro.ViewModels.Training>)ViewBag.previousFinancialYearRecords;
+    IEnumerable<Lexnarro.ViewModels.Training> pn = (IEnumerable<Lexnarro.ViewModels.Training>)ViewBag.nextFinancialYearRecords;
+}
+
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    .page-padding {
+        padding: 30px 20px 10px 20px;
+    }
+
+    .text-style {
+        font-size: 18px;
+    }
+
+    .text-style-medium {
+        font-size: 14px;
+    }
+
+    .text-style-small {
+        font-size: 12px;
+    }
+
+    .text-color-style {
+        color: #428bca;
+    }
+
+    .text-super-style {
+        font-size: 7pt;
+        /*font-family: 'Times New Roman', 'Times', serif;*/
+        vertical-align: super;
+    }
+</style>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NT</title>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container text-style-small">
+        <span class="pull-right">ANNUAL CPD CERTIFICATE V4 LAW SOCIETY NT</span>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <h2>Annual CPD Certificate</h2>
+            </div>
+            <div class="row">
+                <p>Approved form pursuant to clause 16(1) Schedule 2 Legal Profession Regulations 2007 (as amended).</p>
+                <p>
+                    This Certificate should be provided to the Law Society Northern Territory no later than 31 March by
+                    practitioners who hold, or have held, a practising certificate during the CPD year from 1 April to 31 March.
+                </p>
+                <p>
+                    For the purpose of this Certificate the following legend applies: Substantive Law competency (SL);
+                    Core competency in Professional Ethics and Responsibilities (CA);
+                    Core competency in Practice Management and Business Skills (CB);
+                    Core competency in Professional Skills in Legal Practice (CC).
+                </p>
+            </div>
+
+            <div class="row">
+                <p>
+                    <b>1.</b> I <u><b>@Model.Select(u => u.FirstName).First() @Model.Select(u => u.LastName).First()</b></u>
+                    of <u><b>@Model.Select(u => u.Firm).First()</b></u> have completed the following CPD activities to satisfy
+                    my obligations pursuant to Schedule 2 of the Legal Professional Rules 2007 for the @Model.Select(u => u.Financial_Year).First() CPD year:
+                </p>
+
+                <p><b>Points carried forward from January 1 to 31 March of previous CPD year</b></p>
+            </div>
+
+            <div class="row">
+                <table class="table table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>CPD activity</th>
+                            <th>Provider</th>
+                            <th>Points claimed</th>
+                            <th>
+                                Competency:
+                                SL, CA, CB, CC
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (pt != null)
+                        {
+                            foreach (var item in pt)
+                            {
+                                <tr>
+                                    <th>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descrption)
+                                        <span>
+                                            (@Html.DisplayFor(modelItem => item.ActivityName))
+                                        </span>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Units_Done)</td>
+                                    <td>
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "SL")
+                                        {
+                                            <span>SL</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "LE")
+                                        {
+                                            <span>CA</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PM")
+                                        {
+                                            <span>CB</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PS")
+                                        {
+                                            <span>CC</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <p><b>Points accrued in current CPD year from 1 April to 31 March</b></p>
+            </div>
+
+            <div class="row">
+                <table class="table table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>CPD activity</th>
+                            <th>Provider</th>
+                            <th>Points claimed</th>
+                            <th>
+                                Competency:
+                                SL, CA, CB, CC
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descrption)
+                                    <span>
+                                        (@Html.DisplayFor(modelItem => item.ActivityName))
+                                    </span>
+                                </td>
+                            <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Units_Done)</td>
+                            <td>
+                                @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "SL")
+                                {
+                                    <span>SL</span>
+                                }
+                                @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "LE")
+                                {
+                                    <span>CA</span>
+                                }
+                                @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PM")
+                                {
+                                    <span>CB</span>
+                                }
+                                @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PS")
+                                {
+                                    <span>CC</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Total Points claimed</td>
+                            <td>@ViewBag.unitsDone</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <p>
+                    <b>2.</b> I wish to carry forward the following points accrued between 1 January and 31 March in this
+                    CPD year towards next year's CPD obligation (only complete if applicable)
+                </p>
+            </div>
+
+            <div class="row">
+                    <table class="table table-bordered text-style-small">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>CPD activity</th>
+                                <th>Provider</th>
+                                <th>Points claimed</th>
+                                <th>
+                                    Competency:
+                                    SL, CA, CB, CC
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in pn)
+                            {
+                                <tr>
+                                    <th>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</th>
+
+                                    <td>@Html.DisplayFor(modelItem => item.Descrption)
+                                        <span>
+                                            (@Html.DisplayFor(modelItem => item.ActivityName))
+                                        </span></td>
+
+                                    <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Units_Done)</td>
+                                    <td>
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "SL")
+                                        {
+                                            <span>SL</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "LE")
+                                        {
+                                            <span>CA</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PM")
+                                        {
+                                            <span>CB</span>
+                                        }
+                                        @if (Html.DisplayFor(modelItem => item.CategoryShortName).ToString() == "PS")
+                                        {
+                                            <span>CC</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            @*<tr>
+                                <td></td>
+                                <td></td>
+                                <td>Total Points claimed</td>
+                                <td>ViewBag.unitsDone</td>
+                                <td></td>
+                            </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+
+            <div class="row">
+                <p>
+                    <b>3.</b> I declare that I  have /  have not (tick applicable box) accrued sufficient CPD points in a
+                    substantive law competency and each of the core competencies to fulfil my CPD obligations for the
+                    Financial_Year CPD year.
+                </p>
+            </div>
+
+            <div class="row">
+                <p>
+                    <b>4.</b> Complete if full CPD obligation has not been satisfied:
+                    <br>
+                    I intend accrue points after 31 March claiming these towards my CPD obligation for
+                    @Model.Select(u => u.Financial_Year).First()
+                    <br>
+                    I will submit a Supplementary Certificate by 30 June @ViewBag.endYear
+                </p>
+            </div>
+
+            <div class="row">
+                <p><b>5.</b> I declare that this information is true and correct:</p>
+            </div>
+
+            <div class="row">
+                <p><b>Signature: ___________________ Date: __________________</b></p>
+
+                <p>
+                    Once completed this Annual CPD Certificate should be signed (an electronic signature is not acceptable)
+                    and provided to the Law Society Northern Territory by:
+                </p>
+
+                <p><b>Faxing</b> to 08 8941 1623</p>
+                <p><b>Emailing</b> to licenseofficer@lawsocietynt.asn.au with 'Annual CPD Certificate' in the subject line</p>
+                <p><b>Hand delivering</b> it to Level 3, 9 Cavenagh Street, Darwin, 0800</p>
+                <p><b>Posting</b> it to GPO Box 2388, Darwin NT, 0801</p>
+
+                <p>OFFICE USE ONLY</p>
+                <table class="table table-bordered text-style-small">
+                    <tr>
+                        <th>Date received</th>
+                        <th>Recorded in database</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</body>
+</html>

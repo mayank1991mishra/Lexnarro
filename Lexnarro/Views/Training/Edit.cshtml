@@ -1,0 +1,234 @@
+﻿@model Lexnarro.Models.User_Training_Transaction
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+</style>
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "Training", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="form-horizontal col-lg-6 col-lg-offset-2">
+            <h4>User Training Transaction</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "dd/mm/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("State_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.State_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Category", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("Category_Id", null, "--Select Category--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Category_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Activity", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("Activity_Id", null, "--Select Activity--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Activity_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Subactivity", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("SubActivity_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubActivity_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Hours", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Hours, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Hours, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Provider", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Provider, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Provider, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.Label("Financial Year", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Financial_Year, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Financial_Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{
+                if (ViewBag.stateName == "Australian Capital Territory")
+                {
+                    <div class="form-group">
+                        @Html.Label("Your Role", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <div class="col-md-4 radio">
+                                Attendee  @Html.RadioButtonFor(model => model.Your_Role, "Attendee", false)
+                            </div>
+                            <div class="col-md-4 radio">
+                                Presenter   @Html.RadioButtonFor(model => model.Your_Role, "Presenter", false)
+                            </div>
+                            <div class="col-md-4 radio">
+                                Author   @Html.RadioButtonFor(model => model.Your_Role, "Author", false)
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Your_Role, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <div class="form-group hidden">
+                @Html.Label("Forwardable", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="col-md-4 radio">
+                        Yes  @Html.RadioButtonFor(model => model.Forwardable, "Yes", true)
+                    </div>
+                    <div class="col-md-4 radio">
+                        No   @Html.RadioButtonFor(model => model.Forwardable, "No", false)
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Forwardable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                @Html.Label("Has been Forwarded", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="col-md-4 radio">
+                        Yes  @Html.RadioButtonFor(model => model.Has_been_Forwarded, "Yes", true)
+                    </div>
+                    <div class="col-md-4 radio">
+                        No   @Html.RadioButtonFor(model => model.Has_been_Forwarded, "No", false)
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Has_been_Forwarded, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Upload File", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <input type="file" name="postedFile" id="fileUploader" />
+                    <span class="text-danger">@ViewBag.Error1</span>
+                    <span class="text-danger">@ViewBag.Error2</span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Uploaded File", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.UploadedFileName, new { htmlAttributes = new { @class = "form-control disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextArea("Descrption", null, new { @class = "form-control", cols = "55", rows = "8" })
+                    @Html.ValidationMessageFor(model => model.Descrption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+                }
+
+<div>
+    @Html.ActionLink("Back to list", "Index", new { financialYear = Model.Financial_Year }, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+12"
+            });
+        });
+    </script>
+    
+    <script>
+        $(function () {
+            $('#Activity_Id').change(function () {
+                var activity_id = $("#Activity_Id").val();
+                $(this).find("option:selected").text();
+                var activity_name = $(this).find("option:selected").text();
+
+                if (activity_name != "--Select Activity--") {
+                    var State_Id = $("#State_Id").val();
+                    var items1 = '';
+                    $.ajax
+                    ({
+                        url: '@Url.Action("SubActivityList", "Training")',
+                        type: 'GET',
+                        datatype: 'application/json',
+                        contentType: 'application/json',
+                        data: { 'stateID': State_Id, 'activityID': activity_id },
+
+                        success: function (result) {
+                            $("#SubActivity_Id").html("");
+                            $.each(result, function (i, state) {
+                                if (state.Text != 'Private Study') {
+                                    items1 += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                                }
+                            })
+                            $('#SubActivity_Id').html(items1);
+
+                            if (items1.length <= 0) {
+                                items1 = '<option value=NULL>N/A</option>';
+                                $("#SubActivity_Id").html("");
+                                $('#SubActivity_Id').html(items1);
+                            }
+                        },
+                        error: function () {
+                            alert("Something went wrong..")
+                        },
+                    });
+                }
+            })
+        });
+    </script>
+}
+
+@section JavaScript{
+    @Html.Raw(ViewBag.message)
+}
+
+

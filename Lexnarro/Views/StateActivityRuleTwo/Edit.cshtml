@@ -1,0 +1,158 @@
+﻿@model Lexnarro.Models.StateActivity__with_Rule2
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="form-horizontal col-lg-6 col-lg-offset-2">
+            <h4>State Activity Rule Two Mapping</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("StateID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Activity", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("ActivityID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ActivityID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Rule Two", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("Rule2_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Rule2_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @id = "dt1", @placeholder = "dd/mm/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @id = "dt2", @placeholder = "dd/mm/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Status", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("Status", new List<SelectListItem> { new SelectListItem { Text = "Active" }, new SelectListItem { Text = "Deactive" } }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to list", "Index", new {}, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+12"
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#StateID').change(function () {
+                var State_Id = $("#StateID").val();
+                var items1 = '<option>- Select Activity -</option>';
+                $.ajax
+                ({
+                    url: '@Url.Action("ActivityList", "StateActivityRuleTwo")',
+                    type: 'GET',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: { 'StateID': State_Id },
+
+                    success: function (result) {
+                        $("#ActivityID").html("");
+                        $.each(result, function (i, state) {
+                            items1 += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                        })
+                        $('#ActivityID').html(items1);
+                    },
+                    error: function () {
+                        alert("Something went wrong..")
+                    },
+                });
+            }
+            )
+        });
+    </script>
+
+    <script>
+        $(function () {
+            var activity = $('#ActivityID').val();
+            var State_Id = $("#StateID").val();
+            var items1 = '<option>- Select Activity -</option>';
+            $.ajax
+            ({
+                url: '@Url.Action("ActivityList", "StateActivityRuleTwo")',
+                type: 'GET',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: { 'StateID': State_Id },
+
+                success: function (result) {
+                    $("#ActivityID").html("");
+                    $.each(result, function (i, state) {
+                        items1 += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                    })
+                    $('#ActivityID').html(items1);
+                    $("#ActivityID").val(activity);
+                },
+                error: function () {
+                    alert("Something went wrong2..")
+                },
+            });
+        }
+            );
+    </script>
+}
+
+@section JavaScript
+{
+    @Html.Raw(ViewBag.message)
+}

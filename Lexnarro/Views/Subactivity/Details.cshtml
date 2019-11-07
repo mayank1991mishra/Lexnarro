@@ -1,0 +1,54 @@
+﻿@model Lexnarro.Models.Sub_Activity_Master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>Sub Activity</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("State")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Activity Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Activity_Master.Name)
+                </dd>
+
+                <dt>
+                    @Html.Label("Sub Activity Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt class="hidden">
+                    @Html.Label("Short Name")
+                </dt>
+                <dd class="hidden">
+                    @Html.DisplayFor(model => model.ShortName)
+                </dd>
+
+              
+
+            </dl>
+        </div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>

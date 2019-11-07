@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfd3de67848244d881284bb1e537b6e1" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="LaxNarroModel.Rule3_Master" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.State_Rule3_Marriage" Width="1.5" PointX="5.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Activity_Master" Width="1.5" PointX="11.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Category_Master" Width="1.5" PointX="11.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Country_Master" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.ExpiredPlanUserMailLog" Width="1.5" PointX="13.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.MailLog" Width="1.5" PointX="13.5" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.page_master" Width="1.5" PointX="15" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Plan_Master" Width="1.5" PointX="14.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Rate_Card" Width="1.5" PointX="14.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Role_Master" Width="1.5" PointX="9" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.role_page_map" Width="1.5" PointX="17.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Rule1_Master" Width="1.5" PointX="6" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Rule2_Master" Width="1.5" PointX="6" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Rule4_Master" Width="1.5" PointX="6" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.State_Activity_Mapping" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.State_Category_With_Rule4_Mapping" Width="1.5" PointX="8.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.State_Master" Width="1.5" PointX="3" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.StateActivity__with_Rule2" Width="1.5" PointX="8.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.StateActivitySubActivityWithRule1" Width="1.5" PointX="8.25" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Sub_Activity_Master" Width="1.5" PointX="11.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Subscription_Master" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.Total_Unit_Master" Width="1.5" PointX="5.75" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Profile" Width="1.5" PointX="11.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Role_Mapping" Width="1.5" PointX="16.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Subscription" Width="1.5" PointX="16.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Training_Status" Width="1.5" PointX="18.75" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Training_Transaction" Width="1.5" PointX="13.5" PointY="22.625" IsExpanded="true" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Rul__Rule3__245D67DE" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Rul__State__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Act__Activ__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__Activ__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__Activ__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivity__with_Rule2_ToActivityMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivitySubActivityWithRule_Activity_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_Sub_Activity_Master_To_Activity_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Cat__Categ__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__Categ__29E1370A" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__Categ__2F9A1060" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_State_Master_ToCountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Profile_ToCountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__ExpiredPl__UserI__54CB950F" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__MailLog__UserID__1B9317B3" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_role_page_map_page_master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_Rate_Card_ToPlan_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Subscription_ToPlanMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Subscription_ToRateCard" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_role_page_map_ToRole_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Profile_Role_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Role_Mapping_ToRole_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivitySubActivityWithRule_Rule1_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivity__with_Rule2_ToRule2_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Cat__Rule4__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Act__State__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__State_Cat__State__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__State__28ED12D1" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivity__with_Rule2_ToStateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivitySubActivityWithRule_State_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_Sub_Activity_Master_To_state_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_Total_Unit_Master_ToStateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Profile_ToStateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_ProfileStateEnrolled_ToStateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_StateActivitySubActivityWithRule_SubActivity_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__SubAc__2AD55B43" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__SubAc__308E3499" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__User___27F8EE98" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__User___2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Role_Mapping_User_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Subscription_ToUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="LaxNarroModel.FK__User_Trai__Train__318258D2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LaxNarroModel.PaypalResponse" Width="1.5" PointX="13.5" PointY="33" />
+        <AssociationConnector Association="LaxNarroModel.FK_PaypalResponse_UserProfile" />
+        <EntityTypeShape EntityType="LaxNarroModel.User_Transaction_Master" Width="1.5" PointX="19.5" PointY="15.75" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Transaction_Master_ToPlan_Master" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Transaction_Master_ToRate_Card" />
+        <AssociationConnector Association="LaxNarroModel.FK_User_Transaction_Master_ToUser_Subscription" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

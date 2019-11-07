@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Unsubscribe";
+    Layout = "~/Views/Shared/_LoginPartial.cshtml";
+}
+
+<h2>Unsubscribe</h2>
+
+<div class="login-form">
+    <div class="login-wrap">
+        <h2>Account Confirmation</h2>
+
+        <h3>@ViewBag.Status</h3>
+        <span>Click Login to go to login page.</span>
+        @Html.ActionLink("Login", "Login", "Home", new { }, htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+</div>

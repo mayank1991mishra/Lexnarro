@@ -1,0 +1,174 @@
+﻿@model Lexnarro.Models.User_Transaction_Master
+@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+@Styles.Render("~/bundles/css")
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>LEXNARRO INVOICE</title>
+    <style type="text/css">
+        .auto-style {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <form class="auto-style">
+        <div class="container">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <img src="~/Reports/lexnarro.png"/>
+                    </div>
+                    <div class="row">
+                        <p class="text-center lead">
+                            Attention : @Html.DisplayFor(model => model.User_Profile.FirstName)
+                            <span> </span> @Html.DisplayFor(model => model.User_Profile.LastName)
+                        </p>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            INVOICE
+                        </div>
+
+                        <div class="row text-primary">
+                            <div class="col-md-1"></div>
+                            <span>admin@lexnarro.com.au</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            Date: @Html.DisplayFor(model => model.Payment_Date.ToString().Split(' ')[0])
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            Invoice No:
+                            @Html.DisplayFor(model => model.Invoice_No)
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            Terms: @ViewBag.term Days
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <table class="table table-responsive table-bordered auto-style">
+                                <thead class="text-center" style="background-color:#428bca; color:white">
+                                    <tr>
+                                        <td>
+                                            <p>Description</p>
+                                        </td>
+                                        <td>
+                                            <p>Quantity</p>
+                                        </td>
+                                        <td>
+                                            <p>Unit Price</p>
+                                        </td>
+                                        <td>
+                                            <p>Cost</p>
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>
+                                            Lex Narro @Html.DisplayFor(model => model.Plan_Master.Plan) Subscription
+                                        </td>
+                                        <td>
+                                            <p> 1 </p>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @*@Html.DisplayFor(model => model.Amount) AUD*@
+                                                @ViewBag.amt AUD
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @*@Html.DisplayFor(model => model.Amount) AUD*@
+                                                @ViewBag.amt AUD
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>GST</td>
+                                        <td></td>
+                                        <td>
+                                            @*<p>Subtotal</p>*@
+
+                                           <p>@ViewBag.gst</p> 
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @*@Html.DisplayFor(model => model.Amount) AUD*@
+                                                @ViewBag.gst AUD
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <p>Total</p>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @*@Html.DisplayFor(model => model.Amount) AUD*@
+
+                                                @ViewBag.total AUD
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <span>Thank you for your business.</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <span>Sincerely yours,</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <span>Team at Lex Narro</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </form>
+</body>
+</html>
+

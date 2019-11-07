@@ -1,0 +1,139 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<Lexnarro.ViewModels.Training>
+
+@{
+    Layout = null;
+}
+
+@Styles.Render("~/bundles/css")
+
+<style type="text/css">
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    .page-padding {
+        padding: 30px 20px 10px 20px;
+    }
+
+    .text-style {
+        font-size: 18px;
+    }
+
+    .text-style-medium {
+        font-size: 14px;
+    }
+
+    .text-style-small {
+        font-size: 12px;
+    }
+
+    .text-color-style {
+        color: #428bca;
+    }
+
+    .text-super-style {
+        font-size: 7pt;
+        /*font-family: 'Times New Roman', 'Times', serif;*/
+        vertical-align: super;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SA</title>
+</head>
+<body class="page-padding" style="background-color:white">
+    <div class="container">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="text-center text-style-small">
+                    <h3 style="background-color: #000000;color: #fff;padding:2px;">
+                        CPD Rectification Plan Under Rule 8(2)
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-center text-style-small">
+                    <p>
+                        <b>Name:</b> @Model.Select(u => u.FirstName).First() @Model.Select(u => u.LastName).First()
+                        <b>Address:</b> @Model.Select(u => u.StreetNumber).First() @Model.Select(u => u.StreetName).First()
+                         @Model.Select(u => u.Suburb).First() @Model.Select(u => u.PostCode).First()
+                    </p>
+                    <p>
+                        <b>Practitioner No. :</b> <u>@Model.Select(u => u.LawSocietyNumber).First()</u> 
+                        Firm: <u>@Model.Select(u => u.Firm).First()</u><br />
+                        <b>Email:</b> <u> @Model.Select(u => u.EmailAddress).First() </u>  <b>Contact No. :</b> <u> @Model.Select(u => u.PhoneNumber).First() </u>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="text-center text-style-small">
+                    <b>
+                        Please list below the CPD activities you intend to
+                        complete within 90 days from the date of submission of this Plan
+                    </b>
+                </p>
+            </div>
+
+            <div class="row">
+                <table class="table table-responsive table-bordered text-style-small">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Details of CPD Activity</th>
+                            <th>provider</th>
+                            <th>Formats</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Date.ToString().Split(' ')[0])</td>
+                                <td>@Html.DisplayFor(modelItem => item.Descrption) 
+                                <span>(@Html.DisplayFor(modelItem => item.CategoryName))</span></td>
+                                <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Units_Done)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <p class="text-style-small">
+                    <b>Please note:</b> if you do not complete 1 CPD unit in each of the compulsory field as
+                    required under rule 5.2 of the LIV Continuing Professional Developement Rules 2008 or Rule 8
+                    of the Victorian bar Continuing Professional Developement Rules[whichever apply].
+                    You must include in your Rectification Plan CPD activites that will fullfill those compulsory field
+                </p>
+
+                <p><b>Date:____________________________  Signature:________________________  </b></p>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿@model Lexnarro.Models.Total_Unit_Master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-info fade in">
+            <h4>Total Unit Master</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Total Units")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Total_Units)
+                </dd>
+
+                <dt>
+                    @Html.Label("Start Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Start_Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("End Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.End_Date)
+                </dd>
+
+                <dt>
+                    @Html.Label("State Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State_Master.Name)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to Total Unit List", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+
+@section JavaScript
+{
+    @Html.Raw(ViewBag.message)
+}

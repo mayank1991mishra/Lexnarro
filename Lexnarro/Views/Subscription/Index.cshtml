@@ -1,0 +1,180 @@
+﻿@model IEnumerable<Lexnarro.Models.Plan_Master>
+
+@using Lexnarro.Controllers
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Plan Subscription</h2>
+
+<div class="right_content">
+
+    <div class="form">
+        <div class="row">
+            @{
+                List<UserSubscribedPlan> str = new List<UserSubscribedPlan>();
+                str = ViewBag.SubscribedPlan;
+            }
+            @foreach (var item in str)
+            {
+                if (item.PlanName != "Demo" && item.TransactionStatus == "approved")
+                {
+                    <div class="alert alert-info FontLarger">
+                        <span>
+                            <strong>Info!</strong> You have subscribed<b> @item.PlanName</b> plan
+                            from @item.StartDate.ToShortDateString()
+                            to @Convert.ToDateTime(item.EndDate).ToShortDateString().
+                        </span>
+
+                        @*@Html.ActionLink("Email Invoice", "SendInvoice", "Subscription", new { recordId = item.Id },
+                            htmlAttributes: new { @class = "btn btn-success" })<span> | </span>*@
+
+                        @*<a href="@Url.Action("PrintInvoice", "Subscription", new { recordId = item.Id })"
+                            target="_blank" class="btn btn-success">Print Invoice</a>*@
+
+                        <button class="btn btn-success" id="sendMail" value="@item.Id" onclick="SendMail(this)">Email Invoice</button>
+
+                        <a href="@Url.Action("PrintInvoice", "Subscription", new { recordId = item.Id })"
+                           target="_blank" class="btn btn-success">Print Invoice</a>
+                    </div>
+                }
+            }
+
+            @*@foreach (var item in str)
+                {
+                    if (item.PlanName != "Demo" && item.TransactionStatus == "created")
+                    {
+                        <div class="alert alert-warning FontLarger">
+                            <span>
+                                <strong>Info!</strong> Your subscription status of<b> @item.PlanName</b> plan
+                                from @item.StartDate.ToShortDateString()
+                                to @Convert.ToDateTime(item.EndDate).ToShortDateString() is <b>Pending</b>.
+                                We are trying to resolve this. Thank you for your patience.
+                            </span>
+                        </div>
+                    }
+                }*@
+
+            @*<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="62TFDJLAZ2HUE">
+                <table>
+                    <tr><td><input type="hidden" name="on0" value="Duration">Duration</td></tr>
+                    <tr>
+                        <td>
+                            <select name="os0">
+                                <option value="1 Year">1 Year </option>
+                                <option value="2 Years">2 Years </option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+                </form>*@
+
+            <div class="row">
+                @foreach (var item in ViewBag.PM)
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="info-box blue-bg">
+
+                            <div class="count">@item.Plan</div>
+                            <div class="title"></div>
+                            @Html.ActionLink("Pay Now", "PayNow", "Subscription", new { PlanID = item.Plan_ID }, htmlAttributes: new { @class = "btn btn-success" })
+
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="alert alert-danger FontLarger">
+                <span>
+                    <strong>Note!</strong> Please do not close or refresh the browser on Paypal website while transaction is active.
+                    Error could occur and your payment may not get through.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section JavaScript
+        {
+    @Html.Raw(ViewBag.message)
+}
+
+@section scripts{
+<script>
+    function SendMail(elem) {
+        //$('#sendMail').click(function () {
+        var recordId = $(elem).attr("value");
+        $(elem).empty();
+        $(elem).attr("disabled", true);
+        $(elem).append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+                $.ajax
+                ({
+                    url: '@Url.Action("SendInvoice", "Subscription")',
+                    type: 'GET',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                        data: { 'recordId': recordId },
+
+                        success: function (result) {
+                            $(elem).empty();
+                            $(elem).append('Email Invoice');
+                            $(elem) .attr("disabled", false);
+
+                            //console.log(result);
+
+                        Command: toastr['success']('Invoice Emailed');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                            }
+                        },
+                        error: function (result) {
+                            $(elem).empty();
+                            $(elem).append('Email Invoice');
+                            $(elem).attr("disabled", false);
+
+                            //console.log(result);
+
+                            Command: toastr['error']('Mail not sent. Please try again after some time.');
+                            toastr.options = {
+                                'closeButton': false,
+                                'debug': false,
+                                'newestOnTop': false,
+                                'progressBar': false,
+                                'positionClass': 'toast-top-right',
+                                'preventDuplicates': false,
+                                'onclick': null,
+                                'showDuration': '5000',
+                                'hideDuration': '1000',
+                                'timeOut': '3000',
+                                'extendedTimeOut': '1000',
+                                'showEasing': 'swing',
+                                'hideEasing': 'linear',
+                                'showMethod': 'fadeIn',
+                                'hideMethod': 'fadeOut'
+                            }
+                        }
+                });
+            }
+</script>
+    }

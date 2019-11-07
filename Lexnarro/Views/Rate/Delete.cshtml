@@ -1,0 +1,82 @@
+﻿@model Lexnarro.Models.Rate_Card
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div class="row">
+    <div class="form-horizontal col-lg-6 col-lg-offset-2">
+        <div class="alert alert-block alert-danger fade in">
+            <h4>Rate Card</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("Start Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+
+                <dt>
+                    @Html.Label("End Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+
+                <dt>
+                    @Html.Label("Amount")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Amount)
+                </dd>
+
+                <dt>
+                    @Html.Label("Status")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt>
+                    @Html.Label("Plan")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Plan_Master.Plan)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Back to list", "Index", new { }, htmlAttributes: new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Html.Raw(ViewBag.message)
+}
+
+@section JavaScript
+{
+    @Html.Raw(ViewBag.message)
+}
+
+

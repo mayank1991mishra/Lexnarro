@@ -1,0 +1,1217 @@
+﻿@using System.Web.Optimization
+@using Lexnarro.HelperClasses
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="CPD, Continued Professional development, Lawyer, Legal, Barrister, Law Society, effortlessly, effortless, simple, simply, automation, AI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
+    <title>Privacy Policy</title>
+
+    <!-- Favicon -->
+    <!--<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">-->
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon">-->
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Lato:300,400,700,900" rel="stylesheet">
+
+    @Styles.Render("~/bundles/index")
+
+    <link href="~/Content/IndexCSS/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div id="loader">
+            <div id="box"></div>
+            <div id="hill"></div>
+        </div>
+    </div>
+    <!-- Header -->
+    <header id="home">
+        @*<nav class="navbar navbar-default" id="main-nav" style="padding-bottom: 2px;background-color:#ee494d;">*@
+        <nav class="navbar navbar-default" id="main-nav" style="padding-bottom: 2px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-morki">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!--<a class="navbar-brand" href="#">Lexnarro</a>-->
+                            @*<a href="" class="navbar-brand"><img src="./ln2.jpg" height="40" width="200" style="margin-top:-5px"></a>*@
+                            <a href="/Account/Index" class="navbar-brand"><img src="~/Content/img/ln2(2).png" height="40" width="190" style="margin-top:-17px; padding-bottom: 2px;"></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-morki">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active"><a href="https://lexnarro.com.au/#home" data-scroll>Home</a></li>
+                                <li><a href="https://lexnarro.com.au/#features" data-scroll id="features">Features</a></li>                              
+                                <li><a href="https://lexnarro.com.au/#screenshots" data-scroll>Screenshots</a></li>
+                                <li><a href="https://lexnarro.com.au/#price-table" data-scroll>Price</a></li>
+                                <li><a href="https://lexnarro.com.au/#testimonial" data-scroll>About</a></li>
+                                <li><a href="https://lexnarro.com.au/#contact" data-scroll>Contact</a></li>
+
+                                @{
+                                    var userName = UserHelper.GetUserName();
+                                    var userRole = UserHelper.GetUserRole();
+                                }
+
+                                @if (userRole == "Admin")
+                                {
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            @*<span class="profile-ava">
+                                                    <img alt="" src="img/avatar1_small.jpg">
+                                                </span>*@
+                                            <span class="username">@userName</span>
+                                            @*<b class="caret"></b>*@
+                                        </a>
+
+                                        <ul class="dropdown-menu extended logout">
+                                            <div class="log-arrow-up"></div>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Profile", "Admin", new { }, null)"><i class="icon_profile"></i> My Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "ActiveUsers", new { }, null)"><i class="icon_mail_alt"></i> Active Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "OtherUsers", new { }, null)"><i class="icon_clock_alt"></i> Other Users</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("LogOff", "Account", new { }, null)"><i class="icon_key_alt"></i> Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                @if (userRole == "User")
+                                {
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            @*<span class="profile-ava">
+                                                    <img alt="" src="img/avatar1_small.jpg">
+                                                </span>*@
+                                            <span class="username">@userName</span>
+                                            @*<b class="caret"></b>*@
+                                        </a>
+
+                                        <ul class="dropdown-menu extended logout">
+                                            <div class="log-arrow-up"></div>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Index", "Home", new { }, null)"><i class="icon_profile"></i> Dashboard</a>
+                                            </li>
+                                            <li class="eborder-top">
+                                                <a href="@Url.Action("Index", "User", new { }, null)"><i class="icon_profile"></i> My Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Training", new { }, null)"><i class="icon_mail_alt"></i> My Records</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "CarryOver", new { }, null)"><i class="icon_mail_alt"></i> Carryover</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Payment", "User", new { }, null)"><i class="icon_clock_alt"></i> My Transactions</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Subscription", new { }, null)"><i class="icon_chat_alt"></i> My Subscriptions</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("LogOff", "Account", new { }, null)"><i class="icon_key_alt"></i> Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                @if (string.IsNullOrEmpty(userRole))
+                                {
+                                    <li class="nav-download-btn">@Html.ActionLink("Login", "Login", new { }, null)</li>
+                                    <li class="nav-download-btn">@Html.ActionLink("Signup", "Signup", "User", new { }, null)</li>
+                                }
+
+                            </ul>
+                        </div><!-- .navbar-collapse -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header><!-- Ends: header -->
+    <!-- Intro Section -->
+    @*<section class="intro">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-1 col-sm-8 intro-info wow fadeIn">
+                        <div class="intro-info-content">
+                            <h1>
+                                Manage your CPD records  effortlessly.
+
+                            </h1>
+                            <p>
+                                Lex Narro is a simple way to
+                                manage your CPD records. Made
+                                by a busy lawyer with the same
+                                pain points as you. This app is an
+                                easy to use tool for tracking and
+                                managing your records.
+                            </p>
+                            <ul class="list-unstyled">
+                                <li><a href="@Url.Action("Signup", "User", new { }, null)"><i class="icon_key_alt"></i>Subscribe Now</a></li>
+                                <li><a href="@Url.Action("Signup", "User", new { }, null)"><i class="icon_key_alt"></i>Start Trial</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- Ends: .intro-info -->
+
+                    <div class="col-md-3 col-md-offset-1 col-sm-4 intro-image wow fadeIn">
+                        <div class="intro-image-content">
+
+                            <img src="~/Content/img/top picture.jpg" alt="" class="img-responsive">
+                        </div>
+                    </div><!-- Ends: .intro-image -->
+                </div>
+            </div>
+        </section>*@<!-- Ends: .intro -->
+    <!-- About App -->
+    @*<section class="about-app">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="app-info wow fadeIn">
+                            <h2>
+                                Respond to any audit requests within
+                                minutes.
+                            </h2>
+                            <ul class="list-unstyled">
+                                <li>Record multiple years’ CPD data.</li>
+                                <li>
+                                    Review and manage current or previous
+                                    years’ records with a user-friendly dashboard.
+                                </li>
+                                <li>
+                                    View remaining requirements for any current
+                                    year with your dashboard.
+                                </li>
+                                <li>
+                                    Upload and maintain any accompanying
+                                    documents to support your CPD activities.
+                                </li>
+                                <li>
+                                    Send your CPD records at the touch of a
+                                    button formatted with any accompanying files
+                                    attached.
+                                </li>
+                                <li>
+                                    Surplus points can be carried over to the
+                                    following year in accordance with the rules of
+                                    the State or Territory that you are enrolled in
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- Ends: .col-sm-6 -->
+                    <div class="col-sm-5">
+                        <div class="app-image wow fadeInUp" data-wow-delay="0.2s">
+
+                            <img src="~/Content/img/middle.jpg" alt="" class="img-responsive">
+                        </div>
+                    </div><!-- Ends: .col-sm-6 -->
+                </div>
+            </div>
+        </section><!-- Ends: .about-app -->
+        <!-- App Features -->
+        <section class="app-features" id="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 section-header">
+                        <h2>Our Features</h2>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="features-left wow fadeInLeft">
+                            <div class="feature-single">
+                                <div class="feature-info">
+                                    <h3>Cloud back up</h3>
+                                    <p>Your data is held on Australian-based servers.</p>
+                                </div>
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-slack"></i></span>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-info">
+                                    <h3>State Specific</h3>
+                                    <p>
+                                        With all Australian States and Territories’ Law Societies
+                                        having their own specific CPD requirements, we’ve
+                                        customised our app so that when you tell us the State or
+                                        Territory that you are enrolled in, the app will automatically
+                                        configure itself to your Law Society’s requirements.
+                                    </p>
+                                </div>
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-battery"></i></span>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-info">
+                                    <h3>Multiple Year Records</h3>
+                                    <p>
+                                        Input data for all your previous years’ CPD activities and
+                                        don’t rely on manual processes, emails, spreadsheets or
+                                        online calendars.
+                                    </p>
+                                </div>
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-bug"></i></span>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-info">
+                                    <h3>Mandatory Point Management </h3>
+                                    <p>
+                                        Our app makes it clear and simple which points in which
+                                        categories are still to be completed.
+                                    </p>
+                                </div>
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-bar-chart"></i></span>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                        </div>
+                    </div><!-- Ends: .col-sm-4 -->
+                    <div class="col-md-4 col-sm-12" style="margin-top:100px">
+                        <div class="feature-image wow fadeInUp">
+
+                            <img src="~/Content/img/bottom.jpg" alt="" class="img-responsive">
+                        </div>
+                    </div><!-- Ends: .col-sm-4 -->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="features-right wow fadeInRight">
+                            <div class="feature-single">
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-object-group"></i></span>
+                                </div>
+                                <div class="feature-info">
+                                    <h3>Count Down to Due date</h3>
+                                    <p>
+                                        See how many days left are until your current year’s point
+                                        are due..
+                                    </p>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-magic"></i></span>
+                                </div>
+                                <div class="feature-info">
+                                    <h3>Auto-formatted PDFs</h3>
+                                    <p>
+                                        At the touch of a button you can create and send a PDF of your
+                                        CPD records. We’ve even auto formatted the PDF to contain
+                                        the information fields required by your Law Society.
+                                    </p>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-share-alt"></i></span>
+                                </div>
+                                <div class="feature-info">
+                                    <h3>Upload Accompanying data</h3>
+                                    <p>
+                                        Upload any receipts or accompanying data evidencing your
+                                        attendance to accompany your PDF. Lex Narro will attach these
+                                        to your email when you choose to send that year’s data..
+                                    </p>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                            <div class="feature-single">
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-cogs"></i></span>
+                                </div>
+                                <div class="feature-info">
+                                    <h3>Peace of Mind</h3>
+                                    <p>
+                                        Your privacy is paramount to us and we will only store or use
+                                        your personal information in accordance with our privacy policy.
+                                    </p>
+                                </div>
+                            </div><!-- Ends: .feature-single -->
+                        </div>
+                    </div><!-- Ends: .col-sm-4 -->
+                </div>
+            </div>
+        </section><!-- Ends: .app-features -->
+        <!-- Screenshots -->
+        <section class="screenshots" id="screenshots">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 section-header">
+                        <h2>App Screens</h2>
+                    </div>
+                    <div class="col-md-4 col-sm-5">
+                        <div class="gallery-info wow fadeInLeft">
+                            <h3>Explore More</h3>
+                            <p>
+                                Do you or your team struggle to effectively
+                                manage your CPD records. Managing your
+                                records across Word files, Excel
+                                spreadsheets, CPD fliers or online calendar
+                                entries or a combination of these? There is a
+                                better way. Lex Narro provides a way for you
+                                to record and store your CPD records in one
+                                place accessible at the touch of a button.
+                            </p>
+                            <p>
+                                Sophistication on the back end and simplicity
+                                on the front end. Your dashboard gives you an
+                                ‘at a glance view’ of the precise CPD activities
+                                you still need to complete this year and how
+                                long you have to complete these.
+                            </p>
+                            <p>
+                                Your app allows you to add details of your
+                                CPD activities (including uploading supporting
+                                documents such as receipts), view previous
+                                years’ activities, create and send PDFs with
+                                any accompanying supporting documents to
+                                yourself or your Law Society. It really is that
+                                simple!
+                            </p>
+                            <a href="">Take A Tour</a>
+                        </div>
+                    </div><!-- Ends: .col-sm-4 -->
+                    <div class="col-md-8 col-sm-7" style="margin-top:50px">
+                        <div class="screenshot-gallery owl-carousel wow fadeInRight">
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 1.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 1.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 2.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 2.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 3.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 3.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 4.png" alt="" class="img-resoponsive">
+
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 4.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 5.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 5.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 6.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 6.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 7.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 7.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 8.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 8.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="screenshot-single">
+                                <figure>
+
+                                    <img src="~/Content/img/lexi/Lex App 9.png" alt="" class="img-resoponsive">
+                                    <figcaption>
+
+                                        <a href="~/Content/img/lexi/Lex App 9.png"></a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .col-sm-8 -->
+                </div>
+            </div>
+        </section><!-- Ends: .screenshots -->
+        <!-- Price Table -->
+        <section class="price-table" id="price-table">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 section-header">
+                        <h2>Our Pricing</h2>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="price-table-wrapper wow fadeIn" data-wow-delay="0.1s">
+                            <div class="price-header">
+                                <h3>Demo</h3>
+                                <span class="price">Free 5-day </span><span>Trial</span>
+                            </div>
+                            <div class="price-content">
+                                <ul class="list-unstyled">
+                                    <li>• Limited to 5 records</li>
+                                    <li class="ablock">• Unlimited PDF downloads </li>
+                                    <li class="ablock">• Unlimited ancillary files upload </li>
+                                    <li class="ablock">• Free Future Updates & Fixes </li>
+                                    <li class="ablock">• Free Support</li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="price-btn">
+                                <a href="@Url.Action("Signup", "User", new { }, null)">Demo Now</a>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .col-sm-3 -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="price-table-wrapper wow fadeIn" data-wow-delay="0.3s">
+                            <div class="price-header">
+                                <h3>1 Year</h3>
+                                <span class="price">$13.99</span>
+                                <span>Year</span>
+                            </div>
+                            <div class="price-content">
+                                <ul class="list-unstyled">
+                                    <li>• Less than  $1.17  per month for 1 Year Subscription </li>
+                                    <li>• Unlimited Records</li>
+                                    <li>• Unlimited PDF downloads</li>
+                                    <li>• Unlimited ancillary files upload</li>
+                                    <li>• Free Future Updates & Fixes</li>
+                                    <li>• Free Support</li>
+                                </ul>
+                            </div>
+                            <div class="price-btn">
+                                <a href="@Url.Action("Signup", "User", new { }, null)">Subscribe Now</a>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .col-sm-3 -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="price-table-wrapper price-table-featured wow fadeIn" data-wow-delay="0.5s">
+                            <div class="price-header">
+                                <h3>2 Years</h3>
+                                <span class="price">$24.99</span>
+                                <span>2 Year</span>
+                            </div>
+                            <div class="price-content">
+                                <ul class="list-unstyled">
+                                    <li>• Less than  $1.05  per month for 2 Year Subscription </li>
+                                    <li>• Unlimited Records</li>
+                                    <li>• Unlimited PDF downloads</li>
+                                    <li>• Unlimited ancillary files upload</li>
+                                    <li>• Free Future Updates & Fixes</li>
+                                    <li>• Free Support</li>
+                                </ul>
+                            </div>
+                            <div class="price-btn">
+                                <a href="@Url.Action("Signup", "User", new { }, null)">Subscribe Now</a>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .col-sm-3 -->
+                </div>
+            </div>
+        </section><!-- Ends: .price-table -->
+        <!-- Testimonial -->
+        <section class="testimonial" id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 section-header">
+                        <h2>About</h2>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="testimonial-slider owl-carousel wow fadeInUp">
+                            <div class="slide-single">
+                                <div class="client-info">
+                                    <ul class="list-unstyled">
+                                        <li class="105">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="client-text">
+                                    <p>
+                                        Lex Narro is a simple way to manage your continuing education and professional development
+                                        (CPD) obligations. Created by a busy lawyer with the same pain points as you. We made it simple
+                                        and fast, so you don’t need to worry any more than you need to about your records.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Ends: .testimonial -->
+        <!-- Download App -->
+        <section class="download-app" id="download-app">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                        <h2>Now Available</h2>
+                        <p>Visit the iOS App store or Google Play to download your App as well as being able to access everything by logging into our website.</p>
+                        <ul class="list-unstyled">
+                            <li><a href="javascript:void(0)"><img src="~/Content/img/icons/2.png" alt=""></a></li>
+                            <li><a href="javascript:void(0)"><img src="~/Content/img/icons/3.png" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Ends: .download-app -->*@
+
+
+    @*<section class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-1 col-sm-8 intro-info wow fadeIn">
+                    <div class="intro-info-content">*@
+
+
+
+
+    <!-- Privacy Policy -->
+
+
+
+    <section class="intro">
+        <div class="container" style="height: 70%;">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 section-header intro-info wow fadeIn">
+                    <div class="intro-info-content">
+                        <h2 style="margin-top: 124px;">Privacy Policy</h2>
+                        <p>
+                            In this Privacy Policy, 'us''we' or 'our' means Lex Narro Pty Ltd (ABN 46 626 892 279) (Lex Narro).
+                            We are committed to respecting your privacy. Our Privacy Policy sets out how we collect, use, store and
+                            disclose your personal information. By providing personal information to us, you consent to our collection,
+                            use and disclosure of your personal information in accordance with this Privacy Policy and any other arrangements
+                            that apply between us. We may change our Privacy Policy from time to time by publishing changes to it on our website.
+                            We encourage you to check our website periodically to ensure that you are aware of our current Privacy Policy.
+                            Personal information includes information or an opinion about an individual that is reasonably identifiable.
+                            For example, this may include your name, age, gender, postcode and contact details.
+
+                        </p>
+
+                    </div>
+                </div><!-- Ends: .intro-info -->
+                <!-- Ends: .intro-image -->
+            </div>
+        </div>
+    </section>
+
+
+    <section class="faqs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 section-header intro-info wow fadeIn">
+                    @*<h2>Privacy Policy</h2>
+                        <p>
+                            In this Privacy Policy, 'us''we' or 'our' means Lex Narro Pty Ltd (ABN 46 626 892 279) (Lex Narro).
+                            We are committed to respecting your privacy. Our Privacy Policy sets out how we collect, use, store and
+                            disclose your personal information. By providing personal information to us, you consent to our collection,
+                            use and disclosure of your personal information in accordance with this Privacy Policy and any other arrangements
+                            that apply between us. We may change our Privacy Policy from time to time by publishing changes to it on our website.
+                            We encourage you to check our website periodically to ensure that you are aware of our current Privacy Policy.
+                            Personal information includes information or an opinion about an individual that is reasonably identifiable.
+                            For example, this may include your name, age, gender, postcode and contact details.
+
+                        </p>*@
+                </div>
+                <div class="col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>
+                                What personal information do we collect?
+
+                            </h3>
+                            <p>
+                                We may collect the following types of personal information:
+                            </p>
+                            <ul>
+                                <li>name;</li>
+                                <li>ailing or street address;</li>
+                                <li>email address;</li>
+                                <li>telephone number and other contact details;</li>
+                                <li>the firm or company you work for;</li>
+                                <li>
+                                    State enrolled in, LSID or other identifying information relevant
+                                    to your membership of a professional body;
+                                </li>
+                                <li>
+                                    device type, geo-location information, computer and connection information, statistics on page views, traffic to and from
+                                    the sites, ad data, IP address and standard web log information;
+                                </li>
+                                <li>
+                                    details of the products and services we have provided to you or that you have enquired about, including any additional information
+                                    necessary to deliver those products and services and respond to your enquiries;
+                                </li>
+                                <li>
+                                    any additional information relating to you that you provide to us directly through our website or app or indirectly through your use of our website or app or online presence or
+                                    through other websites or accounts from which you permit us to collect information;
+                                </li>
+                                <li>information you provide to us through customer surveys; or</li>
+                                <li>any other personal information that may be required in order to facilitate your dealings with us.</li>
+
+                            </ul>
+
+
+
+
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>How do we collect personal information? </h3>
+                            <p>We may collect these types of personal information either directly from you, or from third parties. We may collect this information when you:</p>
+
+                            <ul>
+                                <li>register on our website or app;</li>
+                                <li>
+                                    communicate with us through correspondence, IM (including through third party platforms), email,
+                                    or when you share information with us from other social applications, services or websites; or
+                                </li>
+                                <li>interact with our sites, services, content and advertising.</li>
+
+
+                            </ul>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Why do we collect, use and disclose personal information? </h3>
+                            <p>
+                                We may collect,hold, use and disclose your personal information for the following purposes:
+                            </p>
+
+
+                            <ul>
+                                <li>to enable you to access and use our website, products or app;</li>
+                                <li>
+                                    to operate, protect, improve and optimise our website, productor app, business and our users’ experience, such as to perform analytics, conduct research and for advertising and marketing;
+                                </li>
+                                <li>
+                                    to send you service, support and
+                                    administrative messages, reminders, technical notices, updates, security alerts, and information requested by you;
+                                </li>
+
+
+                                <li>to send you marketing and promotional messages and other information that may be of interest to you;</li>
+                                <li>
+                                    to administer rewards, surveys, contests, or
+                                    other promotional activities or events sponsored or managed by us or our business partners; and
+                                </li>
+                                <li>
+                                    to comply with our legal obligations, resolve
+                                    any disputes that we may have with any of our users, and enforce our agreements with third parties.
+                                </li>
+
+
+                            </ul>
+
+                            <p>
+                                We may also disclose your personal information to
+                                a trusted third party who also holds other information
+                                about you. This third party may combine that information in order to
+                                enable it and us to develop anonymised consumer insights so that we can better
+                                understand your preferences and interests, personalise your experience and enhance the products and services that you receive.
+
+                            </p>
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3> Do we use your personal information for direct marketing? </h3>
+                            <p>
+                                We may send you direct marketing communications and information about our products.
+                                This may take the form of emails, SMS, mail or other forms of communication, in accordance
+                                with the Spam Act and the Privacy Act. You may opt-out of receiving marketing materials
+                                from us by contacting us using the details set out below or by using the opt-out facilities
+                                provided (eg an unsubscribe link).
+                            </p>
+
+
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3> To whom do we disclose your personal information?</h3>
+                            <p>
+                                We may disclose personal information for the purposes described in this privacy policy to:
+                            </p>
+
+                            <ul>
+                                <li>our employees;</li>
+                                <li>
+                                    third party suppliers and service providers
+                                    (including providers for the operation of our websites and/or our
+                                    business or in connection with providing our products to you);
+                                </li>
+                                <li>
+                                    professional advisers, dealers and agents;
+                                </li>
+
+
+                                <li>payment systems operators (eg merchants receiving card payments);</li>
+                                <li>
+                                    our sponsors or promoters of any promotion that we conduct via our services;
+                                </li>
+                                <li>
+                                    anyone to whom our assets or businesses (or any part of them) are transferred;
+                                </li>
+                                <li>
+                                    specific third parties authorised by you to receive information held by us; and/or
+                                </li>
+                                <li>
+                                    other persons, including government agencies, regulatory bodies
+                                    and law enforcement agencies, or as required,authorised or permitted by law.
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div><!-- Ends: .faq-single -->
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>    Contact Us</h3>
+                            <p>
+                                For further information about our Privacy Policy or to access or
+                                correct your personal information, or make a complaint, please contact us using the details set out below:
+                                For the attention of Privacy Officer
+                                admin@lexnarro.com.au
+                                Effective:1st September 2019
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div><!-- Ends: .col-sm-6 -->
+                <div class="col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+
+
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Using our website and cookies</h3>
+                            <p>
+                                We may collect personal information about you when you use and access our website.
+                                While we do not use browsing information to identify you
+                                personally, we may record certain information about your
+                                use of our website, such as which pages you visit, the
+                                time and date of your visit and the internet protocol address assigned to your computer.
+                                We may also use 'cookies' or other similar tracking
+                                technologies on our website that help us track your
+                                website usage and remember your preferences. Cookies are
+                                small files that store information on your computer, TV, mobile
+                                phone or other device. They enable the entity that put the cookie on
+                                your device to recognise you across different websites, services,
+                                devices and/or browsing sessions. You can disable cookies through
+                                your browser but our websites may not work as intended for you if you do so.
+                                We may also use cookies to enable us to collect data that may
+                                include personal information. For example, where a cookie is linked
+                                to your account, it will be considered personal information under
+                                the Privacy Act. We will handle any personal information collected
+                                by cookies in the same way that we handle all other personal information
+                                as described in this Privacy Policy.
+
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>
+                                Security
+                            </h3>
+                            <p>
+                                We may hold your personal information in either electronic
+                                or hard copy form. We take reasonable stepsto protect your personal
+                                information from misuse, interference and loss, as well as unauthorised access,
+                                modification or disclosure and we use a number of physical, administrative, personnel
+                                and technical measures to protect your personal information. However, we cannot guarantee the
+                        </div>
+                    </div>
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>   Links </h3>
+                            <p>
+                                Our website may contain links to websites operated by third parties. Those links
+                                are provided for convenience and may not remain current or be maintained. Unless expressly
+                                stated otherwise, we are not responsible for the privacy practices of,or any content on,those linked
+                                websites, and have no control over or rights in those linked websites. The privacy policies that apply
+                                to those other websites may differ substantially from our Privacy Policy, so we encourage individuals to read
+                                them before using those websites.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Accessing or correcting your personal information</h3>
+                            <p>
+                                You can access the personal information
+                                we hold about you by contacting us using the contact us
+                                function on our website. Sometimes, we may not be able to provide
+                                you with access to all of your personal information and, where this is the case,
+                                we will tell you why. We may also need to verify your identity when you request your
+                                personal information.If you think that any personal information we hold about you is inaccurate,
+                                please contact us and we will take reasonable steps to ensure that it is corrected.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3> Making a complaint</h3>
+                            <p>
+                                If you think we have breached the Privacy Act,
+                                or you wish to make a complaint about the way we have handled
+                                your personal information, you can contact us using the details set out below.
+                                Please include your name, email address and/or telephone number and your complaint.
+                                We will acknowledge your complaint and respond to you within a reasonable period of time.
+                                If you think that we have failed to resolve the complaint satisfactorily, we will provide you with
+                                information about the further steps you can take.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="faq-single">
+                        <div class="faq-icon">
+                            <span><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="faq-content">
+                            <h3>Disclosure of personal information outside Australia</h3>
+                            <p>
+                                We may disclose personal information outside of Australia to
+                                third party suppliers necessary to our operations located in India.
+                                When you provide your personal information to us, you consent to the
+                                disclosure of your information outside of Australia and acknowledge that
+                                we are not required to ensure that overseas recipients handle that personal
+                                information in compliance with Australian Privacy Law. We will, however, take
+                                reasonable steps to ensure that any overseas recipient will deal with such personal
+                                information in a way that is consistent with the Australian Privacy Principles.
+                            </p>
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- Ends: .faq-single -->
+
+
+
+                </div><!-- Ends: .col-sm-6 -->
+            </div>
+        </div>
+    </section><!-- Ends: .faqs -->
+    @*<section class="contact" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 section-header">
+                        <h2>Contact</h2>
+                    </div>
+                    <div class="col-md-8 col-sm-7">
+                        <div class="contact-wrapper wow fadeInLeft" data-wow-delay="0.1s">
+                            <form method="post" action="">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="text" placeholder="Name" name="name" required id="txtName">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" placeholder="Email" name="email" required id="txtEmail">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <textarea placeholder="Message" name="message" required id="txtMessage"></textarea>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button id="sendMail">Send Message</button>
+                                    </div>
+                                </div>
+                                <div id="form-messages"></div>
+                            </form>
+                        </div>
+                    </div><!-- Ends: .col-sm-8 -->
+                    <div class="col-md-4 col-sm-5">
+                        <div class="contact-details wow fadeInRight" data-wow-delay="0.3s">
+                            <h3>Contact Info</h3>
+                            <p>
+                                Get in touch with us we’ll get back
+                                to you as fast as we can. Leave
+                                feedback, request support or just
+                                say hello.
+                            </p>
+                            <ul class="list-unstyled contact-info-list">
+                                <li><i class="fa fa-phone"></i> Phone: +61459 471 528</li>
+                                <li><i class="fa fa-envelope"></i> Email: admin@lexnarro.com.au</li>
+                                <li><i class="fa fa-globe"></i> Web: https://lexnarro.com.au</li>
+                            </ul>
+                            <ul class="list-unstyled contact-social">
+                                <li><a href="https://www.facebook.com/Lex-Narro-291592028015780/"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/LexNarro"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/lex-narro-99b436171"><i class="fa fa-linkedin"></i></a></li>
+                                <!--<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href=""><i class="fa fa-whatsapp"></i></a></li>-->
+                                <li><a href="https://www.instagram.com/lexnarro/"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div><!-- Ends: .col-sm-4 -->
+                </div>
+            </div>
+        </section>*@<!-- Ends: .contact -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 footer-bottom-left">
+                    <p>Lex Narro © 2019</p>
+                </div>
+                <div class="col-md-7 col-sm-12 footer-bottom-menu">
+                    <ul class="list-unstyled">
+                        <li><a href="/Account/privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="/Account/TermAndCondition">Terms and Condition</a></li>
+                        @*<li><a href="">Support</a></li>
+                            <li><a href="">New Features</a></li>*@
+                    </ul>
+                    <p id="back-top"><a href="#top"><i class="fa fa-angle-up"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ===================================================
+        Javascript Files
+    ===================================================== -->
+    <!-- ===================================================
+        Javascript Files
+    ===================================================== -->
+
+    @Scripts.Render("~/bundles/indexjs")
+
+
+    @section message{
+        @Html.Raw(ViewBag.message)
+    }
+
+    <script>
+        $(function () {
+            $('#sendMail').click(function () {
+                $("#sendMail").empty();
+                $("#sendMail").attr("disabled", true);
+                $("#sendMail").append('<i class="fa fa-spinner fa-spin"></i>Please wait...');
+                $.ajax
+                ({
+                    url: '@Url.Action("SendMail", "Account")',
+                    type: 'POST',
+                    datatype: 'application/json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 'name': $('#txtName').val(), 'email': $('#txtEmail').val(), 'message': $('#txtMessage').val() }),
+
+                    success: function (result) {
+                        $("#sendMail").empty();
+                        $("#sendMail").append('Send Message');
+                        $("#sendMail").attr("disabled", false);
+
+
+                        Command: toastr['success']('Message sent');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                        }
+                    },
+                    error: function (result) {
+                        $("#sendMail").empty();
+                        $("#sendMail").append('Send Message');
+                        $("#sendMail").attr("disabled", false);
+                        Command: toastr['error']('Message not sent. Please try again after some time.');
+                        toastr.options = {
+                            'closeButton': false,
+                            'debug': false,
+                            'newestOnTop': false,
+                            'progressBar': false,
+                            'positionClass': 'toast-top-right',
+                            'preventDuplicates': false,
+                            'onclick': null,
+                            'showDuration': '5000',
+                            'hideDuration': '1000',
+                            'timeOut': '3000',
+                            'extendedTimeOut': '1000',
+                            'showEasing': 'swing',
+                            'hideEasing': 'linear',
+                            'showMethod': 'fadeIn',
+                            'hideMethod': 'fadeOut'
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() == 0) {
+                //$('#header').removeClass('tiny');
+                //$('#menu-spacing').addClass('nav-margin-top');
+                $('.navbar-brand img').attr('src', '../Content/img/ln2(2).png');
+            } else {
+                //$('#header').addClass('tiny');
+                //$('#menu-spacing').removeClass('nav-margin-top');
+                $('.navbar-brand img').attr('src', '../Content/img/ln1.png');
+            }
+        });
+    </script>
+
+    <script>
+
+      function SendOTP() {
+
+            var mobile = $('#userProfileDetails_Phone').val();
+            if (mobile != null && mobile != '') {
+                $.ajax({
+                    method: 'POST',
+                    url: '@Url.Action("SendOTP", "Account")',
+                    data: { 'Mobile': mobile },
+                    datatype: 'JSON',
+                    success: function (obj) {
+
+                    }
+                });
+            }
+        }
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136966071-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136966071-1');
+    </script>
+
+
+</body>
+</html>
